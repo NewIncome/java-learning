@@ -1,0 +1,30 @@
+NOTES | Udemy Course by John Baugh (Dr. J)
+
+---- Java ---- local Course from codestars.com 
+Declaration 
+Initialization 
+Assignment 
+
+// In: 
+final int SOME_NUM = 150; 
+// the reserved word 'final' makes a variable Constant, it cannot change it's assigned value 
+
+Data Types: 
+Primitive: hold the value directly 
+  byte (1 byte) 
+  short (2 bytes) 
+  int (4) 
+  long (8) 
+  float (4 bytes) 
+  double (8) 
+  char (1 character: 2 bytes) 
+  boolean 
+Reference: hold the memory address of the object of interest(a primitive type, etc) 
+  String
+//* Any number is by default a 'double' type. 
+
+- Conversion - 
+float myFloat = 3.14f; 
+double myDouble = myFloat; 
+
+ 
