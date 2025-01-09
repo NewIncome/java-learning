@@ -27,4 +27,18 @@ Reference: hold the memory address of the object of interest(a primitive type, e
 float myFloat = 3.14f; 
 double myDouble = myFloat; 
 
+-Comparison-
+When used == with Reference types it compares the memory address
+
+-Logical Operators-
+&&  ||  !
+
+--
+
+
+-(Steps to re-run edited Dockerfile>Image>Container)-
+docker rm $(docker ps -a -q --filter ancestor=djavab0) && docker rmi djavab0
+docker build -t djavab0 .
+docker run djavab0
+docker run -i djavab0  //if expecting STDIN data
  
