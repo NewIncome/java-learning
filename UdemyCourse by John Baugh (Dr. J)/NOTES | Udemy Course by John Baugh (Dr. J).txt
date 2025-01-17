@@ -33,7 +33,12 @@ When used == with Reference types it compares the memory address
 -Logical Operators-
 &&  ||  !
 
---
+-Control Statements-
++ Sequential (Sequence), these are executed in the order they are written
++ Selection (Decision), if, if-else, switch
++ Repetition (Loops), while, do-while, for
+	'continue' and 'break'. Continue -> jumps to the next loop iteration. Break, breaks loop
+
 
 
 -(Steps to re-run edited Dockerfile>Image>Container)-
