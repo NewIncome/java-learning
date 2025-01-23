@@ -21,13 +21,18 @@ Primitive: hold the value directly
   boolean 
 Reference: hold the memory address of the object of interest(a primitive type, etc) 
   String
-//* Any number is by default a 'double' type. 
+//* Any number is by default a 'double' type.
 
 - Conversion - 
-float myFloat = 3.14f; 
-double myDouble = myFloat; 
+float myFloat = 3.14f;
+double myDouble = myFloat;
+int x = (int) 20.9; // double(20.9) into -> int(4 bytes)
+  String someValue = "450";
+  int numericValue = Integer.parseInt(someValue);
+  numericValue += 10; //now this can be done
+double myPi = Double.parseDouble("3.14159");
 
--Comparison-
+-Comparison- == 'Type CASTING'
 When used == with Reference types it compares the memory address
 
 -Logical Operators-
@@ -39,11 +44,29 @@ When used == with Reference types it compares the memory address
 + Repetition (Loops), while, do-while, for
 	'continue' and 'break'. Continue -> jumps to the next loop iteration. Break, breaks loop
 
+-Data Structures-
+Containers that hold data
++ Array: collection of homogeneous elements
+	'They are fixed in size'
+	ie.: int[] anArray = new int[5] //5 is the init size;   anArray[0] = 12;
+  + ENHANCED FOR Loop, for Arrays:
+  	ie.: for(int num : myArray) { System.out.println(num); }
++ ArrayList: arrays that can resize, and need to be imported from java util lib
+	'They are a type of Entity called "Generic", which only holds reference types args, not primitives'
+	ie.: ArrayList<String> namesList = new ArrayList<>(); /*<data type>*/
+		 namesList.add("Kyle");
+		 System.out.println(namesList.get(0));
++ Wrapper class type: there are 8, correspond to the 8 primitive types. Is a Reference Type
+	'They are just capitalized versions of their primitive counterparts'
+	Byte, Short, Integer, Long, Float, Double, Character, Boolean
+	ie.: ArrayList<Integer> myAL = new ArrayList<>();
+		 myAL.add(new Integer(10)); /*this is done by Java, auto boxing, so:*/ myAL.add(10)
+
+
 
 
 -(Steps to re-run edited Dockerfile>Image>Container)-
-docker rm $(docker ps -a -q --filter ancestor=djavab0) && docker rmi djavab0
+docker rm $(docker ps -a -q --filter ancestor=djava0) && docker rmi djava0
 docker build -t djavab0 .
 docker run djavab0
 docker run -i djavab0  //if expecting STDIN data
- 
