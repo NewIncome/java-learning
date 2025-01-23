@@ -5,10 +5,13 @@ FROM openjdk:11
 WORKDIR /djavab0
 
 # Copy the necessary source files
-COPY UserInput.java .
+COPY Proj4_3_Parallel.java .
 
 # Compile the Java program
-RUN javac UserInput.java
+RUN javac Proj4_3_Parallel.java
 
 # Set the default command to run our Java program
-CMD ["java", "UserInput"]
+CMD ["java", "Proj4_3_Parallel"]
+
+# To delete the created images and containers
+#docker rm $(docker ps -a -q --filter ancestor=djava01) && docker rmi djava01
