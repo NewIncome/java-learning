@@ -44,6 +44,7 @@ When used == with Reference types it compares the memory address
 + Repetition (Loops), while, do-while, for
 	'continue' and 'break'. Continue -> jumps to the next loop iteration. Break, breaks loop
 
+
 -Data Structures-
 Containers that hold data
 + Array: collection of homogeneous elements
@@ -79,6 +80,28 @@ Containers that hold data
 		 myVar.insert(7, "new index defined word");
  		 myVar.replace(5, 8, "new words");
  		 myVar.delete(5, 9);
+
+--- USER-DEFINED METHODS ---
+* we always start our code using the 'main' method, invoked by the Java runtime as the entrypoint to our program
+
+Method parts: header(with the Parameters if any), method body, and both are the m.definition
+
+♣ Types of methods:
+1. Void, Parameterized
+2. Void, Parameterless
+3. Value-returning, Parameterized
+4. Value-returning, Parameterless
+
+♣ Method Overloading
+Is when you write many methods with the same name but different parameters, java recognizes the difference due to that method 'signature'
+- The methods "Signature": is when you combine the name and the parameter list, including the Type, Order and number of parameters.
+
+//* the 'return type' is not part of the method signature, but it typically matches so it's not ambiguous. But it can be different.
+
+
+- The 'Call Stack' -
+Holds activation records, 
+
 
 
 
