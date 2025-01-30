@@ -100,7 +100,11 @@ Is when you write many methods with the same name but different parameters, java
 
 
 - The 'Call Stack' -
-Holds activation records, 
+Holds activation records, keeps track of the method calls that have ocurred
+You can only Push(add) or Pop(remove) an item from the top of the stack
+When any method is called, an "Activation Record" also called "Stack Frame" is Pushed onto the top of the stack.
+ + They hold information about the particular method call, like: memory location, param values, local variables, where in the method the last instruction was executed, etc.
+ ie.: in a recursive countdown call method we Push to the stack the records for the calls like: main, 3, 2, 1, the poped from the stack 1,2,3,main 
 
 
 
