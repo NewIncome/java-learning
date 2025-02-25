@@ -23,5 +23,4 @@ public class ArithmeticFun {
     result ++; //result = result + 1
     System.out.println("result++ is " + result);
   }//end main
-  }//end main
 }

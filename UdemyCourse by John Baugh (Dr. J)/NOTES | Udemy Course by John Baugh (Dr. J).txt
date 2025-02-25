@@ -98,6 +98,8 @@ Is when you write many methods with the same name but different parameters, java
 
 //* the 'return type' is not part of the method signature, but it typically matches so it's not ambiguous. But it can be different.
 
+• 'Subbing out' a method, means: have it return 0, just to get it to compile.
+
 
 - The 'Call Stack' -
 Holds activation records, keeps track of the method calls that have ocurred
@@ -106,6 +108,11 @@ When any method is called, an "Activation Record" also called "Stack Frame" is P
  + They hold information about the particular method call, like: memory location, param values, local variables, where in the method the last instruction was executed, etc.
  ie.: in a recursive countdown call method we Push to the stack the records for the calls like: main, 3, 2, 1, the poped from the stack 1,2,3,main 
 
+- 2D Arrays or Matrices | 2+D Arrays or Tensors -
+Matrix = a 2D Array
+Tensor = Array greater than 2D+
+ie.:
+int[][] my2DArray = new int[2][3]; //2 rows x 3 columns
 
 
 
