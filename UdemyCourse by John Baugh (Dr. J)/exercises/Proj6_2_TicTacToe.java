@@ -24,20 +24,28 @@
  * 6. getWinner: returns 'X' or 'O' if there is a clear winner
  * 7. isBoardFull: returns if the board is full or not
  */
-public class Proj6_2_TicTacToe {
-  public static void main(String[] args) {
-    //String[][] gameBoardValues = new String[3][3]; // only Declaration
-    String[][] gameBoardValues = { // Declared and initialized with spaces at the same time
-      {" ", " ", " "},
-      {" ", " ", " "},
-      {" ", " ", " "}
-  };
+import java.util.Arrays;
 
+public class Proj6_2_TicTacToe {
+  /*String[][] gameBoardValues = { // Declared and initialized with spaces at the same time
+    {" ", " ", " "},
+    {" ", " ", " "},
+    {" ", " ", " "}
+}; // But won't be used for cleaner more oganized purposes*/
+  public static void main(String[] args) {
+    String[][] gameBoardValues = new String[3][3]; // only Declaration
+
+    initializeGameBoard(gameBoardValues);
     printCurrentBoard(gameBoardValues);
   }//end main
 
   public static void runGame() {}//end runGame
-  public static void initializeGameBoard(String[][] gameBoard) {}//end initializeGameBoard
+
+  public static void initializeGameBoard(String[][] gameBoard) {
+    for(String[] row : gameBoard) {
+      Arrays.fill(row, " ");
+    }
+  }//end initializeGameBoard
   
   public static void printCurrentBoard(String[][] gameBoard) {
     System.out.println("\n   Game Board, current");
@@ -50,12 +58,15 @@ public class Proj6_2_TicTacToe {
   }//end printCurrentBoard
 
   public static void getUserInput(boolean xTurn, String[][] gameBoard) {}//end getUserInput
+
   public static boolean cellAlreadyOccupied(int row, int col, String[][] gameBoard) {
     return false;
   }//end cellAlreadyOccupied
+
   public static char getWinner(String[][] gameBoard) {
     return ' ';
   }//end getWinner
+
   public static boolean isBoardFull(String[][] gameBoard) {
     return false;
   }//end isBoardFull
