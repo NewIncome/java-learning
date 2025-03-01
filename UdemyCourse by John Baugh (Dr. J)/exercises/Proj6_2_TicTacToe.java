@@ -38,14 +38,17 @@ public class Proj6_2_TicTacToe {
 
   public static void runGame() {}//end runGame
   public static void initializeGameBoard(String[][] gameBoard) {}//end initializeGameBoard
+  
   public static void printCurrentBoard(String[][] gameBoard) {
+    System.out.println("\n   Game Board, current");
     for(int i = 0; i < gameBoard.length; i++) {
-      System.out.println(gameBoard[i][0] + "|" + gameBoard[i][1] + "|" + gameBoard[i][2]);
-      if(i == 2) { break; }
-      System.out.println("- - -");
+      System.out.println("\t" + gameBoard[i][0] + "|" + gameBoard[i][1] + "|" + gameBoard[i][2]);
+      if(i == 2) { continue; }
+      System.out.println("\t- - -");
     }// end for i
-    
+    System.out.println();
   }//end printCurrentBoard
+
   public static void getUserInput(boolean xTurn, String[][] gameBoard) {}//end getUserInput
   public static boolean cellAlreadyOccupied(int row, int col, String[][] gameBoard) {
     return false;

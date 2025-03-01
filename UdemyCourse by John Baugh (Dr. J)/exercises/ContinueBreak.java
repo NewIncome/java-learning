@@ -6,7 +6,7 @@ public class ContinueBreak {
 
       if(count == 5) {
         count++;
-        continue;
+        continue; // just jumps it. break; breaks the loop and ends it, 
       }
       System.out.print(count + "\t");
 
