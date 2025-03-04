@@ -25,6 +25,7 @@
  * 7. isBoardFull: returns if the board is full or not
  * additionals:
  * + isMoveValid?
+ * + swapPlayer
  */
 import java.util.Arrays;
 import java.util.Scanner;
@@ -43,8 +44,18 @@ public class Proj6_2_TicTacToe {
     runGame();
     //printCurrentBoard(gameBoardValues);
     // Game will loop until there's a winner or the boardIsFull
-    getSetUserInput(turn, gameBoardValues);
-    printCurrentBoard(gameBoardValues);
+    /*getWinner(gameBoardValues);
+    isBoardFull(gameBoardValues);*/
+    while(getWinner(gameBoardValues) == ' ' || !isBoardFull(gameBoardValues)) {
+      getSetUserInput(turn, gameBoardValues);
+      printCurrentBoard(gameBoardValues);
+      turn = swapPlayer(turn);
+    }
+    if(getWinner(gameBoardValues) == ' ') {
+      System.out.println("It was a tie! Please try the game again");
+    } else {
+      System.out.println("Player " + turn + " is the Winner!!!");
+    }
   }//end main
 
   public static void runGame() {
@@ -93,9 +104,12 @@ public class Proj6_2_TicTacToe {
 
     while(!valid || cellAlreadyOccupied(row, col, gameBoard)) {
       System.out.println("That was not a valid move or the cell was occupied");
+      System.out.println("You chose: " + row + col + ", that cell has de value: " + gameBoard[row][col]);
       System.out.println("Please choose a valid move:");
       move = userIn.nextLine();
       valid = isMoveValid(move);
+      row = Integer.parseInt(move.substring(0, 1));
+      col = Integer.parseInt(move.substring(1));
     }
 
     //set the userMove
@@ -117,6 +131,14 @@ public class Proj6_2_TicTacToe {
     return false;
   }//end isMoveValid
 
+  public static char swapPlayer(char player) {
+    if(player == 'X') {
+      return 'O';
+    } else {
+      return 'X';
+    }
+  }//end swapPlayer
+
   public static boolean cellAlreadyOccupied(int row, int col, char[][] gameBoard) {
     if(gameBoard[row][col] != ' ') {
       return true;
@@ -125,11 +147,41 @@ public class Proj6_2_TicTacToe {
   }//end cellAlreadyOccupied
 
   public static char getWinner(char[][] gameBoard) {
+    /* Possible Wins: same-symbol-on
+    rows[row0(01,02,03), row1, row2], cols[[00,10,20], [01, 11, 21], [02,12,22]], diag[[00,11,22], [02,11,20]]
+    */
+    //1) Check Rows
+    for(char[] row : gameBoard) {
+      if(row[0] == row[1] && row[0] == row[2]) {
+        return row[0];
+      }
+    }
+    //2) Check Columns
+    for(int i = 0; i < gameBoard.length; i++) {
+      if(gameBoard[0][i] == gameBoard[1][i] && gameBoard[0][i] == gameBoard[2][i]) {
+        return gameBoard[0][i];
+      }
+    }
+    //3) Check Diagonals
+    if(gameBoard[0][0] == gameBoard[1][1] && gameBoard[0][0] == gameBoard[2][2]) {
+      return gameBoard[0][0];
+    } else if(gameBoard[0][2] == gameBoard[1][1] && gameBoard[0][2] == gameBoard[2][0]) {
+      return gameBoard[0][2];
+    }
+
     return ' ';
   }//end getWinner
 
   public static boolean isBoardFull(char[][] gameBoard) {
-    return false;
+    for(char[] row : gameBoard) {
+      for(int col = 0; col < row.length; col++) {
+        if(row[col] == ' ') {
+          return false;
+        }
+      }
+    }
+
+    return true;
   }//end isBoardFull
   
 }
