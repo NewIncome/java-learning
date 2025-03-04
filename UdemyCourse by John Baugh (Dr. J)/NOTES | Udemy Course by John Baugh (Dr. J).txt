@@ -44,7 +44,6 @@ When used == with Reference types it compares the memory address
 + Repetition (Loops), while, do-while, for
 	'continue' and 'break'. Continue -> jumps to the next loop iteration. Break, breaks loop
 
-
 -Data Structures-
 Containers that hold data
 + Array: collection of homogeneous elements
@@ -98,21 +97,41 @@ Is when you write many methods with the same name but different parameters, java
 
 //* the 'return type' is not part of the method signature, but it typically matches so it's not ambiguous. But it can be different.
 
-• 'Subbing out' a method, means: have it return 0, just to get it to compile.
-
 
 - The 'Call Stack' -
 Holds activation records, keeps track of the method calls that have ocurred
 You can only Push(add) or Pop(remove) an item from the top of the stack
 When any method is called, an "Activation Record" also called "Stack Frame" is Pushed onto the top of the stack.
  + They hold information about the particular method call, like: memory location, param values, local variables, where in the method the last instruction was executed, etc.
- ie.: in a recursive countdown call method we Push to the stack the records for the calls like: main, 3, 2, 1, the poped from the stack 1,2,3,main 
+ ie.: in a recursive countdown call method we Push to the stack the records for the calls like: main, 3, 2, 1, the poped from the stack 1,2,3,main
 
-- 2D Arrays or Matrices | 2+D Arrays or Tensors -
-Matrix = a 2D Array
-Tensor = Array greater than 2D+
-ie.:
-int[][] my2DArray = new int[2][3]; //2 rows x 3 columns
+
+--- OOP ---
+• Programming Paradigms
+	+ Procedural: focuses on the procedures or Methods
+	+ OOP: focuses on Objects, which has behaviours(procedures) and data
+	    features and Primary PRINCIPLES:
+		- (1)Encapsulation : The data and procedures live together in the Object
+		- (2)Inhertance
+		- (3)Polimorphism
+
+• Encapsulation
+	Refers to the Uniting of behaviours and data in a single entity, known as Object
+  + Advantages:
+	+ Portability
+	+ Security : Promotes information / implementation Hiding
+
+• A Class acts as a blueprint for objects
+  + Instance Fields : the scentences defining specific data in a class, that objects'll have
+  + Mutators(setter) : methods that set an internal value of the object
+  + Accessors(getter) : methods that gets data from an object
+  + Constructor(ctor) : they're called automatically when creating an object
+		- they have the same name as their class
+		- There are No-arg Constructor, and Parameterized ctor
+*// Name Shadowing : is using this inside a setter method like so:
+		ie.: this.numStories = numStories;
+	  that refers to 2 different variables
+
 
 
 
