@@ -36,13 +36,15 @@ public class Proj6_2_TicTacToe {
     {" ", " ", " "}
 }; // But won't be used for cleaner more oganized purposes*/
   public static void main(String[] args) {
-    String[][] gameBoardValues = new String[3][3]; // only Declaration
+    char[][] gameBoardValues = new char[3][3]; // only Declaration
     char turn = 'X';
 
     initializeGameBoard(gameBoardValues);
     runGame();
     //printCurrentBoard(gameBoardValues);
+    // Game will loop until there's a winner or the boardIsFull
     getSetUserInput(turn, gameBoardValues);
+    printCurrentBoard(gameBoardValues);
   }//end main
 
   public static void runGame() {
@@ -53,13 +55,13 @@ public class Proj6_2_TicTacToe {
     System.out.println("Have fun!!\n");
   }//end runGame
 
-  public static void initializeGameBoard(String[][] gameBoard) {
-    for(String[] row : gameBoard) {
-      Arrays.fill(row, " ");
+  public static void initializeGameBoard(char[][] gameBoard) {
+    for(char[] row : gameBoard) {
+      Arrays.fill(row, ' ');
     }
   }//end initializeGameBoard
   
-  public static void printCurrentBoard(String[][] gameBoard) {
+  public static void printCurrentBoard(char[][] gameBoard) {
     System.out.println("\n   Game Board, current");
     System.out.println("\t  0 1 2");
 
@@ -71,11 +73,11 @@ public class Proj6_2_TicTacToe {
     System.out.println();
   }//end printCurrentBoard
 
-  public static void getSetUserInput(char xTurn, String[][] gameBoard) {
+  public static void getSetUserInput(char xTurn, char[][] gameBoard) {
     Scanner userIn = new Scanner(System.in);
     String move;
     boolean valid;
-    int[] rowCol = new int[2];
+    int row, col;
 
     //get the user's move
     System.out.println("It's your turn player " + xTurn);
@@ -84,12 +86,12 @@ public class Proj6_2_TicTacToe {
 
     //check the user move for validity and cellOccupation
     valid = isMoveValid(move);
-    rowCol[0] = Integer.parseInt(move.substring(0, 1));
-    rowCol[1] = Integer.parseInt(move.substring(1));
+    row = Integer.parseInt(move.substring(0, 1));
+    col = Integer.parseInt(move.substring(1));
 
     System.out.println("\nWas the move valid? : " + valid + "\n");
 
-    while(!valid || cellAlreadyOccupied(rowCol[0], rowCol[1], gameBoard)) {
+    while(!valid || cellAlreadyOccupied(row, col, gameBoard)) {
       System.out.println("That was not a valid move or the cell was occupied");
       System.out.println("Please choose a valid move:");
       move = userIn.nextLine();
@@ -98,6 +100,8 @@ public class Proj6_2_TicTacToe {
 
     //set the userMove
     System.out.println("All valid, ready to set your move");
+    gameBoard[row][col] = xTurn;
+    System.out.println("Board updated!");
   }//end getSetUserInput
 
   public static boolean isMoveValid(String move) {
@@ -113,18 +117,18 @@ public class Proj6_2_TicTacToe {
     return false;
   }//end isMoveValid
 
-  public static boolean cellAlreadyOccupied(int row, int col, String[][] gameBoard) {
-    if(gameBoard[row][col] != " ") {
+  public static boolean cellAlreadyOccupied(int row, int col, char[][] gameBoard) {
+    if(gameBoard[row][col] != ' ') {
       return true;
     }
     return false;
   }//end cellAlreadyOccupied
 
-  public static char getWinner(String[][] gameBoard) {
+  public static char getWinner(char[][] gameBoard) {
     return ' ';
   }//end getWinner
 
-  public static boolean isBoardFull(String[][] gameBoard) {
+  public static boolean isBoardFull(char[][] gameBoard) {
     return false;
   }//end isBoardFull
   
