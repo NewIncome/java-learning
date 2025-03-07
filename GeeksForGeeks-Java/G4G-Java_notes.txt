@@ -112,6 +112,61 @@ Are data containers, or memory location name for data.
 		  - int = 0
 		  - float = 0.0f
 		  - Wrapper classes like 'Integer' = null, etc.
-	+Static : 
+	+Static : also known as 'class variables'
+		+ these are similar to instance variables, but must use the 'static' keyword 4 declaration
+		+ these are created at the start of a program execution and destroyed on end
+		+ Declaring a static variable inside a block that is not a StaticBlock 
+*		+ If we access a static variable like an instance variable (through an object) or without a class name, the compiler will show a warning message, which won’t halt the program. The compiler will replace(or append) the object name with the class name automatically.
+		*// If we want to execute some code once for all objects of a class then we will be using Static Block in Java. If we want to execute it everytime an object is created we use an 'Instance Block'
+
+- Scope in Java -
+Scope of a variable defines the region of the program where the variable can be accessed
+
+types of Scopes:
+1. Local scope
+2. Instance Scope
+3. Class Scope
+4. Parameter Scope
+5. Block Scope
+
+- Java Operators -
+Special symbols that are used for performing Operations.
+
+• Types of operations in Java: Arithmetic, Unary, Assignment, Relational, Logical, Ternary, Bitwise, Shift, instance of operator
+
+// for the following must use binary numbers: 0b1010
+• Bitwise : is for manipulating individual bits of a number. They are used when performing update and query operations of the Binary indexed trees. &, |, ^, ~, and , or, xor, complement(inverts all, one's complement), respectively.
+• Shift : used to shift the bits of a number left or right, thereby multiplying or dividing the number by two, respectively.
+  ♦ << (Left shift) – Shifts bits left, filling 0s (multiplies by a power of two).
+  ♦ >> (Signed right shift) – Shifts bits right, filling 0s (divides by a power of two), with the leftmost bit depending on the sign.
+  ♦ >>> (Unsigned right shift) – Shifts bits right, filling 0s, with the leftmost bit always 0.
+ie.: number shift_op number_of_places_to_shift; 
+• Instance of Operator : used for type checking. ie.: object instancof class/subclass/interface 
+
+• Precedence and Associativity of Java Operators: Must review orders table. Highest order top:
+Unary postfix
+Unary prefix
+Multiplicative
+Additive
+Shift
+Relational
+Equality
+Boolean Logical AND
+Boolean Logical Exclusive OR
+Boolean Logical Inclusive OR
+Conditional AND
+Conditional OR
+Conditional
+Assignment
+
+• Be a Compiler: The compiler in our systems uses a lex tool to match the greatest match when generating tokens
+	ie.: int a = 20, b = 10, c = 0;
+	     a=b+++c;
+	// a=b+++c is compiled as
+	// a = b++ +c
+        // b++ +c
+        // a=b+c then b=b+1
+	// so ends as: a = 10, b: 
+  + talking about the 'tokens': the token created by lex is a, =, b, ++, +, c.
 
 

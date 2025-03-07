@@ -111,7 +111,7 @@ When any method is called, an "Activation Record" also called "Stack Frame" is P
 	+ Procedural: focuses on the procedures or Methods
 	+ OOP: focuses on Objects, which has behaviours(procedures) and data
 	    features and Primary PRINCIPLES:
-		- (1)Encapsulation : The data and procedures live together in the Object
+		- (1)Encapsulation : The data(fields) and procedures(methods) live together in the Object
 		- (2)Inhertance
 		- (3)Polimorphism
 
@@ -131,6 +131,26 @@ When any method is called, an "Activation Record" also called "Stack Frame" is P
 *// Name Shadowing : is using this inside a setter method like so:
 		ie.: this.numStories = numStories;
 	  that refers to 2 different variables
+  + Field : is a variable that belongs to a class or an object
+    - There are 2 types: Instance fields, and Static Fields
+    //- Also referred to as member 'Attributes'
+
+- UML (Unified Modeling Language) -
+• A Class Diagram : is used to help 'model' a class
+• They have 3 sections: name, fields, and methods
+  ♦ Format is as follows:
+    ○ identifier : dataType
+    ○ + means public, - means private
+    ○ _ and 'underlined' field or method means it's "Static", thus it belongs to the class
+ie.:  Name      Rectangle
+      Fields  - length : double
+              - _numRectangles : int_ //underlined
+      Methods + Rectangle()   // no-arg ctor
+              + Rectangle(length : double, width : double)  //param ctor
+              + getLength() : double
+              + setLength(length : double) : void
+              + _getNumRectangles() : int_ //underlined
+
 
 
 
