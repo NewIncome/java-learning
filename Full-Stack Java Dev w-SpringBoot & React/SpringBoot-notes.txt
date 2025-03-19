@@ -1,0 +1,14 @@
+--- SpringBoot ---
+○ Advantages:
+  + dependency inyection
+  + database transaction management
+  + integration with other Java frameworks
+  + MVC framework
+
+
+-- Spring Framework --
+• A Framework:
+    + is a configurable layer of code
+    + usually built on top of primitive APIs
+    + contains logic and abstractions designed to hide tedious tasks
+    
