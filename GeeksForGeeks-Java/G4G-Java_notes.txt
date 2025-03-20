@@ -58,7 +58,8 @@ JDK > JVM > JRE
 • Source File Name
     When There is a public class in the file the file name must exactly match the name of the public class name. If there is no public class or the class is not public the filename doesn't matter
 
-- SCOPE | Access & Non-access MODIFIERS -
+
+-- SCOPE | Access & Non-access MODIFIERS --
 Access Modifiers:
   ○ default, public, protected, private
 Non-access Modifiers:
@@ -72,7 +73,8 @@ Non-access Modifiers:
   ► main()  : Name configured in the JVM. The main method must be inside the class definition. 
   ► String[]  : The main method accepts a single argument, i.e., an array of elements of type String. 
 
-- Data Types -
+
+-- Data Types --
 Are values that can be stored in variables
 A) Primitive types
     byte(8 bits), short(16), int(32), long(64), float(32), double(64), char and boolean
@@ -98,7 +100,8 @@ KEY POINTS
 ○ MEMORY EFFICIENCY: Choosing the right data type based on the range and precision needed helps in efficient memory management.
 ○ IMMUTABILITY OF STRINGS: Strings in Java cannot be changed once created, ensuring safety in multithreaded environments.
 
-- Variables -
+
+-- Variables --
 Are data containers, or memory location name for data.
 • They have: +Data Type, +Variable Name, +Value
 • There are 3 kinds in Java:
@@ -119,7 +122,8 @@ Are data containers, or memory location name for data.
 *		+ If we access a static variable like an instance variable (through an object) or without a class name, the compiler will show a warning message, which won’t halt the program. The compiler will replace(or append) the object name with the class name automatically.
 		*// If we want to execute some code once for all objects of a class then we will be using Static Block in Java. If we want to execute it everytime an object is created we use an 'Instance Block'
 
-- Scope in Java -
+
+-- Scope in Java --
 Scope of a variable defines the region of the program where the variable can be accessed
 
 types of Scopes:
@@ -129,7 +133,8 @@ types of Scopes:
 4. Parameter Scope
 5. Block Scope
 
-- Java Operators -
+
+-- Java Operators --
 Special symbols that are used for performing Operations.
 
 • Types of operations in Java: Arithmetic, Unary, Assignment, Relational, Logical, Ternary, Bitwise, Shift, instance of operator
@@ -143,21 +148,21 @@ Special symbols that are used for performing Operations.
 ie.: number shift_op number_of_places_to_shift; 
 • Instance of Operator : used for type checking. ie.: object instancof class/subclass/interface 
 
-• Precedence and Associativity of Java Operators: Must review orders table. Highest order top:
-Unary postfix
-Unary prefix
-Multiplicative
-Additive
-Shift
-Relational
-Equality
-Boolean Logical AND
-Boolean Logical Exclusive OR
-Boolean Logical Inclusive OR
-Conditional AND
-Conditional OR
-Conditional
-Assignment
+• ***Precedence*** and Associativity of Java Operators: Must review orders table. Highest order top:
+Unary postfix   (++ --)
+Unary prefix    (++ -- + - ~ ! (type))
+Multiplicative  (* / %)
+Additive        (+ -)
+Shift           (<< >> >>>)
+Relational      (< <= > >=)
+Equality        (== !==)
+Boolean Logical AND           (&)
+Boolean Logical Exclusive OR  (^)
+Boolean Logical Inclusive OR  (|)
+Conditional AND (&&)
+Conditional OR  (||)
+Conditional     (?:)
+Assignment      (= += -= *= /= %=)
 
 • Be a Compiler: The compiler in our systems uses a lex tool to match the greatest match when generating tokens
 	ie.: int a = 20, b = 10, c = 0;
@@ -169,4 +174,166 @@ Assignment
 	// so ends as: a = 10, b: 
   + talking about the 'tokens': the token created by lex is a, =, b, ++, +, c.
 
+• Inside system.out.println() make sure to do addition using parenthesis, to avoid string concatenation instead of addition
 
+• Java doesn’t support Operator Overloading
+
+
+-- User Input --
+with class:
+• Scanner,  part of java.util package
+  + Introduced in Java 5
+  + use ie.: Scanner scn = new Scanner(System.in);
+  + has the methods: next(), nextLine(), nextBoolean/Byte/Int/Short/Long/Float/Double(). Each for reading specific values
+    ○ nextInt/Float() leave the newline character in the input buffer, so if you call nextLine() right after, it will read this newline as input instead of a new line
+  Main characteristics:
+    - Reads formatted input
+    - Best suited for small data types
+    - Slow due to parsing overhead (e.g., nextInt(), nextFloat())
+• BufferedReader
+  + has the methods:
+    ◘ read():  Reads a single character
+    ◘ read(char[] cbuf): Reads an array of characters
+    ◘ readLine(): Reads an entire line of text
+  + Main characteristics:
+    - Faster for large input as it does less parsing
+    - Exceptions handling (IOException)
+    - Thread-safe, due to Synchronization
+
+
+-- Flow Control / Conditioning --
+• if  statement
+• if-else
+• if-else-if  (sequential conditioning & fallback mechanism)
+  ♦  if we do not provide the curly braces ‘{‘ and ‘}’ after if( condition ) then by default if statement will consider the immediate one statement to be inside its block
+• for loop
+  ♦  ie.: for(initialization; condition/test; updation) { body }
+• for-each / Enhanced For Loop
+  ♦  ie.: for(type var : array) { }
+  ♦  Limitations:
+    - cannot modify array elements directly
+    - no access to index
+    - single-direction only
+• while() {}  // can run without {}
+• do{} while();
+  ♦  when you want the code to run at least once
+• break,  breaks the loop immediately
+  ♦  In LABELED BLOCKS, Java allows using break with labels to exit from nested blocks. It often referred to as an alternative to the goto statement.
+    ◙  ie.:
+      first: {
+        second: {
+          //Block of statements
+          break first;
+        }
+      }
+• continue,  skips current iteration and move to next one
+• return,  used to exit from a method, with or without a value
+  ♦  In methods with return type void, it can be used without a value, as an exit method
+    ◙  ie.:
+      public class Geeks {
+        void demoFunc(double n) { if (n < 9) return; n++; }
+        ...main...{
+          new Geeks().demoFunc(5);
+        }
+      }
+
+
+-- Methods --
+Are blocks of code that perform a specific task
+• All methods in Java must belong to a class
+• Are similar to functions and expose the behavior of objects
+• Syntax:
+  <access_Modifier> <Return_Type> <method_Name>(list_of_Parameters)
+{
+    //Body
+}
+  ie.: public void test() { //code block }
+  ♦  modifiers,  (public, private, protected, or default)
+
+• Method Naming
+  ♦ typically a single word that should be a VERB in lowercase
+  ♦ or multi-word, that begins with a VERB in lowercase followed by an ADJECTIVE, NOUN
+  ♦ After the first word, the first letter of each word should be capitalized
+
+Types of Methods in Java
+• Predefined methods,  are already defined in Java class libraries
+• User-defined methods
+  There are 2 types:
+  ♦  Instance Method,  Declared inside a class
+  ♦  Static Method,   Access the static data using class name. Declared inside class with static keyword
+  ♦  Abstract Methods,  is used for creating blueprints for classes or interfaces. Abstract classes can also be seen as  super-classes
+    ◘  These need to use the 'abstract' reserved word
+    ◘  They can only be implemented using subclasses or classes that implement the interfaces
+    ◘  They are sometimes referred to as subclass responsibility because they have no implementation specified in the super-class. Thus, a subclass must override them to provide a method definition
+
+• Method Overloading & Method Signature
+A method name can be defined in different ways to make different methods
+It consists of the method name and a parameter list.
+  ♦ number of parameters
+  ♦ type of the parameters
+  ♦ order of the parameters
+
+• Memory Allocation for Methods Calls
+Methods calls are implemented through a stack, whenever a method is called
+  ♦  the stack frame stores the arguments passed to and the local variables and value to be returned by this called method, which'll be deleted upon completion
+  ♦  There is a stack pointer register that tracks the top of the stack which is adjusted accordingly
+
+• Advantages
+  ♦  Reusability
+  ♦  Abstraction
+  ♦  Encapsulation
+  ♦  Modularity
+  ♦  Customization
+  ♦  Improved Performance
+
+
+-- How to Call a Method in Java? --
+Calling the
+  + Abstract Methods:  by creating an instance of the public-class that extended from the abstract-class that has the abstract-method. And calling the method on that instance
+  + Predefined(/Instance) Methods:  by just calling the method on the object needed
+    //(Instance Methods) are very similar, in use, to predefined methods, but can be created by you
+    - they belong to the object
+    ** Use instance methods for operations that depend on the state of an object.
+  + Static Methods:  class.method();
+    - they belong to the class
+    ** Use static methods for class-level operations or utilities.
+
+//* Method Hidding.  when both superclass and subclass have static methods with the same name, thus the subclass method hides the superclass method
+
+//* the Heap,   is a region of memory used for Dynamic Memory Allocation. is where 'new' objects are stored (the onse that use the 'new' keyword to instantiate them)
+
+
+-- Access Modifiers --
+Keywords that control the visibility and accessibility of classes, methods, and variables
+*Thus ensuring better security and encapsulation
+Main Types:
+• Default – No keyword required,  are accessible only within the same package (Package-Private)
+• Private:  “only visible within the enclosing class”
+• Protected:  “only visible within the enclosing class and any subclasses”
+• Public,  are accessible from everywhere in the program
+
+All 12  modifiers in Java:
+  public      static          native
+  private     final           strictfp
+  protected   synchronized    transient
+  default     abstract        volatile
+
+
+-- Command Line Arguments --
+is an argument passed at the time of running the Java program and can be used as input
+ie.:
+public static void main(String[] args) { System.out.println(args[0]); }
+• these are passed as space-separated values
+• can be both strings and primitive data types
+• they're converted into a string array and provided to the main() function
+
+
+-- Variable Arguments (Varargs) --
+• is a method that takes a variable number of arguments
+• is specified by three periods or dots(…)
+• From JDK 5 onwards, we can declare a method with a variable number of arguments.
+• ie.:  public static void Names(String... n)
+• ie.:  static void fun2(String s, int... a)
+***  should ensure that there exists ONLY ONE Varargs parameter that should be Written Last in the parameter list of the method declaration
+
+• Vararg Methods can also be overloaded, but overloading may lead to ambiguity.
