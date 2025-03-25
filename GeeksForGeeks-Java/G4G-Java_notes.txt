@@ -470,11 +470,50 @@ As any other object variable that is declared with the 'final' reserved word,
 Is a type of objects that can store the sequence of characters
 • And every character is stored in 16 bits i.e using UTF 16-bit encoding
 • There are 2 ways of creating Java Strings:
-  ◘  String Literal
+  ◘  String Literal (Static Memory)
     ie.:  String demoString = “GeeksforGeeks”; 
-  ◘  Using new Keyword
+    ♦  Makes memory efficient (because no new objects are created if it exists already in the string constant pool)
+  ◘  Using new Keyword (HEAP Memory)
     ie.:  String str = new String("GeeksforGeeks");
     ♦  here Java will create a new string object in normal (non-pool) heap memory
     ♦  and it will return the reference to the same instance
-• Strings are immutable, they cannot be changed
+• String is an immutable class which means a constant and cannot be changed once created.
+Thus it is automatically thread safe
+
+- Interfaces and Classes in Strings -
+Also, the following class can be used:
+• CharBuffer class
+  ◘  implements the CharSequence interface; uses regex
+•  CharSequence
+  ◘  is used for representing the sequence of Characters
+  ◘  The following are implemented using the CharSequence interface:
+    ♦  String
+    ♦  StringBuffer
+      ○  is a peer class of String
+      ○  it is mutable in nature and it is thread safe class ○  can be used for multi threaded environment and shared object of string buffer
+    ♦  StringBuilder
+      ○  creates a mutable sequence of characters and it is NOT thread safe
+      ○  You can modify it, like:  demoString.append(“GFG”);
+    ♦  StringTokenizer
+      ○  is used to break a string into tokens(words)
+    Which means that this provides much of functionality like substring, lastoccurence, first occurence, concatenate , toupper, tolower etc
+      ○*  StringJoiner ,  is a class in java.util package
+        ☺  used to construct a sequence of characters(strings) separated by a delimiter
+        ☺  optionally starting with a supplied prefix and ending with a supplied suffix
+  •* The Cache that stores all created string instances is known as the STRING CONSTANT POOL or String Pool
+
+*** Just to make that memory detail clear:
+*  The String Pool is a special memory region where Java stores string literals
+*  String Literals: When you create a string using string literal syntax, like String s1 = "hello", it is automatically stored in the String Pool
+*  If the string already exists in the pool, it won't be duplicated
+*  String Objects Created Using the new Keyword: When you create a string using the 'new' keyword, it creates a new object on the heap
+*  However, if the string literal "hello" is already in the String Pool, the new String("hello") will reference the existing "hello" string in the pool,
+*  but the new String object itself is still created on the heap.
+
+• If you want to explicitly store a string in the constant pool, you need to 'intern' it
+  ie.:  String internedString = demoString.intern();
+
+//*** Strings are immutable for security, performance, and thread safety reasons. It prevents unwanted changes and helps optimize memory usage.
+
+
 
