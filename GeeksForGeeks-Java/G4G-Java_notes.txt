@@ -337,3 +337,144 @@ public static void main(String[] args) { System.out.println(args[0]); }
 ***  should ensure that there exists ONLY ONE Varargs parameter that should be Written Last in the parameter list of the method declaration
 
 • Vararg Methods can also be overloaded, but overloading may lead to ambiguity.
+
+
+-- Arrays --
+Are structures that store multiple values of the same type in a single variable
+• For primitive arrays,  elements are stored in a contiguous memory location.
+• For non-primitive arrays,  references are stored at contiguous locations, but the actual objects may be at different locations in memory
+• The size of an array is fixed
+
+• Declaration:  type[] var-name;  OR  type var-name[]; 
+*//   *** You cannot define the size of an array in the declaration:
+       int arr[2];   // Compiler Error
+• Creation/Initialization:  var-name = new type[size];
+    or with specific values:  int[] arr = {1, 2, 3, 4, 5};
+• Access/modification:  numbers[0] = 10;
+• We can get the length of an array using the 'length property'
+   int length = numbers.length;
+• By default, new arrays will automatically be initialized to Zero (for numeric types), False (for boolean), or Null (for reference types)
+• In Java, all arrays are dynamically allocated
+
+• Declaring array literal  
+   int[] intArray = new int[]{ 1,2,3,4,5,6,7,8,9,10 };
+• 2D Arrays are also called Matrix
+   datatype [][] arrayrefvariable;
+• Multidimensional Arrays are also called Jagged Arrays,
+   arrays of arrays
+  ♦  int[][] arr = { { 1, 2 }, { 3, 4 } };
+  ♦*** Multidimensional arrays in Java are not stored in tabular form. Each row is independently heap allocated, making it possible to have arrays with 'different row sizes'.
+  ♦ JAGGED arrays,  are arrays with member of different sizes
+    ◘  ie.:  arr [][]= { {1,2}, {3,4,5,6},{7,8,9}};
+• Array Types
+  ♦ Primitive Type
+  ♦ Object Type
+  ♦ Abstract Class Type
+  ♦ Interface Type
+
+• Returning Arrays from Methods
+  ♦  return new int[] { 1, 2, 3 };
+• Java Array Members
+  ♦  All the members are inherited from class Object; the only method of Object that is not inherited is its clone method
+  ♦  The public method clone() overrides the clone method in class Object and throws no checked exceptions
+• Cloning Arrays in Java (with the clone() method)
+  ♦  When you clone a single-dimensional array, such as Object[], a shallow copy is performed ==> the new array contains references to the original array’s elements
+  ♦  only with arrays containing primitive data types the actual values are copied
+  ♦  ie.:  int cloneArray[] = intArray.clone();
+  ♦  With a Multi-Dimensional Array clone
+    ◘  subarrays are shared
+    ◘  ie.: int cloneArray[][] = intArray.clone();
+            intArray == cloneArray        // false
+            intArray[0] == cloneArray[0]  // true
+            intArray[1] == cloneArray[1]  // true
+
+• The direct superclass of an array in Java is Object
+  ♦  Thus, inherit methods like: toString(), equals(), and hashCode()
+
+- Advanced Initialization Using Streams -
+An array can be initialized by using a stream interface. The IntStream interface in Java offers additional ways to initialize arrays with sequential or predefined values
+• int[] arr1 = java.util.stream.IntStream.range(1, 5).toArray();   // Output: 1 2 3 4
+• int[] arr2 = java.util.stream.IntStream.rangeClosed(1, 4).toArray();   // Output: 1 2 3 4
+• int[] arr3 = java.util.stream.IntStream.of(1, 2, 3, 4).toArray();   // Output: 1 2 3 4  'specific values'
+
+- Declaration & Initialization of Jagged Arrays -
+• Jagged arrays let you specify the size of each sub-array at runtime, rather than at compile-time
+different methods of d&i
+• 1)
+arr [][]= { {1,2}, {3,4,5,6},{7,8,9}};
+• 2)
+data_type array_name[][] = new data_type[n][];     // n= no. of rows
+
+array_name[] = new data_type[n1]        //n1= no. of columns in row-1
+array_name[] = new data_type[n2]       //n2= no. of columns in row-2
+                                   .
+                                   .
+array_name[] = new data_type[nk]        //nk=no. of columns in row-n
+• 3)
+int arr_name[][] = new int[][]  { 
+                                  new int[] {10, 20, 30 ,40},
+                                  new int[] {50, 60, 70, 80, 90, 100},
+                                  new int[] {110, 120}
+                              };
+• 4)
+int[][] arr_name = { 
+                                new int[] {10, 20, 30 ,40},
+                                 new int[] {50, 60, 70, 80, 90, 100},
+                                 new int[] {110, 120}
+                             };
+• disadvantages
+  ♦  increased complexity in the code and a potentially less readable codebase, so they should be used carefully and appropriately
+
+
+-- Arrays class in Java --
+The Arrays class in java.util package is a part of the Java Collection Framework
+• This class provides static methods to dynamically create and access Java arrays
+• to optimize our code, with ie.: fill, sort, search, etc
+• Class declaration
+    public class Arrays extends Object
+• to make use of Arrays methods 
+    Arrays.<function/method name>;
+• Methods in Java Array Class:
+ asList()
+ binarySearch(array, searchFor)
+ binarySearch(array, fromIndex, toIndex, key, Comparator)
+ compare(array 1, array 2)
+ copyOf(originalArray, newLength)
+ copyOfRange(originalArray, fromIndex, endIndex)
+ deepEquals(Object[] a1, Object[] a2)
+ deepHashCode(Object[] a)
+ deepToString(Object[] a)
+ equals(array1, array2)
+ fill(originalArray, fillValue)
+ hashCode(originalArray)
+ mismatch(array1, array2)
+ parallelPrefix(originalArray, fromIndex, endIndex, functionalOperator)
+ parallelPrefix(originalArray, operator)
+ parallelSetAll(originalArray, functionalGenerator)
+ parallelSort(originalArray)
+ setAll(originalArray, functionalGenerator)
+ sort(originalArray)
+ sort(originalArray, fromIndex, endIndex)
+ sort(T[] a, int fromIndex, int toIndex, Comparator< super T> c)
+ sort(T[] a, Comparator< super T> c)
+ spliterator(originalArray)
+ spliterator(originalArray, fromIndex, endIndex)
+ stream(originalArray) 
+ toString(originalArray) 
+
+- Final Arrays in Java -
+As any other object variable that is declared with the 'final' reserved word,
+* can only be initialized or Referenced ONCE, but the content CAN change.
+
+-- Strings --
+Is a type of objects that can store the sequence of characters
+• And every character is stored in 16 bits i.e using UTF 16-bit encoding
+• There are 2 ways of creating Java Strings:
+  ◘  String Literal
+    ie.:  String demoString = “GeeksforGeeks”; 
+  ◘  Using new Keyword
+    ie.:  String str = new String("GeeksforGeeks");
+    ♦  here Java will create a new string object in normal (non-pool) heap memory
+    ♦  and it will return the reference to the same instance
+• Strings are immutable, they cannot be changed
+
