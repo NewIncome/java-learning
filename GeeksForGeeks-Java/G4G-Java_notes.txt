@@ -479,6 +479,12 @@ Is a type of objects that can store the sequence of characters
     ♦  and it will return the reference to the same instance
 • String is an immutable class which means a constant and cannot be changed once created.
 Thus it is automatically thread safe
+*** ○ Static Memory is allocated at Compile-Time
+      ☼  mainly used to store: staticVariables, stringLiterals, and classDefinitions(metadata)
+    ○   Heap Memory is allocated at Run-Time
+      ☼  also known as Dynamic Memory Allocation
+      ☼  stores all objects
+      ☼  memory management is done mainly by the GarbageCollector(GC)
 
 - Interfaces and Classes in Strings -
 Also, the following class can be used:
@@ -515,5 +521,50 @@ Also, the following class can be used:
 
 //*** Strings are immutable for security, performance, and thread safety reasons. It prevents unwanted changes and helps optimize memory usage.
 
+- String Concatenation -
+• NullPointerException: when either of the strings is null
 
+- String Class -
+String Constructors in Java:
++ 1. String(byte[] byte_arr)
+  Construct a new String by decoding the byte array. It uses the platform’s default character set for decoding.
++ 2. String(byte[] byte_arr, Charset char_set)
+  Construct a new String by decoding the byte array. It uses the char_set for decoding.
++ 3. String(byte[] byte_arr, int start_index, int length)
+  Construct a new string from the bytes array depending on the start_index(Starting location) and length(number of characters from starting location).
++ 4. String(byte[] byte_arr, int start_index, int length, Charset char_set)
+  Construct a new string from the bytes array depending on the start_index(Starting location) and length(number of characters from starting location).Uses char_set for decoding.
++ 5. String(char[] char_arr)
+  Allocates a new String from the given Character array.
++ 6. String(char[] char_array, int start_index, int count)
+  Allocates a String from a given character array but choose count characters from the start_index.
++ 7. String(int[] uni_code_points, int offset, int count)
+  Allocates a String from a uni_code_array but choose count characters from the start_index.
++ 8. String(StringBuffer s_buffer)
+  Allocates a new string from the string in s_buffer.
++ 9. String(StringBuilder s_builder)
+  Allocates a new string from the string in s_builder.
+
+- String Methods -
++1. int length():  Returns the number of characters in the String.
++2. Char charAt(int i):  Returns the character at ith index.
++3. String substring (int i):  Return the substring from the ith  index character to end.
++4. String substring (int i, int j):  Returns the substring from i to j-1 index.
++5. String concat( String str):  Concatenates specified string to the end of this string.
++6. int indexOf (String s):  Returns the index within the string of the first occurrence of the specified string.:  If String s is not present in input string then -1 is returned as the default value.
++7. int indexOf (String s, int i):  Returns the index within the string of the first occurrence of the specified string, starting at the specified index.
++8. Int lastIndexOf( String s):  Returns the index within the string of the last occurrence of the specified string.:  If String s is not present in input string then -1 is returned as the default value.
++9. boolean equals( Object otherObj):  Compares this string to the specified object.
++10. boolean  equalsIgnoreCase (String anotherString):  Compares string to another string, ignoring case considerations.
++11. int compareTo( String anotherString) :  Compares two string lexicographically.
++12. int compareToIgnoreCase( String anotherString) :  Compares two string lexicographically, ignoring case considerations.:  Note: In this case, it will not consider case of a letter (it will ignore whether it is uppercase or lowercase).
++13. String toLowerCase():  Converts all the characters in the String to lower case.
++14. String toUpperCase():  Converts all the characters in the String to upper case.
++15. String trim():  Returns the copy of the String, by removing whitespaces at both ends. It does not affect whitespaces in the middle.
++16. String replace (char oldChar, char newChar):  Returns new string by replacing all occurrences of oldChar with newChar.
+Note: s1 is still feeksforfeeks and s2 is geeksgorgeeks
+
++17. boolean contains(CharSequence sequence):  Returns true if string contains contains the given string.
++18. Char[] toCharArray()::  Converts this String to a new character array.
++19. boolean startsWith(String prefix):  Return true if string starts with this prefix.
 
