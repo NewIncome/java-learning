@@ -568,3 +568,41 @@ Note: s1 is still feeksforfeeks and s2 is geeksgorgeeks
 +18. Char[] toCharArray()::  Converts this String to a new character array.
 +19. boolean startsWith(String prefix):  Return true if string starts with this prefix.
 
+
+-* String Buffer class *-
+String class that CAN be modified :. can change the content :. mutable
+• Has an initial capacity that can be changed later
+• It is ThreadSafe(for multiple threads) because the methods are 'Syncronized'
+• Usage, recommended when we need to modify the string multiple times
+• Important methods:
+  ○ ensureCapacity() ,  helps modify the capacity of the StringObject,
+    append(), insert(), delete(), reverse()
+• Constructors:
+  + StringBuffer()            16chars without (memory)reallocation
+  + StringBuffer(int size)    
+  + StringBuffer(String str)  str length + 16moreChars
+• all Methods:
+  ○ append(), length(), capacity(), charAt(), delete(), deleteCharAt()
+  ○ ensureCapacity(), insert(), length(), reverse(), replace()
+• Auxiliary Methods
+  ○ ensureCapacity(), appendCodePoint(int codePoint), charAt(int index), IntStream chars(), String toString(), void trimToSize(),
+    int codePointAt(int index), int codePointBefore(int index), int codePointCount(int beginIndex, int endIndex),
+    IntStream codePoints(), int indexOf(String str), int lastIndexOf(String str),
+    int offsetByCodePoints(int index, int codePointOffset), void setCharAt(int index, char ch),
+    void setLength(int newLength), CharSequence subSequence(int start, int end), String substring(int start),
+  ○ void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin)
+• All Implemented Interfaces of StringBuffer classes are Serializable, Appendable, CharSequence
+
+-* String Builder class *-
+Represents a 'Mutable' sequence of characters
+• Is Not Synchronized, thus it is Not Thread Safe, thus suitable for single-threaded applications
+• It is a high-performance and low-overhead non thread non-thread-safe alternative
+• Is faster than StringBuffer in most implementations, because it avoids creating new objects on every modification, reducing memory overhead
+• It dynamically adjusts its capacity as needed, minimizing the need for 'resizing'
+• Constructors:
+  ○ StringBuilder(), StringBuilder(int capacity), StringBuilder(String str), StringBuilder(CharSequence cs)
+• Methods:
+  ○ append(String str), insert(int offset, String), replace(int start, int end, String), delete(int start, int end),
+    reverse(), capacity(), length(), charAt(int index), setCharAt(int index, char), substring(int start, int end),
+    ensureCapacity(int minimum), deleteCharAt(int index), indexOf(String str), lastIndexOf(String str), toString()
+  ○ toString() ,  Converts the StringBuilder object to a String
