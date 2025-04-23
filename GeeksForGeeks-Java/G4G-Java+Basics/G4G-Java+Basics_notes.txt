@@ -606,3 +606,17 @@ Represents a 'Mutable' sequence of characters
     reverse(), capacity(), length(), charAt(int index), setCharAt(int index, char), substring(int start, int end),
     ensureCapacity(int minimum), deleteCharAt(int index), indexOf(String str), lastIndexOf(String str), toString()
   ○ toString() ,  Converts the StringBuilder object to a String
+
+- String to StringBuilder to String Buffer conversion -
+// from String to String Buffer, same for StringBuilder
+String s = "Geeks";
+StringBuffer sbr = new StringBuffer(s);
+
+// from StringBuilder or StringBuffer to String
+StringBuffer sbr = new StringBuffer(s);
+String s1 = sbr.toString();
+
+// from StringBuilder to StringBuffer, and viceversa
+StringBuffer sbr = new StringBuffer("Geek");
+String s = sbr.toString();
+StringBuilder sbl = new StringBuilder(s);

@@ -1,0 +1,6 @@
+--- Java OOP Concepts ---
+Programming approach that organizes code into objects and classes
+• A class is a blueprint that defines properties and behaviors
+• while an Object is an instance of a class representing real-world entities
+• Main 4 pilars are:
+  ○ Abstraction, Encapsulation, Inheritance, and Polymorphism
