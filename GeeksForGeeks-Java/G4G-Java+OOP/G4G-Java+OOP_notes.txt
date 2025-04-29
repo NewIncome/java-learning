@@ -2,5 +2,161 @@
 Programming approach that organizes code into objects and classes
 • A class is a blueprint that defines properties and behaviors
 • while an Object is an instance of a class representing real-world entities
+
+• Java Class: Is a user-defined blueprint or prototype from which objects are created
+  ○  a Class declaration usually includes: class modifiers, class-name, body
+• Java Object: is a basic unit of OOP that represents real-life entities
+  ○  An object mainly consists of: state(attr), behaviour(methods), identity, methods
+*    ♦  In Java, every method must be part of some class
+
 • Main 4 pilars are:
   ○ Abstraction, Encapsulation, Inheritance, and Polymorphism
+
+•1- Abstraction:
+  ○  is the property by virtue of which only the essential details are displayed to the user
+     is the process of identifying only the required characteristics of an object, ignoring the irrelevant details
+  ○  In Java  abstraction is achieved by interfaces and abstract classes
+    ♦  We can achieve 100% abstraction using interfaces.
+•2- Encapsulation:
+  ○  is the wrapping up of data under a single unit
+      :. === “data-hiding”
+  ○  Can be achieved by declaring all the variables in a class as private and writing public methods in the class to set and get the values of the variables
+•3- Inheritance:
+  ○  is the mechanism in Java by which one class is allowed to inherit the features (fields and methods) of another class
+  ○  Important terminologies: superclass, subclass, reusability(derive our new class from the existing class)
+•4- Polymorphism:
+  ○  refers to the ability of object-oriented programming languages to differentiate between entities with the same name efficiently
+     The ability to appear in many forms is called polymorphism.
+  ○  it is done by Java with the help of the signature and declaration of these entities
+  ○  Types of polymorphism in Java:
+    ♦1. Method Overloading
+      ◘  Also, known as Compile-Time polymorphism
+      ◘  is the concept where more than one method share the same name with different signature(Parameters) in a class
+    ♦2. Method Overriding
+      ◘  Also, known as Run-Time polymorphism
+      ◘  is the concept of Polymorphism where method in the child class has the same name, return-type and parameters as in parent class
+          The child class provides the implementation in the method already written
+
+-- Classes And Objects --
+• Class is a logical entity
+• Object is a physical entity
+• No memory is allocated when a Class is declared
+• Memory is allocated as soon as an Object is created
+
+• In general, class declarations can include these components, in order:
+  ○  Modifiers, Class keyword, Class name, Superclass (if any), Interfaces(if any), Body
+
+• An object consists of:
+  ○  State(attr/prop), Behaviour(methods), Identity(uniq name, enables interaction)
+•* //Objects (non-primitive types) are always allocated on the heap, while their reference variables are stored on the stack.
+• Declaring Objects, is also called Instantiating a Class
+
+• Ways to Create an Object of a Class:
+  ○1. Using new Keyword
+  ○2. Using Reflection (Dynamic Class Loading)
+    ♦  Reflection is a powerful feature in Java that allows a program to inspect and modify its own structure and behavior at runtime
+    ie.:  Class<?> c = Class.forName(“Student”);
+          Student s2 = (Student) c.getDeclaredConstructor().newInstance();
+* ○  Note: Reflection is used in frameworks like Spring for "dependency injection"
+  ○3. Using clone() method
+    ie.: Test t1 = new Test();
+         Test t2 = (Test)t1.clone();
+  ○4. Deserialization
+    ♦  De-serialization is a technique of reading an object from the saved state in a file
+
+• Creating Multiple Objects by one type only (A good practice)
+  ○  Creating a number of references for storing them is not a good practice and therefore we declare a static reference variable and use it whenever required.
+  ○  In the inheritance system, we use a parent class reference variable to store a sub-class object. In this case, we can switch into different subclass objects using the same referenced variable.
+  ie.:  class Animal {} 
+        class Dog extends Animal {} 
+        class Cat extends Animal {} 
+        public class Test {    
+          // using Dog object     
+          Animal obj = new Dog();     
+          // using Cat object     
+          obj = new Cat(); 
+        }
+
+• Anonymous Objects in Java
+  ○ are objects that are instantiated without storing their reference in a variable. They are used for one-time operations
+  ○ Common in event handling
+  ie.:  button.setOnAction(event -> System.out.println(“Button clicked!”)); // Anonymous object via lambda
+        stage.setScene(new Scene(root, 300, 200));
+
+-- Constructors --
+A constructor is a special block of code that is called when an object is created
+This process happens automatically when we use the “new” keyword to create an object
+• Characteristics:
+  ○  Same Name as the Class
+  ○  No Return Type
+  ○  Automatically Called on Object Creation
+  ○  Used to Set Initial Values for Object Attributes
+•* The first line of a constructor is a call to super() or this(),
+(a call to a constructor of a super-class or an overloaded constructor),
+if you don’t type in the call to super in your constructor the compiler will
+provide you with a non-argument call to super at the first line of your code,
+the super constructor must be called to create an object
+class Geeks {
+    // Constructor
+    Geeks()
+    {
+        super();
+        System.out.println("Constructor Called");
+    }
+
+    // main function
+    public static void main(String[] args)
+    {
+        Geeks geek = new Geeks();
+    }
+}
+• Rules for writing constructors are as follows:
+  ○  The constructor of a class must have the same name as the class name in which it resides.
+  ○  A constructor in Java can not be abstract, final, static, or Synchronized.
+  ○  Access modifiers can be used in constructor declaration to control its access i.e which other class can call the constructor.
+• Types of Constructors in Java:
+  ○1  Default Constructor
+  ○2  Parameterized Constructor
+  ○3  Copy Constructor
+    ie.:  Geeks(Geeks obj2)
+•* Note: There are no “return value” statements in the constructor, but the constructor returns the current class instance. We can write ‘return’ inside a constructor.
+• Constructor Overloading:  This allows us to create multiple constructors in the same class with different parameter lists.
+• Common Mistakes to Avoid:
+  ○  Forgetting super() in Child Classes: Always call the parent constructor (super()) if the parent class has no default constructor, or it will lead to compilation errors.
+  ○  Excessive Work in Constructors: Keep constructors simple and focused on initialization, avoiding heavy logic that slows down object creation.
+  ○  Not Handling Null Checks: Always validate parameters to avoid NullPointerException when constructing objects.
+
+-- Class --
+• Object Class Methods:
+  ○  toString(), hashCode(), equals(), finalize(), getClass(), clone(), wait(), notify() notifyAll() (Concurrency methods)
+• Object.toString() ,  provides a custom string representation for a class
+  ie.:  // Person{name:'Geek'}
+•* //Note: It is generally necessary to override the hashCode() method whenever the equals() method is overridden, so as to maintain the general contract for the hashCode method, which states that equal objects must have equal hash codes.
+  ie.:
+  public class Student {
+    int roll;
+    @Override
+    public int hashCode() {
+        return roll;
+    }
+    ...
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Student) {
+            return this.roll == ((Student) o).roll;
+        }
+        return false;
+    }
+    ...
+  }
+• getClass() ,  returns the class object of “this” object and is used to get the actual runtime class of the object
+  ie.: // java.lang.String
+• finalize() ,  this method is called just before an object is garbage collected
+  ○  It is called the Garbage Collector on an object when the garbage collector determines that there are no more references to the object
+  ○  We should override finalize() method to dispose of system resources, perform clean-up activities and minimize memory leaks
+  ○  Note: The finalize method is called just once on an object even though that object is eligible for garbage collection multiple times
+• Concurrency Methods: wait(), notify(), and notifyAll()
+  ○  These methods are related to thread Communication in Java. They are used to make threads wait or notify others in concurrent programming
+
+
+
