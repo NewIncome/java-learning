@@ -37,6 +37,7 @@ Programming approach that organizes code into objects and classes
       ◘  is the concept of Polymorphism where method in the child class has the same name, return-type and parameters as in parent class
           The child class provides the implementation in the method already written
 
+
 -- Classes And Objects --
 • Class is a logical entity
 • Object is a physical entity
@@ -83,6 +84,7 @@ Programming approach that organizes code into objects and classes
   ie.:  button.setOnAction(event -> System.out.println(“Button clicked!”)); // Anonymous object via lambda
         stage.setScene(new Scene(root, 300, 200));
 
+
 -- Constructors --
 A constructor is a special block of code that is called when an object is created
 This process happens automatically when we use the “new” keyword to create an object
@@ -126,6 +128,7 @@ class Geeks {
   ○  Excessive Work in Constructors: Keep constructors simple and focused on initialization, avoiding heavy logic that slows down object creation.
   ○  Not Handling Null Checks: Always validate parameters to avoid NullPointerException when constructing objects.
 
+
 -- Class --
 • Object Class Methods:
   ○  toString(), hashCode(), equals(), finalize(), getClass(), clone(), wait(), notify() notifyAll() (Concurrency methods)
@@ -159,4 +162,99 @@ class Geeks {
   ○  These methods are related to thread Communication in Java. They are used to make threads wait or notify others in concurrent programming
 
 
+-- Abstraction --
+Is the process of hiding the implementation details and only showing the essential details or features to the user
+  ○ Thus reducing complexity and improving maintainability
+• It allows to focus on what an object does rather than how it does it
+• Abstract classes may have methods without implementation and must be implemented by subclasses
+•* An Abstract class cannot be instantiated
+• By abstracting functionality, changes in the implementation do not affect the code that depends on the abstraction
+• Java provides 2 ways to implement abstraction:
+  ○  Abstract Classes (Partial Abstraction)
+  ○  Interface (100% Abstraction)
+• Data Abstraction may also be defined as the process of "'identifying' only the required characteristics" of an object ignoring the irrelevant details
+ie.:
+  abstract class Geeks {        // Abstract Class
+      abstract void turnOn();   // Abstract Method
+      abstract void turnOff();
+  }
+  // "Concrete" class implementing the abstract methods
+  class TVRemote extends Geeks {
+      @Override
+      void turnOn() {
+          System.out.println("TV is turned ON.");
+      }
+      @Override
+      void turnOff() {
+          System.out.println("TV is turned OFF.");
+      }
+  }
+• The concrete classes are used to contain the program logic.
 
+- Interface -
+• In Java or any other language, interfaces include both methods and variables but lack a method body
+• To implement an interface we use the keyword “implements” with class
+• Apart from abstraction, interfaces can also be used to implement inheritance in Java
+  ie.:
+  interface Shape { double calculateArea(); }
+  class Rectangle implements Shape {
+    public double calculateArea() { return length * width; }
+  }
+
+• Abstraction Best Practices:
+  ○  Use abstract classes when you need a common base class with shared functionality.
+  ○  Use interfaces when you need multiple inheritance or 100% abstraction.
+  ○  Keep your interfaces small and focused. Don’t put unrelated methods into a single interface.
+
+
+-- Encapsulation --
+Is a technique used to protect an object’s data from unauthorized access
+  ○  By using 'private' fields(instance variables)
+  ○  and providing public accessor methods(getter, setter)
+  ○  Thus ensuring data protection, security, and flexibility
+• Advantages:
+  ○  Data Hiding, Data Integrity, Reusability, and Testing code is easy
+• Best Practice bullet:
+  ○  Validate Data Before Modifying
+
+
+-- Inheritance --
+Mechanism by which one class is allowed to inherit features(fields and methods) of another class
+• Basically means: creating new classes based on existing ones
+• Inheritance promotes:
+  ○  code reusability, method overriding, and polymorphism
+    ♦  which makes the Java program more modular and efficient
+• It's implemented using the 'extends' keyword
+• The class that inherits is called the 'subclass' (child class)
+• The class being inherited from is called the 'superclass' (parent class)
+• Basic syntax:  class ChildClass extends ParentClass { ... }
+• Types of Inheritance:
+  ○  Single Inheritance ,  single-parent class (A <- B)
+  ○  Multilevel Inheritance ,  (A <- B <- C)
+  ○  Hierarchical Inheritance,  (B -> A <- C), (A <- B, A <- C, A <- D)
+    ♦  one class serves as a superclass (base class) for more than one subclass
+  ○  Multiple Inheritance ,  (A <- C, B <- C) == (A <- C -> B) 
+    ♦  one class can have more than one superclass and inherit features from all parent classes
+    ♦  We can achieve multiple inheritances only through 'Interfaces'
+  ○  Hybrid Inheritance ,  ()
+    ♦  We can achieve hybrid inheritance only through Interfaces
+    ♦  We can achieve this with Multiple-Inheritance
+    ♦  And also with MultiLevel and Hierarchical-Inheritance 
+•* //A class cannot directly access the grandparent’s members if they are private
+
+• In a subclass, we can:
+  ○  Override superclass methods, using the same signature
+  ○  write a subclass constructor that invokes the constructor of the superclass, either implicitly or by using the keyword 'super'
+  ○  write a new 'static' method in the subclass that has the same signature as the one in the superclass, thus 'hiding' it
+• Advantages of Inheritance:
+  ○  Code Reusability, Abstraction, Class Hierarchy, Polymorphism
+• Disadvantages:
+  ○  Complexity, Tight Coupling
+
+• Default superclass: (single inheritance) every class has one and only one direct superclass
+• Constructors, aren't inherited, but can be invoked
+• A subclass does'nt inherit 'private' members of its parent class
+  ○  But 'publi' and 'protected' methods are inherited
+
+***
+• The 'super' keyword allows access to the immediate parent class's methods or constructors.
