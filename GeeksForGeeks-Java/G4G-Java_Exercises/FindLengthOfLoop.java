@@ -29,12 +29,19 @@
     addValuesToList(list3, values3);
     list3.createLoop(4); //add loop to LinkedList, loop length:7
     numberOfNodesIfAny(list3);
-
+    printLoopHeadNode(list3);
+    
     LinkedList list4 = new LinkedList();
     int[] values4 = new int[]{1,2,3,4,5};
     addValuesToList(list4, values4);
     list4.createLoop(2); //loop length:7
     numberOfNodesIfAny(list4);
+    printLoopHeadNode(list4);
+  }
+
+  static void printLoopHeadNode(LinkedList list) {
+    Node headNode = FloydsCycleDetection.getLoopHeadNode(list.head);
+    System.out.println("Loop head-node: " + headNode.data);
   }
 
   static void addValuesToList(LinkedList list, int[] values) {

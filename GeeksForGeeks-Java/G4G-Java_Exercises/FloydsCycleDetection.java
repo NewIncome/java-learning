@@ -7,20 +7,8 @@ public class FloydsCycleDetection {
   // Function to count the number of nodes in loop
   // using Floyd's Cycle Detection Algorithm
   public static int countNodesinLoop(Node head) {
-    Node slow = head;
-    Node fast = head;
-
-    while(fast != null && fast.next != null) {
-      slow = slow.next;
-      fast = fast.next.next;
-
-      if(slow == fast) {
-        // Loop detected, count the length
-        return countLoopLength(slow); 
-      }
-    }
-
-    return 0;
+    Node meetPoint = findMeetingPoint(head);
+    return countLoopLength(meetPoint);
   } //end countNodesinLoop
 
   public static int countLoopLength(Node meetingPoint) {
@@ -34,6 +22,38 @@ public class FloydsCycleDetection {
 
     return count;
   } //end countLoopLength
+
+  public static Node getLoopHeadNode(Node head) {
+    Node pointer1 = head;
+    Node pointer2 = findMeetingPoint(head);
+
+    while(pointer1 != pointer2) {
+      pointer1 = pointer1.next;
+      pointer2 = pointer2.next;
+
+      if(pointer1 == pointer2) {
+        return pointer1;
+      }
+    }
+
+    return null;
+  }
+
+  public static Node findMeetingPoint(Node head) {
+    Node slow = head;
+    Node fast = head;
+
+    while(fast != null && fast.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
+
+      if(slow == fast) {
+        return slow;
+      }
+    }
+
+    return null;
+  }
 }
 
 /*
