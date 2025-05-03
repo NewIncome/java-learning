@@ -44,16 +44,18 @@ public class FloydsCycleDetection {
  * Floyd's Cycle Detection Algorithm
  * ---------------------------------
  *  => To find if there is a loop
- *    Make pointer1(Tortoise) traverse the loop by 1
- *    make pointer2(hare) traverse the loop by 2
+ *    Make pointer1(Tortoise) traverse the LList by 1
+ *    make pointer2(Hare) traverse the LList by 2
  *    If they meet there is a loop,
  *    if any arrive at null there is No loop
  *  => To find the length of the loop
  *    After they meet 1st time(meeting-node)
- *    Make both pointer loop again from there, same speed,
- *    when they meet again, the times they traverse,
+ *    Make both pointer traverse again from there,
+ *    same speed, when they meet again, the times they traverse,
  *    is the length of the loop
  *  => To find the head-node of the loop
- *    One pointer stays in the meeting-node
- *    
+ *    One pointer stays in the meeting-node(say Tortoise)
+ *    The other moves to the head-ndoe(say Hare)
+ *    They both traverse again, but both at same rithm(by 1)
+ *    When they meet again, that is the head-node of the loop
  */
