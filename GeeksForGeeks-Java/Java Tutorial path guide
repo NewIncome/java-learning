@@ -70,12 +70,12 @@ Java follows the Object-Oriented Programming (OOP) paradigm, which organizes cod
 • Packages
 • Quiz: Polymorphism and Packages
 
-***  Recommended Books:   ***
-“Head First Java” by Kathy Sierra and Bert Bates
-“Java: A Beginner’s Guide” by Herbert Schildt
-“Java: The Complete Reference” by Herbert Schildt
-“Effective Java” by Joshua Bloch
-“Java: The Good Parts” by Jim Waldo
+      ***  Recommended Books:   ***
+      “Head First Java” by Kathy Sierra and Bert Bates
+      “Java: A Beginner’s Guide” by Herbert Schildt
+      “Java: The Complete Reference” by Herbert Schildt
+      “Effective Java” by Joshua Bloch
+      “Java: The Good Parts” by Jim Waldo
 
 --- Java Interfaces ---
 Java interfaces define a contract that classes must follow, specifying method signatures without implementations. They enable abstraction and support multiple inheritance in Java through a clean, structured approach:
