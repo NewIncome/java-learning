@@ -258,3 +258,146 @@ Mechanism by which one class is allowed to inherit features(fields and methods) 
 
 ***
 • The 'super' keyword allows access to the immediate parent class's methods or constructors.
+
+
+-- Polymorphism --
+It's the ability of objects to behave differently based on their specific class type
+• Key features:
+  ○  Multiple Behaviors, Method Overriding,
+     Method Overloading, Runtime Decision
+
+• Types of Polymorphism
+  ○1- Compile-Time Polymorphism (Static)
+    |- Method Overloading  :dueTo
+  ○2- Runtime Polymorphism (Dynamic)
+    |- Method Overriding
+    |- Virtual Functions
+
+
+-- Method Overloading --
+Allows us to define multiple methods with the same name but different signature
+  ○  Signature:  the name + parameters of a method, return type doen't matter
+  ○*  changing the order of the parameters also counts, as a different signature
+• Method overloading is also known as Compile-time Polymorphism,
+  Static Polymorphism, or Early binding,
+  because the decision about which method to call is made at compile time
+  ○  when a method could take child & parent type, Java prefers the more specific child type
+• If the exact prototype(primitives) doesn't match, Java Converts it to a higher type(in terms of range)
+• Advantages
+  ○  Increase flexibility and improve the readability of code
+• Disadvantages:
+  ○  Confusion for developers
+  ○  Improper use may lead to ambiguity in method selection
+
+
+-- Method Overriding  --
+Occurs when a subclass or child class implements a method that is already defined in the superclass or base class.
+• The subclass method must match the parent class method’s name, parameters, and return type
+• Static methods cannot be overridden
+  ○  Only Instance methods
+• Enables Run-time polymorphism,
+  ○  because the method called depends on the object type at runtime
+• Advantages:
+  ○  Reuse method names logically instead of creating new ones for minor changes
+  ○  Can modify Parent 'private' method to public
+  ○  But a 'private' Parent method can't be overridden
+  ○  Also a method declared as 'final' cannot be overridden
+
+• Overriding is for Instance Methods
+  +  Java checks for the -Object Type- , to choose the method
+• Hiding is for Static/Class Methods
+  +  Java checks for the -Variable Type- , to choose the method
+  ie.:  VariableType variableName = new ObjectType();
+        ReferenceType
+  ○* // NOT common in GOOD or Well DESIGNS !!!!!  <<== <==< <-
+
+Rules for Java Method Overriding
+1. Access Modifiers in overriding: can make an overridden method More Accessible
+  ○  literally ONLY from 'protected' -> to 'public'
+  ie.:  upgrade protected to public, but not less
+2. Final Methods Cannot Be Overriden. Produces an Error
+3. Static Methods Cannot Be Overridden (Method Hiding), they can be 'Hidden'
+4. Private Methods Cannot Be Overridden. Produces an Error
+5. Method Must Have the Same Return Type (or subtype). == 'covariant' return type
+6. Invoking Parent’s Overridden Method Using super
+  ie.:  super.methodName();
+//* Abstract methods in an interface or abstract class are meant to be overridden
+//* We cannot override the constructor as the parent and child class can never have a constructor with the same name
+- Exception-Handling in Overriding -
+There are Two rules to note when overriding methods related to exception handling
+• Rule 1: If the super-class overridden method does not throw an exception, the subclass overriding method can only throw the unchecked exception,
+  throwing a checked exception will lead to a compile-time error. 
+  ○  'Un-checked exception' ,  is/are runtime exceptions, like: ArithmeticException, ClassCastException, NullPointerException, ArrayIndexOutOfBoundsException, ArrayStoreException, IllegalThreadStateException
+    ♦  they are derived from "RuntimeException"
+    ♦//'checked exception' are derived from "Exception"
+• Rule 2: If the superclass overridden method does throw an exception, the subclass overriding method can only throw the same, subclass exception.
+  ○  Also, there is no issue if the subclass overridden method does not throw any exception.
+
+//...*
+Overriding and Synchronized/strictfp Method
+The presence of a synchronized/strictfp modifier with the method has no effect on the rules of overriding, i.e. it’s possible that a synchronized/strictfp method can override a non-synchronized/strictfp one and vice-versa.
+
+
+//* ==========================================================
+  * --- Final Keyword ---
+  * The final Keyword in Java is used as a non-access modifier applicable to a variable, a method, or a class.
+  * Quick overview:
+  * Final Variable  -->  to Create a constant variable
+  * Final Method    -->  to Prevent Method Overriding
+  * Final Classes   -->  to Prevent Inheritance
+  * *They all produce an Error.
+  * ==========================================================
+  */
+
+
+-- Packages --
+Are a mechanism that encapsulates a group of classes, sub-packages, and interfaces.
+• By grouping related classes into packages, Java promotes 'data encapsulation', making code reusable and easier to manage
+• What for?
+  ○  Prevent naming conflicts
+  ○  Ease of organization, location
+  ○  Controlled access for Protected packages and subclasses
+  ○  default members (no access specifier) are accessible only within the same package
+  ○  Simply import the desired class from a package to use it in your program
+• Folder Structure:
+  - Program
+  |- JavaProgramming
+   |- arrays
+    |- twoPointers.java
+  inside the file use:  package JavaProgramming.arrays;
+  ○  Now you can do:
+    ♦  javac src\JavaProgramming\arrays\TwoPointers.java
+    ♦  java src\JavaProgramming\arrays\TwoPointers.java  ...it's .class
+
+• Naming Conventions: Package names are written in reverse order of domain names
+
+• Types of packages
+  ○  Built-in Packages:
+consist of a large number of classes which are a part of Java API, like:
+    ♦  java.lang, java.io, java.util, java.applet, java.net, java.awt(for graphical user interfaces, like buttons, menus)
+  ○  User-defined packages
+
+• Static Import
+  ○  Static Import in Java is about simplifying access to static members
+  ○  allows members (fields and methods) defined in a class as public static to be used in Java code without specifying the class in which the field is defined
+  ie.:  import static java.lang.System.*;
+        out.println("GeeksforGeeks");  //this can be done
+
+• Handling Name Conflicts
+  ○  if both are to be used, we must use the full package name
+  ie.:  java.util.Date deadLine = new java.util.Date();
+        java.sql.Date today = new java.sql.Date();
+
+• Access Modifiers in the Context of Packages
+  ○  Public ,  accessible from anywhere, regardless of whether the accessing class is in the same package or not
+  ○  Protected ,  accessible within the same package, accessible by subclasses
+  ○  Default ,  accessible only within the same package, not accessible by subclasses
+  ○  Private ,  accessible only within the same class
+
+• Important Points:
+  ○  Every class is part of some package.
+  ○  If no package is specified, the classes in the file goes into a special unnamed package (the same unnamed package for all files).
+  ○  All classes/interfaces in a file are part of the same package. Multiple files can specify the same package name.
+  ○  If package name is specified, the file must be in a subdirectory called name (i.e., the directory name must match the package name).
+  ○  We can access public classes in another (named) package using: package-name.class-name
+
