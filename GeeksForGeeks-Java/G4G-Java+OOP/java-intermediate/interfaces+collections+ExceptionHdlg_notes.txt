@@ -1,7 +1,84 @@
 --- Java Interfaces ---
+An interface in Java is a blueprint of a behaviour.
+Defined as an abstract type used to specify the behaviour of a class.
+• Key concepts:
+  ○  is a mechanism to achieve abstraction and multiple inheritance
+  ○  by default variables in an interface are public, static, and final
+  ○  supports loose coupling (classes depend on behavior, not implementation)
+    ♦  In other words, interfaces primarily define methods that other classes must implement
+//* Note: When we decide on a type of entity by its behaviour and not via attribute we should define it as an interface
+• Relationship Between Class and Interface
+  class       interface     interface
+    ^extends    ^implements     ^extends
+  class       class         interface
+//New feats added after JDK 8
+• Method Types for interfaces
+  ○  'default' methods
+    ♦  provide a method implementation within the interface itself
+  ○  'static' methods
+    ♦  are called directly using the interface name and are not inherited by implementing classes
+  ○  'private' methods
+    ♦  cannot be overridden nor accessed by implementing classes, as they are not inherited
+
+***-- Functional Interface --
+Is an interface that contains exactly one abstract method
+•* Enables Functional Programming Concepts in Java
+  ○  allowing you to pass behavior as arguments to methods, return behavior from methods, and treat functions as first-class citizens
+• Single Abstract Method (SAM): The interface contract specifies only one behavior that implementing classes must provide
+• It needs the @FunctionalInterface Annotation (optional but recommended)
+• Can Contain Static and Default Methods: Functional interfaces can have any number of static methods
+  (which are called on the interface itself) and default methods (which provide a default implementation
+  for the implementing classes). These don't violate the "single abstract method" rule because they already have implementations
+• Basic syntax:
+    @FunctionalInterface
+    interface MyFunctionalInterface {
+      void singleAbstractMethod();
+    }
+•* Primarily used to support lambda expressions and method references
+  ○*  enable you to treat functionality as data
+• In use with Lambda Expressions:
+    interface MyOperation {
+      int operate(int a, int b);
+    }
+    public class Main {
+      public static void main(String[] args) {
+        // Lambda expression implementing MyOperation
+        MyOperation addition = (int x, int y) -> x + y;
+        MyOperation subtraction = (a, b) -> a - b; // Type inference
+
+        System.out.println(addition.operate(5, 3));     // Output: 8
+        System.out.println(subtraction.operate(5, 3));  // Output: 2
+    ...
+• In use with Method References:
+    import java.util.List;
+    import java.util.Arrays;
+    import java.util.function.Consumer;
+    ...
+    // Functional Interface: Consumer<String> (accepts a String and returns void)
+    // Method reference to the static method printUpperCase
+    Consumer<String> printer = Main::printUpperCase;
+    names.forEach(printer); // Output: ALICE, BOB, CHARLIE
+    // Method reference to an instance method
+    List<String> greetings = Arrays.asList("hello ", "hi ", "hey ");
+    greetings.forEach(System.out::print); // Output: hello hi hey
+• java.util.function package
+  ○  is a rich set of built-in functional interfaces for many common use cases
+    ♦  Consumer<T>: Represents an operation that accepts a single input argument and returns no result.   
+    ♦  Supplier<T>: Represents a supplier of results.
+    ♦  Function<T, R>: Represents a function that accepts one argument and produces a result.   
+    ♦  Predicate<T>: Represents a predicate (a boolean-valued function) of one argument.   
+    ♦  UnaryOperator<T>: Represents an operation on a single operand that produces a result of the same type as its operand.   
+    ♦  BinaryOperator<T>: Represents an operation upon two operands of the same type, producing a result of the same type as the operands.
+
+•* Extending Interfaces
+  ○  When a class implements an interface that inherits another interface, it must provide an implementation for all methods required by the interface inheritance chain.
+
 
 
 --- Java Collections ---
 
 
 --- Java Exception Handling ---
+
+
+
