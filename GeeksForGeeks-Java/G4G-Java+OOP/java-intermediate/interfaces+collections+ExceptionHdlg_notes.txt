@@ -1,6 +1,6 @@
 --- Java Interfaces ---
 An interface in Java is a blueprint of a behaviour.
-Defined as an abstract type used to specify the behaviour of a class.
+It is a Contract defined as an abstract type used to specify the behaviour of a class.
 • Key concepts:
   ○  is a mechanism to achieve abstraction and multiple inheritance
   ○  by default variables in an interface are public, static, and final
@@ -64,21 +64,41 @@ Is an interface that contains exactly one abstract method
 • java.util.function package
   ○  is a rich set of built-in functional interfaces for many common use cases
     ♦  Consumer<T>: Represents an operation that accepts a single input argument and returns no result.   
+      ◘  ( s.a.m.: void accept(T t) )
     ♦  Supplier<T>: Represents a supplier of results.
+      ◘  ( sam: T get() )
     ♦  Function<T, R>: Represents a function that accepts one argument and produces a result.   
+      ◘  ( sam: R apply(T t) )
     ♦  Predicate<T>: Represents a predicate (a boolean-valued function) of one argument.   
+      ◘  ( sam: boolean apply(T t) )
     ♦  UnaryOperator<T>: Represents an operation on a single operand that produces a result of the same type as its operand.   
     ♦  BinaryOperator<T>: Represents an operation upon two operands of the same type, producing a result of the same type as the operands.
+    ♦  Runnable ( s.a.m.: void run() )
+    ♦  Callable<V> ( sam: V call() throws Exception )
+    ♦  Comparator<T> ( sam: int compare(T o1, T o2) )
 
 •* Extending Interfaces
-  ○  When a class implements an interface that inherits another interface, it must provide an implementation for all methods required by the interface inheritance chain.
+  ○  When a class implements an interface that inherits another interface,
+     it must provide an IMPLEMENTation for ALL METHODS required by the INTERFACE inheritance chain.
 
+• Steps of the development process, in general:
+  Level 1 – interfaces: It contains the service details.
+  Level 2 – abstract classes: It contains partial implementation.
+  Level 3 – implementation classes: It contains all implementations.
+  Level 4 – Final Code / Main Method: It have access of all interfaces data.
+
+• Important Points:
+  ○  A class that implements the interface must implement all the methods in the interface
+  ○  All the methods are public and abstract
+  ○  All the fields are public, static, and final; due to this it's not possible to declare instance variables
+  ○  It is used to achieve multiple inheritances
+  ○  It is used to achieve loose coupling
+  ○  Interfaces are about "What" not 'How'
 
 
 --- Java Collections ---
 
 
 --- Java Exception Handling ---
-
 
 
