@@ -20,7 +20,7 @@ It is a Contract defined as an abstract type used to specify the behaviour of a 
   ○  'private' methods
     ♦  cannot be overridden nor accessed by implementing classes, as they are not inherited
 
-***-- Functional Interface --
+***- Functional Interface -***
 Is an interface that contains exactly one abstract method
 •* Enables Functional Programming Concepts in Java
   ○  allowing you to pass behavior as arguments to methods, return behavior from methods, and treat functions as first-class citizens
@@ -109,6 +109,91 @@ Is a mechanism in which one object acquires all the properties and behaviors of 
 //* From Java 8, interfaces also have implementations of methods.
     So if a class implements two or more interfaces having the same method signature
     with implementation, it is mandated to implement the method in class also.
+
+-- Class vs Interfaces --
+• Main Difference:
+  ○  A class defines the state of behaviour of objects
+  ○  An interface is lika a contract,
+     that defines the methods that a class must implement
+  ○  an Interfaces:
+    ♦  cannot be instantiated directly, instead, it is implemented by a class or a struct
+    ♦  contains abstract methods by default (< Java 8)
+       or default/static methods (>=Java 8 onward)
+    ♦  All variables and methods are declared public
+    ♦  All variables are static and final
+    ♦  is focused on capabilities
+    ♦  methods declared in the interface are by default abstract (only method signature, nobody)
+
+-- Functional Interfaces (SAM Interfaces) --
+• is an interface that contains only one abstract method
+• can have multiple default or static methods, but only one abstract method
+• Runnable, ActionListener, and Comparator are common examples of Java functional interfaces
+• From Java 8 onwards, lambda expressions and method references can be used to represent the instance of a functional interface
+//• Note: A functional interface can also extend another functional interface
+
+- @FunctionalInterface Annotation -
+This annotation is used to ensure that the functional interface cannot have more than one abstract method
+• The “Unexpected @FunctionalInterface annotation” error ocurrs at compilation if more than one abstract methods are present
+//Note: @FunctionalInterface annotation is optional but it is a good practice to use
+• ie.:  
+    @FunctionalInterface
+    interface Square { int calculate(int x); }
+    ... main .. {
+      Square s = (int x) -> x * x; //This is how you implement & instantiate a FunctionalInterface Method
+      int squareValue = s.calculate(5);
+    }
+/* 
+ * • Functional Interfaces Before Java 8
+ *   ○  had to create anonymous inner class objects or implement these interfaces
+ *   ○  ie.:
+        // create anonymous inner class object
+        new Thread(new Runnable() {
+            @Override public void run()
+            {
+                System.out.println("New thread created");
+            }
+        }).start();
+*/
+• Built-In Java Functional Interfaces
+These are cointained in the java.util.function package
+  ○  Runnable:        only contains the run() method
+  ○  Comparable:      only contains the compareTo() method
+  ○  ActionListener:  only contains the actionPerformed() method
+  ○  Callable:        only contains the call() method
+• Types of Functional Interfaces in Java
+Java SE 8 included four main kinds of functional interfaces which can be applied in multiple situations
+  1. Consumer
+    ♦  accepts only one argument or a gentrified argument
+    ♦  has no return value
+    ♦  there are variants —  DoubleConsumer, IntConsumer, and LongConsumer (the before accept primitive values as arguments), 
+    ♦  also, a last variant:  Bi-Consumer
+    ♦  Syntax:  Consumer<Integer> consumer = (value) -> System.out.println(value);
+  2. Predicate
+    ♦  represents a boolean-valued function of one argument
+    ♦  It is commonly used for filtering operations in streams
+    ♦  extensions:  IntPredicate, DoublePredicate, and LongPredicate
+    ♦  No-lambda syntax:  public interface Predicate<T> { boolean test(T t); }
+    ♦  Syntax:  Predicate predicate = (value) -> value != null;
+  3. Function
+    ♦  receives only a single argument and returns a value after the required processing
+    ♦  extensions:  Bi-Function(takes 2 args), UnaryOperator, and BinaryOperator
+    ♦  Syntax:  Function<Integer, Integer> function = (value) -> value * value;
+  4. Supplier
+    ♦  does not take any input or argument
+    ♦  returns a single output
+    ♦  extensions:  BooleanSupplier, DoubleSupplier, LongSupplier, and IntSupplier
+    ♦  Syntax:  Supplier<String> supplier = () -> “Hello, World!”;    
+
+-- Nested Interfaces --
+• A nested interface can be declared public, protected, package-private (default), or private
+• A top-level interface (not nested) can ONLY be declared as public or package-private (default)
+• When implementing a nested interface, we refer to it as 'i_first.i_second'
+  ○  or c_name.i_name  for an interface inside a class
+• ie.:
+    class Parent { interface Test { void show(); } }
+    class Child implements Parent.Test { @Override public void show() {...
+
+
 
 
 --- Java Collections ---
