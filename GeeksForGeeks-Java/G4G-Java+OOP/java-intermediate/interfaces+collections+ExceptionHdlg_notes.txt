@@ -95,6 +95,21 @@ Is an interface that contains exactly one abstract method
   ○  It is used to achieve loose coupling
   ○  Interfaces are about "What" not 'How'
 
+-- Interfaces and Inheritance --
+Is a mechanism in which one object acquires all the properties and behaviors of a parent object
+• Fundamental principle of 'class-based inheritance'
+  ○  The Is-A relationship, is where a subclass is a more specialized version of its superclass
+    ♦  which is also known as the "Parent-Child relationship"
+    ♦ Dog IS_A Animal , Car IS_A Vehicle , Employee IS_A Person
+• Types of inheritance, between classes
+  ○  Single-level , Multi-level , and Hierarchical
+• With interfaces you can achieve
+  ○  Multiple & Hybrid inheritance
+  ○  Multiple Inheritance is not supported by class because of ambiguity
+//* From Java 8, interfaces also have implementations of methods.
+    So if a class implements two or more interfaces having the same method signature
+    with implementation, it is mandated to implement the method in class also.
+
 
 --- Java Collections ---
 
