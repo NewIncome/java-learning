@@ -192,7 +192,68 @@ Java SE 8 included four main kinds of functional interfaces which can be applied
 • ie.:
     class Parent { interface Test { void show(); } }
     class Child implements Parent.Test { @Override public void show() {...
+• Uses:
+  ○  To group related interfaces together; readability, organization
+  ○  To create more secure code; limiting scope
+  ○  To implement multiple interfaces; avoids cluttering up the global namespace with too many interface names
+  ○  To create callbacks
+  ○  To define a contract between classes; code more modular
 
+-- Marker Interface --
+is an empty interface means having no field or methods
+• Examples:
+  ○  Serializable
+    ♦  present in java.io package
+  ○  Cloneable
+    ♦  present in java.lang package
+    ♦  Invoking Object's clone method on an instance of the class that does not implement the Cloneable interface results in an exception CloneNotSupportedException being thrown
+    ♦  By convention, classes that implement this interface should override Object.clone() method
+  ○  Remote
+    ♦  present in java.rmi package
+    ♦  A 'remote' object is an object which is stored at one machine and accessed from another machine
+    ♦  RMI (Remote Method Invocation) provides some convenience classes that remote object implementations can extend
+
+-- Comparator Interface --
+is used to sort the objects of user-defined classes
+• present in java.util package
+• allows custom comparison logic outside of the class for which instances we want to sort
+• Compares 2 objects of the same class
+• Useful when:
+  ○  we need multiple sorting strategies for a class
+  ○  we want to keep the sorting logic separate from the class
+  ○* Suppose we have a list of Student objects, containing fields like roll no, name, address, DOB, etc,
+     and we need to sort them based on roll no or name.
+     We use Comparator here to define that logic separately.
+• Syntax:  public int compare(Object obj1, Object obj2);
+  ○  returns a negative integer if obj1 < obj2
+  ○  returns 0 if both objects are equal
+  ○  returns a positive integer if obj1 > obj2
+• Contains 2 methods:
+  ○  compare(Object obj1, Object obj2)
+  ○  equals(Object element)
+
+• sort() methods ,  of the Collections class is relevant here because it
+  is used to sort the elements of a List by the given Comparator
+  :. thus it internally calls the compare() method
+  ○  present in java.util.Collections.sort
+  ○  ie.:
+      ♦ You can sort a List of Students by Age with lambdas like this:
+         students.sort((p1, p2) -> Integer.compare(p1.age, p2.age));
+      ♦ You can sort by 2+ properties with Comparator's comparing() & thenComparing(), like:
+         students.sort(Comparator.comparing(Student::getName).thenComparing(Student::getAge));
+//* Note: new Comparator Interface methods: comparing() & thenComparing()
+
+Feature	          Comparator           	Comparable
+---------------------------------------------------------------
+•Sorting Logic 	  Defined externally	  Defined within the class (Internally)
+  Location
+•Multiple Sorting    Supported         	Not supported
+    Orders
+•Interface       	  compare()           compareTo()
+  Methods
+•Functional            Yes               No
+  Interface
+•Usage	          Flexible and reusable   Simple and tightly coupled
 
 
 
