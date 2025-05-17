@@ -258,6 +258,28 @@ Feature	          Comparator           	Comparable
 
 
 --- Java Collections ---
+• Collection: Any group of individual objects that are represented as a single unit
+• "Collection Framework" holds all the Java Collection Classes and Interfaces
+• There are 2 main interfaces:
+  ○  Collection interface (java.util.Collection)
+  ○  Map interface (java.util.Map)
+• Main Interfaces of Collections:
+  ○  List
+  ○  Set
+  ○  Queue
+  ○  Map
+  ○  conversions from one to another
+• Framework ,  is a set of classes and interfaces which provide a ready-made architecture
+• Advantages of the Collection Framework:
+  ○  Consistent API
+    ♦  has a basic set of interfaces like Collection, Set, List, or Map, all the
+       classes (ArrayList, LinkedList, Vector, etc)
+  ○  Reduces programming effort
+    ♦  achieves abstraction
+  ○  Increases program speed and quality
+• Hierarchy of the Collection Framework
+  ○  
+
 
 
 --- Java Exception Handling ---
