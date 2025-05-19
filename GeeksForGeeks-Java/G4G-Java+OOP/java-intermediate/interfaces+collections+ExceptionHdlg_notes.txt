@@ -264,21 +264,112 @@ Feature	          Comparator           	Comparable
   ○  Collection interface (java.util.Collection)
   ○  Map interface (java.util.Map)
 • Main Interfaces of Collections:
-  ○  List
-  ○  Set
-  ○  Queue
-  ○  Map
+  ○  List   (ArrayList, Vector, Stack, LinkedList, ...)
+  ○  Queue  (...priorityQueue...)
+  ○  Set    (CHashMap, HashSet, LinkedHashSet, ...)
+  ○  Map    (HashMap, TreeMap, EnumMap, HashTable, ...)
   ○  conversions from one to another
-• Framework ,  is a set of classes and interfaces which provide a ready-made architecture
+• Framework
+  ○  is a set of classes and interfaces which provide a ready-made architecture
 • Advantages of the Collection Framework:
-  ○  Consistent API
+  ○1  Consistent API
     ♦  has a basic set of interfaces like Collection, Set, List, or Map, all the
        classes (ArrayList, LinkedList, Vector, etc)
-  ○  Reduces programming effort
+  ○2  Reduces programming effort
     ♦  achieves abstraction
-  ○  Increases program speed and quality
-• Hierarchy of the Collection Framework
-  ○  
+  ○3  Increases program speed and quality
+• METHODS of the Collection Interface
+  ○  add(Object),  addAll(Collection c),  clear(),  contains(Object o)
+  ○  containsAll(Collection c),  equals(Object o),  hashCode()
+  ○  isEmpty(),  iterator(),  parallelStream(),  remove(Object o)
+  ○  removeAll(Collection c),  removeIf(Predicate filter),  retainAll(Collection c)
+  ○  size(),  spliterator(),  stream(),  toArray()
+•  INTERFACES that Extend the Java Collections Interface
+  ○1. Iterable Interface
+    ♦  is the root interface for the entire collection framework: all the interfaces and classes implement this interface
+    ♦  Iterator iterator();  //only 1 abstract method
+  ○2. Collection Interface
+    ♦  is implemented by all the classes in the collection framework
+    ♦  contains all the basic methods which every collection has like adding the data into the collection, removing the data, clearing the data, etc
+  ○3. List Interface
+    ♦  child interface of the collection interface
+    ♦  can store all the ordered collections of the objects(List type)
+    ♦  also allows duplicate data to be present in it
+    ♦  is implemented by various classes like ArrayList, Vector, Stack, etc
+    ♦  ie.:  List <T> al = new ArrayList<> (); 
+             List <T> ll = new LinkedList<> (); 
+             List <T> v = new Vector<> (); 
+             //Where T is the type of the object 
+    ♦  Classes which implement the List interface:
+      ◘ i).   ArrayList
+        ▲  provides us with dynamic arrays (but slower than std arrays)
+        ▲  can not be used for primitive types(int, char, etc), will need 'wrapper classes'
+      ◘ ii).  LinkedList
+        ▲  is an implementation of the LinkedList data structure
+      ◘ iii). Vector
+        ▲  is identical to ArrayList in terms of implementation
+        ▲  the primary difference is that a Vector is synchronized and an ArrayList is non-synchronized
+      ◘ iv).  Stack
+        ▲  implements the Stack data structure, and is based on the basic principle of last-in-first-out (LIFO)
+        ▲  the class provides 3 more functions: empty, search, and peek; in addition to the basic push and pop
+        ▲  can also be referred to as the subclass of Vector
+        ▲* is a subclass of Vector and a legacy class.
+           It is thread-safe which might be overhead in an environment where thread safety is not needed.
+           An alternate to Stack is to use ArrayDequeue which is not thread-safe and has faster array implementation
+  ○4. Queue Interface
+    ♦  maintains the FIFO(First In First Out) order similar to a real-world queue line
+    ♦  is used where the order of the elements matter
+    ♦  ie:  Queue <T> pq = new PriorityQueue<> (); 
+            Queue <T> ad = new ArrayDeque<> (); 
+            //Where T is the type of the object.  
+    ♦ PriorityQueue ,  is The most frequently used implementation of the queue interface
+      ◘  is used when the objects are supposed to be processed based on priority
+      ◘  is based on the priority heap
+      ◘  The elements of the priority queue are ordered according to the natural ordering
+         or by a 'Comparator' provided at queue construction time
+      ◘  If no comparator is set, it will order the list by ASCII value
+        ie.: So if integers are given, the smalles will be at the top        
+  ○5. Deque Interface
+    ♦  also known as a double-ended queue
+    ♦  is a data structure where we can add and remove elements from both ends of the queue
+    ♦  The ArrayDeque class implements the Deque interface
+    ♦  ie.: Deque<T> de_que = new ArrayDeque<> (); 
+            //Where T is the type of the object
+            de_que.addFirst(564);
+            de_que.addLast(14);
+  ○6. Set Interface
+    ♦  is an unordered collection of objects in which duplicate values cannot be stored
+    ♦  is implemented by various classes like HashSet, TreeSet, LinkedHashSet, etc
+    ♦  ie.: Set<T> hs = new HashSet<> (); 
+            Set<T> lhs = new LinkedHashSet<> (); 
+            Set<T> ts = new TreeSet<> (); 
+            //Where T is the type of the object.  
+    ♦  The classes that implement the Set interface:
+      ◘ i).  HashSet
+        ▲  is an inherent implementation of the 'hash table' data structure
+        ▲  same order while insertion is not guaranteed
+        ▲  objects are inserted based on their hashcode
+        ▲  This class also allows the insertion of NULL elements
+      ◘ ii). LinkedHashSet
+        ▲  difference from HashSet is that this uses a doubly linked list to store the data
+        ▲  and retains the ordering of the elements
+  ○7. Sorted Set Interface
+    ♦  this interface has extra methods that maintain the ordering of the elements
+    ♦  TreeSet ,  is the class which implements this interface
+    ♦  ie.: SortedSet<T> ts = new TreeSet<> (); 
+            //Where T is the type of the object. 
+      ◘  uses a Tree for storage
+  ○8. Map Interface
+    ♦  data structure that supports the key-value pair for mapping the data
+    ♦  doesn't support duplicate keys because the same key cannot have multiple mappings
+    ♦  is useful if there is data and we wish to perform operations on the basis of the key
+    ♦  ie.: Map<T> hm = new HashMap<> (); 
+            Map<T> tm = new TreeMap<> ();
+            //Where T is the type of the object.
+    ♦  HashMap ,  is the frequently used implementation of a Map
+      ◘  uses a technique called Hashing
+      ◘  Hashing is a technique of converting a large String to a small String that represents the same String so that the indexing and search operations are faster
+      ◘//* HashSet also uses HashMap internally 
 
 
 
