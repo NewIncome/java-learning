@@ -372,6 +372,71 @@ Feature	          Comparator           	Comparable
       ◘//* HashSet also uses HashMap internally 
 
 
+-- Collections Class --
+is one of the utility classes in the Framework
+• in the java.util package
+• is used with the static methods that operate on the collections or return the collection
+• throws the NullPointerException if the collection or object passed to the methods is null
+• Declaration:  public class Collections extends Object
+• difference between Collection and Collections
+  ○  collection, refers to the interface in the CollectionsFramework
+    ♦  Declaration:  public interface Collection<E> extends Iterable<E>
+    ♦  Contains abstract and default methods
+    ♦  It is used to represent a group of individual objects as a single unit
+  ○  collections, refers to a utility class present in java.util package
+    ♦  has some base utility methods
+    ♦  Contains only static methods :  like  Collections.addAll(), and Collections.sort()
+    ♦  It defines several utility methods that are used to operate on collection
+
+- The Collection classes -
+•1 ArrayList :  ArrayList<_type_> var_name = new ArrayList<_type_>();
+•2. Vector :    public class Vector<E> extends AbstractList<E> implements List<E>, RandomAccess, Cloneable, Serializable
+•3. Stack :     public class Stack<E> extends Vector<E>  ; (LIFO)
+•4. LinkedList :    LinkedList<_type_> var_name = new LinkedList<_type_>();
+•5. HashSet :   public class HashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable, Serializable
+•6. LinkedHashSet : public class LinkedHashSet<E> extends HashSet<E> implements Set<E>, Cloneable, Serializable
+    ○  is a doubli-linked List
+•7. TreeSet :   TreeSet<E> set = new TreeSet<>();
+•8. PriorityQueue : public class PriorityQueue<E> extends AbstractQueue<E> implements Serializable
+•9. ArrayDeque :    public class ArrayDeque<E> extends AbstractCollection<E> implements Deque<E>, Cloneable,Serializable
+•10. HashMap :  public class HashMap<K,V> extends AbstractMap<K,V> implements Map<K,V>, Cloneable, Serializable
+•11. EnumMap :  public class EnumMap<K extends Enum<K>,​V> extends AbstractMap<K,​V> implements Serializable, Cloneable
+•12. AbstractMap :  public abstract class AbstractMap<K,V> implements Map<K,V>
+13. TreeMap :   SortedMap<K, V> m = Collections.synchronizedSortedMap(new TreeMap<>());
+
+• Java Collections Class Fields:
+  ○  EMPTY_LIST to get an immutable empty List
+  ○  EMPTY_SET to get an immutable empty Set
+  ○  EMPTY_MAP to get an immutable empty Map
+• There is a very large list of methods inside the Collections class, must review separately
+  ○ The most used are Collections. :
+    import java.util.Collections;
+    ♦  addAll(Collection c, T... elements)
+    ♦  sort()
+    ♦  reverseOrder() ,  can be used inside sort() to reverse order sorted
+    ♦  binarySearch(List slist, T key)  |  (List slist, T key, Comparator c)
+      ◘  To use this method, the list should be sorted in ascending order, otherwise, the result returned from the method will be wrong
+      ◘  For Comparator you could use:  Collections.reverseOrder()
+    ♦  copy(List dest, List src)
+    ♦  disjoint(l1, l2) ,  returns true if the two collections do not have any element in common
+
+
+-- Collection Interface --
+is a core member of the Java Collections Framework
+is one of the root interfaces of the Java Collection Hierarchy
+• Sub-Interfaces:
+  ○  List
+  ○  Set
+  ○  Queue
+  ○  Deque
+  ○  SortedSet
+  ○  NavigableSet <- extends SortedSet
+    ♦  provides additional methods for navigation such as finding the closest element
+• The list of implementing classes is of 26+
+• Method declared in the iterable interface:  forEach​(Consumer<? super T> action)
+
+
+
 
 --- Java Exception Handling ---
 
