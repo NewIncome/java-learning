@@ -1,0 +1,11 @@
+List of Practice Exercises
+--------------------------
+-  didn't pass any or not finished
+/  passed some test cases
+✔  done
+
+[✔] - FindLengthOfLoop
+[✔] - PascalTriangle
+[✔] - UniqueNumber1
+[-] - PrimeList
+[/] - SubstringsSameFirstLastChar
