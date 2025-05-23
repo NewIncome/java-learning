@@ -232,26 +232,31 @@ Prepare for Java interviews with these commonly asked questions, covering core c
 • 200+ Core Java Interview Questions and Answers
 • Java MCQ
 
+
+-- Practice suggestions: --
+• https://www.geeksforgeeks.org/java-oop-exercises/
+• https://www.geeksforgeeks.org/java-programming-examples/
+• https://www.geeksforgeeks.org/java-projects/
+1•* [Lets Build Twitter](https://www.youtube.com/playlist?list=PLpo-NDb93rDVqmr9RbkMTLBaOmp2VfAU0)
+• [Java Backend Project: Spring Boot Tutorial](https://www.youtube.com/watch?v=y3odhQtu4R8)
+• [@Programming with Mosh](https://www.youtube.com/@programmingwithmosh)
+• [Spring Boot Tutorial for Beginners [2025]](https://www.youtube.com/watch?v=gJrjgg1KVL4&t=13s)
+• https://amigoscode.com/courses
+• Advanced Java Full Course 2023 | Advance Java Tutorial | J2EE, JSP, JDBC, Java API | from Simplilearn
+   https://www.youtube.com/watch?v=Ae-r8hsbPUo
+
+
 --- Best Approach to Learn Java ---
 Here’s the step-by-step approach to learn and master Java efficiently and effectively:
 1. Understand Java Fundamentals: Start with the basics: what Java is, how it works (JVM, JRE, JDK), and why it’s platform-independent. Learn about Java’s role in building desktop, web, and mobile applications.
-
 2. Set Up the Java Environment: Install the latest JDK and configure your development environment. Use a beginner-friendly IDE like IntelliJ IDEA, Eclipse, or VS Code for writing and testing your code.
-
 3. Learn Core Java Concepts: Focus on essential topics like variables, data types, operators, control structures (if-else, switch, loops), and input/output. Practice writing simple programs to strengthen your understanding.
-
 4. Master Object-Oriented Programming (OOP): Dive into the pillars of OOP—classes, objects, inheritance, polymorphism, encapsulation, and abstraction. Understand how Java handles these concepts and how to apply them effectively in real projects.
-
 5. Explore Collections and Data Structures: Learn about Java's Collection Framework—ArrayList, HashMap, Set, LinkedList, and more. Understand how to use them and when to choose one over the other.
-
 6. Work with Exception Handling: Understand the importance of error handling in Java using try-catch blocks, finally, throw, and custom exceptions. Learn best practices for writing clean, safe code.
-
 7. Get Comfortable with File I/O: Learn how Java reads from and writes to files using File, FileReader, BufferedReader, FileWriter, and Streams. Practice creating programs that manage and manipulate file data.
-
 8. Understand Multithreading and Concurrency: Grasp the basics of threads, synchronization, and concurrent programming. Learn how Java handles multiple tasks simultaneously using the Thread class and ExecutorService.
-
 9. Learn Java Libraries and APIs: Familiarize yourself with essential APIs like Java Math, Date & Time (java.time), and String manipulation. Explore popular libraries like Apache Commons, Gson, or Jackson for real-world development.
-
 10. Build Real-World Projects: Apply your knowledge by building console apps, file management systems, or basic desktop GUIs using JavaFX or Swing. Gradually move into web development with Java Servlets, JSP, or Spring Boot.
 
 -- Java Program Examples --
