@@ -209,7 +209,7 @@ with class:
 • for loop
   ♦  ie.: for(initialization; condition/test; updation) { body }
 • for-each / Enhanced For Loop
-  ♦  ie.: for(type var : array) { }
+  ♦  ie.: for (Type element : collectionOrArray) { }
   ♦  Limitations:
     - cannot modify array elements directly
     - no access to index
