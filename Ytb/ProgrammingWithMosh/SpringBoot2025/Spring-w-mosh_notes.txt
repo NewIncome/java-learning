@@ -1,4 +1,5 @@
-Spring Course Structure : Mosh Hamedani
+Spring Course : Mosh Hamedani
+Course-Structure && Notes
 -----------------
 
 Part 1
@@ -62,7 +63,43 @@ Part 1
   ...
 
   Project Structure
-  • .mvn/  Maven wrapper to not require it to be globally installed on your machine
-  • mvnw   for mac or linux
-  • mvnw.cmd   for windows
-  •
+  • .mvn/     Maven wrapper to not require it to be globally installed on your machine
+  • mvnw      shell-script for mac or linux
+  • mvnw.cmd  shell-script for windows, both to automatically download the correct Maven version specified in the maven-wrapper
+  • pom.xml   (Project Object Model) The heart of the Maven project
+    ○  Here we have config about the project and it's dependencies, in xml format
+  • src/      all the actual code for our project
+    ○ /java/        for our java files
+      ♦ /com.codewithmosh.store/StoreApplication.java
+          this is the entrypoint to our application
+      ♦ In my case ie.:
+        /com/jalfredev/springstore01/Springstore01Application.java
+    ○ /resources/   for our non-java files, like config, or static assets(html, css, js, etc)
+      ♦ /application.properties   config, like db settings, server ports, etc
+
+1.2 Dependency Management
+Are 3rd party libraries that we use in out application
+• For example:
+  ○ tomcat ,  for embedded web-server
+  ○ web ,  for handling web requests
+  ○ webmvc ,  for building APIs
+  ○ jackson ,  for processing JSON data
+  ○ logging ,  for authentication
+• Starter Dependency:  is a curated version of libraries and frameworks that are commonly used together,
+  tested and verified by the spring dev team
+  Used to instead of adding multiple individual libraries
+  ○  spring-boot-starter-web ,  will bring in all the above dependencies mentioned
+• Maven Central, is a public repo where we can find dependencies, similar to npm
+   in  https://central.sonatype.com
+  ○ To use it you just copy the 'snippet' to the pom.xml file
+    inside/below the <dependencies> tag
+
+MAVEN CLI
+• To update newly added dependencies (in your pom file)
+  ○ It cleans the project, downloads new dependencies, compiles the code, runs tests, and packages the application into a JAR/WAR
+    $ mvn clean install
+  ○ compile your project and, as part of that, resolve and download any new dependencies
+    $ mvn compile
+  ○ directly
+    $ mvn dependency:resolve
+
