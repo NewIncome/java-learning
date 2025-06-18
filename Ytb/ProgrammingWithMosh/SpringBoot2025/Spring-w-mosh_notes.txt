@@ -80,26 +80,77 @@ Part 1
 1.2 Dependency Management
 Are 3rd party libraries that we use in out application
 • For example:
-  ○ tomcat ,  for embedded web-server
-  ○ web ,  for handling web requests
-  ○ webmvc ,  for building APIs
-  ○ jackson ,  for processing JSON data
-  ○ logging ,  for authentication
+  ○  tomcat ,  for embedded web-server
+  ○  web ,  for handling web requests
+  ○  webmvc ,  for building APIs
+  ○  jackson ,  for processing JSON data
+  ○  logging ,  for authentication
 • Starter Dependency:  is a curated version of libraries and frameworks that are commonly used together,
   tested and verified by the spring dev team
   Used to instead of adding multiple individual libraries
   ○  spring-boot-starter-web ,  will bring in all the above dependencies mentioned
 • Maven Central, is a public repo where we can find dependencies, similar to npm
    in  https://central.sonatype.com
-  ○ To use it you just copy the 'snippet' to the pom.xml file
+  ○  To use it you just copy the 'snippet' to the pom.xml file
     inside/below the <dependencies> tag
+* An interesting dependency for AutomaticReload, so the app compiles and reloads on every change we make, when running
+  ○  spring-boot-devtools
+  ○  with the tag:  <optional>true<optional>    //so it is not packaged for production
+
 
 MAVEN CLI
 • To update newly added dependencies (in your pom file)
-  ○ It cleans the project, downloads new dependencies, compiles the code, runs tests, and packages the application into a JAR/WAR
+  ○  It cleans the project, downloads new dependencies, compiles the code, runs tests, and packages the application into a JAR/WAR
     $ mvn clean install
-  ○ compile your project and, as part of that, resolve and download any new dependencies
+  ○  compile your project and, as part of that, resolve and download any new dependencies
     $ mvn compile
-  ○ directly
+  ○  directly
     $ mvn dependency:resolve
+* If you don't have Maven installed, you can use the maven wrapper in the downloaded package from start.spring.io
+  ○  to use it, being inside the project folder:
+    $ ./mvnw -v
+• To run a SpringBoot project
+  $ mvn spring-boot:run
+  ○  tomcat by default uses port 8080
+
+
+Spring MVC (ModelViewController)
+• Model (can be a simple Java class)
+  ○  Data + Logic
+• View (what the user sees)
+  ○  can be static files, or dynamicly generated (ie.: with Timeleaf)
+• Controller
+  ○  Traffic controller, handles:
+    ♦ Incoming requests from the User >
+      > Interacts with the Model to get data
+      > Then tell the View what to display
+
+Controller
+• to define one you need to use the Annotation @Controller
+  ○  and Add the import to where the package lies, ie.: import org.springframework.stereotype.Controller;
+* an Annotation is like a label or Tag in the code to give instructions or additional contect to the compiler
+  + Can be applied to classes, methods, fields, parameters, and more
+ie.:
+• to add a new controller for the Home ("/") or root directory of our site
+  ○1  Create the HomeController.java file
+  ○2  Inside create the HomeController class
+  ○2.1  Use the @Controller annotation to define a controller, before the class declaration
+  ○3  Inside it, create the index method:  public String index() {}
+  ○3.1  Use the @RequestMapping("url") annotation to define an HTTP request, before the method declaration
+  ○3.2  Have it return the index.html
+
+Configuring Project/Page Properties
+• These are done inside the file src/main/resources/application.properties
+• common properties to change:
+  ○  server.port=8081  //port our application will listen on
+  Or custom properties like:
+  * Value-Annotation is needed to use these properties in our code
+  ○  app.page-size=10
+
+@Value annotation
+• used for custom properties, from the application.properties file
+•1 prepend in the previous line: @Value("${}")  and add the key to be looked for at run time
+•2 add a private field (variable) to store the desire value in
+  ○  ie.: @Value("${spring.application.name}")
+          private String appName;
 
