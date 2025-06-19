@@ -77,7 +77,7 @@ Part 1
     ○ /resources/   for our non-java files, like config, or static assets(html, css, js, etc)
       ♦ /application.properties   config, like db settings, server ports, etc
 
-1.2 Dependency Management
+Dependency Management
 Are 3rd party libraries that we use in out application
 • For example:
   ○  tomcat ,  for embedded web-server
@@ -153,4 +153,29 @@ Configuring Project/Page Properties
 •2 add a private field (variable) to store the desire value in
   ○  ie.: @Value("${spring.application.name}")
           private String appName;
+
+1.2 Dependency Injection
+• Is ...
+• Constructor injection
+  Is using a constructor in a class to inject there a class of a dependency
+  *  Is the recommended way to inject a dependency
+• Setter injection
+• Spring IoC container
+• Configure Beans using annotations
+• Controlling Bean Selection
+• Externalizing configuration
+• Configuring beans using code
+• Lazy initialization
+• Beans scopes
+• Beans lifecycle methods
+
+*//* In DependencyInjection using ConstructorInjection we are making use of
+   * the OPEN-CLOSED-PRINCIPLE = "A class should be open for extension,
+                                  but closed for modification"
+   * because here we didn't have to modify our OrderService
+   * we extended our application by creating new classes instead of
+   modifying existing ones.
+    // This is important because by avoiding changes to existing code we reduce
+    the risk of introducing bugs and breaking other parts of the application
+    - It's a 'tool', not a 'rule'
 
