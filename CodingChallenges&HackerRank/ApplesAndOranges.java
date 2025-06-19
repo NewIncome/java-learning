@@ -39,7 +39,7 @@ class Result {
 
      //Print oranges count
      //System.out.println(countFruit(s, t, a, oranges));
-     System.out.println(countFruit(s, t, a, oranges));
+     System.out.println(countFruit(s, t, b, oranges));
   }
 
   public static int countFruit(int s, int t, int tree, List<Integer> fruits) {

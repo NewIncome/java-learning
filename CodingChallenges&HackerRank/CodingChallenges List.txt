@@ -4,8 +4,8 @@ List of Coding Challenges
 /  passed some test cases
 ✔  done
 
-[/] - ApplesAndOranges (passed 2 TCs)
-[ ] - 
+[✔] - ApplesAndOranges
+[✔] - NumberLineJumps  (can further understand a Math approach)
 [ ] - 
 [ ] - 
 [ ] - 
