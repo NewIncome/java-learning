@@ -93,3 +93,26 @@
      ie.:  MyGenericsClass g1 = new MyGenericsClass();  //general input type
            MyGenericsClass<Integer> g2 = new MyGenericsClass();  //only Integer input type
 
+  ○ Bounded Types
+    ◙ to work with specific types, say numbers
+    <T extends A>
+    ◙ T can only accept data types that are subtypes of A
+    ie.:  class MyGenericsClass2 <T extends Number>
+      if we want our class to only work with numeric data types
+
+    ◙ Upper bounds (extends): Restrict to a type and its SUBclasses.
+    ◙ Lower bounds (super): Restrict to a type and its SUPERclasses.
+    ◙ Unbounded (?): Accepts any type. (or Wildcard)
+    ie.:  ? super Integer  means the list can accept Integer or any of its superclasses (e.g., Number, Object)
+     public static void printNumbers(List<? super Integer> list)
+
+      ?  means any type is accepted
+     public static void printList(List<?> list) {
+
+  ○ Multiple Bounds
+    <T extends B1 & B2 & B3>
+    ◙ A type variable with multiple bounds is a subtype of all the types listed in the bound. If one of the bounds is a class, it must be specified first. For example:
+    ie.:  Class A { /* ... */ }
+          interface B { /* ... */ }
+          interface C { /* ... */ }
+
