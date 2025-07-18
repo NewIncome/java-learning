@@ -83,3 +83,13 @@
   * There is also a "PrintWriter" class ...
     ○ Prints formatted representations of objects to a text-output stream
 
+• Generics
+  ○ allow us to create a single class, interface or method that automatically works with different types of data
+  ○ Only works with 'Reference Types'
+  ○ The use of 'Objects' as typeOfData inside < >
+  ○ uses <T> ;  T is a type parameter
+  *○ Another advantage of generics is it allows for type-checking
+    ◙ Which when making use of it, we can define the typeOfData in the variable declaration to avoid errors in the use of the class methods
+     ie.:  MyGenericsClass g1 = new MyGenericsClass();  //general input type
+           MyGenericsClass<Integer> g2 = new MyGenericsClass();  //only Integer input type
+
