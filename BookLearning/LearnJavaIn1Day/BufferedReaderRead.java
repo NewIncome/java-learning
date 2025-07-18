@@ -1,6 +1,9 @@
-import java.io.*;
+//import java.io.*;  //could be used instead of the other imports
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
-public class BufferReaderRead {
+public class BufferedReaderRead {
   public static void main(String[] args) {
     String line;
 
