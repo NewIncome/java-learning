@@ -64,3 +64,14 @@
     ○ 'try-with-resources' statement
       used to avoid closing, use the try-catch block like so:
       ie.:  try (BufferedReader reader = new BufferedReader(new FileReader("myFile.txt")))
+
+  ♦ Writting to a text file:
+    ○ We use 'BufferedWriter' & 'FileWriter' classes
+    ○ This is done very similar to reading, but with two differences
+    ie.:  try (BufferedWriter writer = new BufferedWriter(new
+ FileWriter("myFile2.txt", true)))
+      1◙ if the file doesn't exist it will create it
+      2◙ the 2nd argument in the FileWriter object
+        ◘ if 'true', it will append the new info to the file
+        ◘ if 'false' or default(not set), it will overwrite any existing data in the file
+
