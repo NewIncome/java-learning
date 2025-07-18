@@ -17,3 +17,10 @@
     catch(AnotherError e){}
     catch(Exception e)  // this catch block is for 'General Errors'
     finally{} //optional
+
+• Autoboxing & Unboxing
+  ♦ Autoboxing: converting from primitive type to object(Wrapper class), automatically
+    ie.:  Integer intObject = new Integer(100);
+          Integer intObject = 100;  //instead of the above, this will do the same, java in the background will do 'new ...'
+  ♦ Unboxing: converting from Wrapper class(Object) to int(primitive type)
+    ie.:  int m = intObject; //java autoamitcally gets only the value intObject.intValue();
