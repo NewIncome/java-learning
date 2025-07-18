@@ -75,3 +75,11 @@
         ◘ if 'true', it will append the new info to the file
         ◘ if 'false' or default(not set), it will overwrite any existing data in the file
 
+  ♦ File class
+    ○ is used to manipulate file "paths", not to create or write files
+    ○ .createNewFile() ,  File method to physically create a file
+    ○ .getName() ,  File method to get the name of the file
+
+  * There is also a "PrintWriter" class ...
+    ○ Prints formatted representations of objects to a text-output stream
+
