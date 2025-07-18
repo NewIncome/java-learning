@@ -24,3 +24,43 @@
           Integer intObject = 100;  //instead of the above, this will do the same, java in the background will do 'new ...'
   ♦ Unboxing: converting from Wrapper class(Object) to int(primitive type)
     ie.:  int m = intObject; //java autoamitcally gets only the value intObject.intValue();
+-Learn Java in One Day-
+
+• Formatting Outputs (pg.55)
+  ♦ 1:  System.out.printf("The answer for %.3f divided by %d is %.2f.", 5.45, 3, 5.45/3);
+    // 5.450 divided by 3 is 1.82.
+    ○ % ,  'format-specifier'
+    ○ .3 / 3 / etc ,  'flags'
+    ○ f / d / n,  'converter' f:floating, d:decimal, n:newLine
+  ♦ 2: Width flag.  System.out.printf("%8d", 12);
+    //      12
+  ♦ 3: Thousands separator flag(,).  System.out.printf("%,.2f", 12345.56789);
+    //  12,345.57
+
+• Specific Errors (pg.82)
+  ♦ try {}
+    catch(Error e){}
+    catch(AnotherError e){}
+    catch(Exception e)  // this catch block is for 'General Errors'
+    finally{} //optional
+
+• Autoboxing & Unboxing
+  ♦ Autoboxing: converting from primitive type to object(Wrapper class), automatically
+    ie.:  Integer intObject = new Integer(100);
+          Integer intObject = 100;  //instead of the above, this will do the same, java in the background will do 'new ...'
+  ♦ Unboxing: converting from Wrapper class(Object) to int(primitive type)
+    ie.:  int m = intObject; //java autoamitcally gets only the value intObject.intValue();
+
+• File Handling
+  ♦ Reading a text file:
+    ○ We use 'BufferedReader' & 'FileReader' classes
+     try{
+      reader = new BufferedReader(new FileReader("myFile.txt"));
+      line = reader.readLine();
+      //... and continue doing so until the reader == null
+     }
+     //normal try-catch block like above needs closing BufferReader object
+     try { if (reader != null) reader.close(); }
+    ○ 'try-with-resources' statement
+      used to avoid closing, use the try-catch block like so:
+      ie.:  try (BufferedReader reader = new BufferedReader(new FileReader("myFile.txt")))
