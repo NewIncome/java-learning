@@ -110,9 +110,12 @@
      public static void printList(List<?> list) {
 
   ○ Multiple Bounds
-    <T extends B1 & B2 & B3>
+    ◙ Multiple bounds allow you to restrict a generic type parameter to more than one type,
+      combining a class with one or more interfaces
+    ◙ Syntax:  <T extends ClassType & Interface1 & Interface2>
+    ie.:  <T extends A & B & C>
     ◙ A type variable with multiple bounds is a subtype of all the types listed in the bound. If one of the bounds is a class, it must be specified first. For example:
     ie.:  Class A { /* ... */ }
           interface B { /* ... */ }
           interface C { /* ... */ }
-
+    ◙** Only one of those bounds can be a class, and the rest must be interfaces
