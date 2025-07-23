@@ -119,3 +119,17 @@
           interface B { /* ... */ }
           interface C { /* ... */ }
     ◙** Only one of those bounds can be a class, and the rest must be interfaces
+
+• Functional Interfaces & Lambda Expressions
+  ○ Functional Interfaces ,  Interface that contains only one Abstract method
+  ie.: @FunctionalInterface  # Not necessary; since methods in interfaces are anbstract by default
+       interface MyNumber{
+         double getValue();
+       }
+  ○ Lambda Expressions are used to implement FunctionalInterfaces
+    ◙ Syntax:  (parameter list) -> lambda body
+    ◙ Expression body: is a lambda block that has only 1 expression
+    ◙ Block body:  is a lambda block that has  >1 expressions
+  ○ Invoking a LambdaExpression with Functional Interfaces
+    1. We cannot instantiate an Interface, hence we:
+    
