@@ -25,10 +25,5 @@ public class SwitchAndMChaining {
         System.out.println("Try again later");
         break;
     }
-
-    boolean welcome = false;
-    //Ternary Operator, and Method Chaining
-    if(name.toLowerCase().equals(name)) welcome = true;
-    System.out.println(welcome);
   }
 }
