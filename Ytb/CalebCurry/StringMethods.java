@@ -1,5 +1,7 @@
 package Ytb.CalebCurry;
 
+import java.util.Scanner;
+
 public class StringMethods {
   public static void main(String[] args) {
     //String format method
@@ -30,5 +32,25 @@ public class StringMethods {
     System.out.println(fullAd.substring(9));
     //Ending index is EXCLUSIVE
     System.out.println(fullAd.substring(9, 13));
+
+    //More on comparison
+    String password = "let me in";
+    System.out.println("Guess the password: ");
+
+    Scanner scanner = new Scanner(System.in);
+    String guess = scanner.nextLine();
+    System.out.println(password.equals(guess));
+    /* password == guess;
+     * // with primitives - this works
+     * // with objects||referenceTypes - this does not work!
+     * //because it doesn't get the value, it compare the memory location
+     */
+
+    String a = "hi";
+    String b = "hi";
+    System.out.println(a == b); //will be true; due to it being interned
+    //This will create a totally new object, so it'll be false
+    String c = new String("hi");
+    System.out.println(a == c); //false
   }
 }
