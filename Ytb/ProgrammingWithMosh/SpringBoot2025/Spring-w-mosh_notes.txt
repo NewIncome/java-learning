@@ -183,3 +183,19 @@ Constructor Injection of dependencies
 • The recommended way to inject a dependency into a class is via a Constructor
   ○  Contructor injection requires a field for the parameter to be injected
   ○  And to use it we call the method from the object saved in the field
+
+Setter Injection of dependencies
+Another way to Inject a dependency into a class, is via a Setter
+• .
+• This approach is more used for Optional 'dependencies'
+  ○* because it's used instead-of the ConstructorInjection
+• By convention, we put getters & setters in the bottom of the class
+
+
+--- Common VScode JAVA shortcuts ---
+• Create an Interface
+ > RClick on ClassName > Refactor > Extract-interface > 'choose methods to declare' > 'enter name of the Interface'
+• Implement the Methods of the implemented/parent Interface
+ > RClick on ClassName > Source-Action > Generate/implement Methods.. > 'Select Methods to implement'
+• Create a Setter method
+ > RClick on FieldName > Source-Action > Generate Setters
