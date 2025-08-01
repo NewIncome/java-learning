@@ -179,3 +179,7 @@ Configuring Project/Page Properties
     the risk of introducing bugs and breaking other parts of the application
     - It's a 'tool', not a 'rule'
 
+Constructor Injection of dependencies
+• The recommended way to inject a dependency into a class is via a Constructor
+  ○  Contructor injection requires a field for the parameter to be injected
+  ○  And to use it we call the method from the object saved in the field
