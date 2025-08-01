@@ -206,6 +206,10 @@ IOC Container
     ◙ @Service is an @AliasFor -> @Component ,  so they are practically the same
   ○ @Repository , for classes that interact with the DB
   ○ @Controller ,  for classes that handle WebRequests
+  ○ @Autowired ,  to "autowire"/match the class with it's dependencies
+    ◙ needed only if there are more than 1 constructor
+    ◙ and used only in the constructor with that one 'bean' parameter
+
 
 
 --- Common VScode JAVA shortcuts ---
@@ -215,3 +219,6 @@ IOC Container
  > RClick on ClassName > Source-Action > Generate/implement Methods.. > 'Select Methods to implement'
 • Create a Setter method
  > RClick on FieldName > Source-Action > Generate Setters
+
+
+-done...-
