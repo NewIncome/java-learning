@@ -1,0 +1,75 @@
+Spring Rest API development
+----------------------------
+
+► Coding Steps
+---------------
+1- https://start.spring.io
+2- Dependencies add: "Spring Web"
+3- 
+
+
+► Maven Concepts
+-----------------
+• Apache Maven
+  ○ Helper to manage projects and all needed to build, test, package-it
+  ○ MVN has 3 main phases or Life-cycles, with certain goals in each
+    ♦ each name is also the mvn command to be used
+    ♦ clean   - remove temp dirs and files
+      ◙ pre-clean   - hooks for before cleaning
+      ◙ clean       - the actual cleaning
+      ◙ post.clean  - hooks for after cleaning
+    ♦ 2. default - where most useful goals live
+      //* if called 'default' it will run the goals in order
+      ◙ compile   - compiles code into bytecode
+      ◙ test      - runs unit tests
+      ◙ package   - creates a jar or war file
+      ◙ verify    - runs checks and integration tests
+      //* if you run a specific goal-command, it'll run the previous goals
+    ♦ 3. site    - where documentation is generated
+
+  ○ 'target' directory
+    ♦ is where all th eproject is actually being built
+    ♦ which is what gets cleaned out in the 'clean phase'
+  ○ 'src/main/resources/application.properties
+    ♦ this is where we would configure our app
+     ie.: with other file to load etc.
+    ♦ the Tests dir also has a the same dir/file for config
+
+  ○ Commands while developing
+  // $ mvn clean test  //is a good way to make sure everything is ok before testing
+  // $ java -jar restapi-0.0.1-SNAPSHOT.jar  //to run the compiled file as we would in production. And can bee seen as if run normally; port 8080
+      this being inside the target/ directory
+  // $ mvn spring-boot:run
+    ♦ clean > compile > run/test
+
+
+► Spring Framework
+--------------
+By itself is highly configurable, but a lof of work
+• LAYERS
+  ♦ Presentation ,  use all the data from the 'Service layer' and expose it to the user
+    ◙ with a RestAPI which uses controllers for implementation
+      or a GraphQL-API, or WebSockets-API
+  ♦ Service ,  use all of the functionality exposed by the 'persistence layer'
+      and use it to meet the requirements our application is built to handle
+    ◙ with Services
+  ♦ Presistence ,  handles interactions with our DB
+    ◙ with Entities
+    ◙ with Repository patterns, and DAO's patterns (DataAccessObject) - CRUD
+
+
+► Spring Boot
+--------------
+Is a layer built on top of -Spring Framework-
+• Puspose is to provide additional functionality
+• Helps managing and creating Beans and Interfaces, by sensible defaults
+
+▲ IOC, DependencyInjection
+• What the Framework does? Provides and injects the classes/dependencies/Beans
+• We just need to make the Interfaces for our main class
+• Ways of configuring Beans:
+  ♦ by the @Configuration class
+  ♦ by the @Component annotation (& friends)
+
+▲ Component Scanning
+
