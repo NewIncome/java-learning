@@ -6,6 +6,6 @@ List of Coding Challenges
 
 [✔] - ApplesAndOranges
 [✔] - NumberLineJumps  (can further understand a Math approach)
-[ ] - 
-[ ] - 
+[✔] - BetweenTwoSets (wV)
+[✔] - SubarrayDivision (Success)
 [ ] - 
