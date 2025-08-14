@@ -97,3 +97,11 @@ Is an alias for many other different annotations
     ◙ which is a collection of dependencies needed to implement a web project
     ◙ like: SpringMVC and embeddedTomCat
 
+• pom.xml file ,  is where all out dependencies can be found
+
+//* Specially used annotations:
+   ○ @ConditionalOnClass({ClassName.class}) ,  when the {class} is available on the class path,
+     the following class should be instantiated and run
+   ○ @ConditionalOnBean(Bean) ,  when this bean is available the following part of the config/code should be run
+   ○ @ConditionalOnMissingBean(Bean) ,  run the following code when the Bean is missing
+
