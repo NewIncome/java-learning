@@ -1,0 +1,52 @@
+Java && Spring  -snippets-
+-------------------------
+
+=-- SDKMAN --=  (SoftwareDevelopmentKit)
+• a to see the list of available Java versions
+ $ sdk list java
+• Install the desired version
+ $ sdk install java 21.0.6-amzn
+• to check installed versions, and currently used
+ $ sdk list java | grep installed
+$ sdk current java
+• to make any version as the default version
+ $ sdk default java 21.0.6-amzn
+• to use one Java version inside the terminal and not change the default
+ $ sdk use java 8.0.402-amzn
+
+
+=-- Java --=
+• 
+
+
+=-- Spring --=
+- Maven CLI -
+• To update newly added dependencies (in your pom file)
+  ○  It cleans the project, downloads new dependencies, compiles the code, runs tests, and packages the application into a JAR/WAR
+    $ mvn clean install
+  ○  compile your project and, as part of that, resolve and download any new dependencies
+    $ mvn compile
+  ○  directly
+    $ mvn dependency:resolve
+* If you don't have Maven installed, you can use the maven wrapper in the downloaded package from start.spring.io
+  ○  to use it, being inside the project folder:
+    $ ./mvnw -v
+• To run a SpringBoot project
+  $ mvn spring-boot:run
+  ○  tomcat by default uses port 8080
+• Creating a Project
+  $ mvn archetype:generate \
+      -DgroupId=com.mycompany.app \
+      -DartifactId=demo-project \   #dir
+      -DarchetypeArtifactId=spring-boot-maven-archetype \  #or maven-archetype-quickstart
+      -DarchetypeVersion=2.7.2 \
+      -DinteractiveMode=false
+#to copy-run
+mvn archetype:generate \
+  -DgroupId= com.jalfredev.restapi \
+  -DartifactId= devtiro-restapi \
+  -DarchetypeArtifactId=spring-boot-maven-archetype \
+  -DarchetypeVersion=2.7.2 \
+  -DinteractiveMode=false
+• Generating the Site
+  $ mvn site
