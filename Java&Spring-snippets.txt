@@ -22,12 +22,17 @@ $ sdk current java
 =-- Spring --=
 - Maven CLI -
 • To update newly added dependencies (in your pom file)
-  ○  It cleans the project, downloads new dependencies, compiles the code, runs tests, and packages the application into a JAR/WAR
+  ○  It CLEANs THE PROJECT, downloads new dependencies, compiles the code, runs tests, and packages the application into a JAR/WAR
     $ mvn clean install
+    ♦ -U (or --update-snapshots),  forces Maven to check for updates on all remote repositories and re-download any dependencies
   ○  compile your project and, as part of that, resolve and download any new dependencies
     $ mvn compile
   ○  directly
     $ mvn dependency:resolve
+• If you have dependency issues
+  ○ To check your project's dependencies, find them in your local repository (~/.m2/repository), and delete them, including any corrupted files or metadata
+  //Specially/specificlly with IntelliJ IDEA
+    $ mvn dependency:purge-local-repository
 * If you don't have Maven installed, you can use the maven wrapper in the downloaded package from start.spring.io
   ○  to use it, being inside the project folder:
     $ ./mvnw -v
