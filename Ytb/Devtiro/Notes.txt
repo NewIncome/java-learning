@@ -138,12 +138,26 @@ Is an alias for many other different annotations
     //that code to be then injected(say via ConstructorInjection) to the main class for use
 
 
+► DataBase Layers
+• Database Driver - allows to interact with the DB from your java code
+• JDBC (JavaDataBaseConnectivity) - LowLevel API, for sql queries
+• Spring JDBC - adds spring magic to normal JDBC with 'templates'
+• JPA (JavaPersistenceApi) - Allows interaction with DB by JavaObjects
+  ♦ is also built on top of JDBC, so considered a HighLevel API
+  ♦ technically JPA is a specification
+  ♦ the implementation in Spring is done by 'Hibernate'
+• Spring Data JPA - adds spring magic, such as defined repositories
+• Hibernate is an ORM
+
+▲  
+
+
 
 
 * 1:17:00 ,  Interesting short code, pizza proj
   + uses well structured String.format
   + uses @Log, and @Data annotations (also @AllArgsConstructor, @NoArgsConstructor)
-  + uses "lombok", ... , has great annotations that automate code ...
+  + uses "lombok"(Logger), ... , has great annotations that automate code ...
 
 
 
