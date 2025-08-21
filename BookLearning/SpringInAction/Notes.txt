@@ -1,3 +1,13 @@
 -Spring in Action- 5th Ed
 
+Essentials
+• Spring application context ,  is a Spring container that creates and manages application components
+• Beans ,  are those components to be managed
+• DependencyInjection(DI) ,  is the  act of wiring beans together is based on a pattern
+(pg.6(28))
 • 
+• 
+• 
+• 
+• 
+
