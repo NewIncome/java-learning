@@ -14,8 +14,7 @@ Essentials
 • Spring Tools ,  extension for VSCode
   ♦ called by ctrl + shift + p > 'Spring Initializr'
 
-  (pg.12(34))
-• Points on Project Structure, in src/main/resources
+• Points on Project Structure, in src/main/resources          (pg.12(34))
   ♦ application.properties ,  place where you can specify configuration properties
   ♦ static/ ,  folder for static content (images, stylesheets, JavaScript, etc)
   ♦ templates/ ,  place for template files that will be used to render content to the browser
@@ -27,4 +26,19 @@ Essentials
   ♦* the Spring Initializr defaults to JAR packaging unless you tell it to do otherwise
 • Whereas WAR files are perfectly suitable for deploying to a traditional Java application server
   ♦ needs to include a web initializer class
+
+• "Bootstrapping the Application"                             (pg.12(34))
+  ♦ means starting the application's initial setup process
+  ♦ This process typically involves:
+    1. Loading Core Components: Loading essential classes and libraries into memory
+    2. Initializing the Environment: Setting up system properties, environment variables, and configurations
+    3. Creating the Main Container: For frameworks like Spring, it means creating the central
+    container (like the ApplicationContext) that will manage all other components
+• @SpringBootApplication
+  ♦ is a composite application that combines three other
+ annotations:
+    1. @SpringBootConfiguration ,  this annotation is, in fact, a specialized form of the @Configuration annotatio
+    2. @EnableAutoConfiguration ,  this annotation tells Spring Boot to automatically configure any components that it thinks you’ll need
+    3. @ComponentScan ,  lets you declare other classes with annotations like @Component, @Controller, @Service, and others,
+        to have Spring automatically discover them and register them as components in the Spring application context
 

@@ -8,6 +8,7 @@ public class TacoCloudApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TacoCloudApplication.class, args);
+    // .run() performs the actual bootstrapping of the application, creating the Spring appli cation context
 	}
 
 }
