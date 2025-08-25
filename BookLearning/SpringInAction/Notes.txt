@@ -4,10 +4,27 @@ Essentials
 • Spring application context ,  is a Spring container that creates and manages application components
 • Beans ,  are those components to be managed
 • DependencyInjection(DI) ,  is the  act of wiring beans together is based on a pattern
-(pg.6(28))
-• 
-• 
-• 
-• 
-• 
+  (pg.6(28))
+• Component Scanning ,  with it Spring can automatically discover components from an application’s
+   classpath and create them as beans in the Spring application context
+• Autowiring ,  with it Spring automatically injects the components with the other beans that they depend on
+• Autoconfiguration ,  with it  Spring Boot can make reasonable guesses of what components need
+   to be configured and wired together, based on entries in the classpath, environment variables,
+   and other factors
+• Spring Tools ,  extension for VSCode
+  ♦ called by ctrl + shift + p > 'Spring Initializr'
+
+  (pg.12(34))
+• Points on Project Structure, in src/main/resources
+  ♦ application.properties ,  place where you can specify configuration properties
+  ♦ static/ ,  folder for static content (images, stylesheets, JavaScript, etc)
+  ♦ templates/ ,  place for template files that will be used to render content to the browser
+    ○ ie.: Thymleaf templates
+• Why JAR?
+  ♦ JAR packaging is a cloud-minded choice
+  ♦ natural fit for most cloud platforms
+  ♦ all Java cloud platforms are capable of running an executable JAR file
+  ♦* the Spring Initializr defaults to JAR packaging unless you tell it to do otherwise
+• Whereas WAR files are perfectly suitable for deploying to a traditional Java application server
+  ♦ needs to include a web initializer class
 
