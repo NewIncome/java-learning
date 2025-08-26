@@ -41,4 +41,20 @@ Essentials
     2. @EnableAutoConfiguration ,  this annotation tells Spring Boot to automatically configure any components that it thinks you’ll need
     3. @ComponentScan ,  lets you declare other classes with annotations like @Component, @Controller, @Service, and others,
         to have Spring automatically discover them and register them as components in the Spring application context
+  ♦ SpringApplication.run() performs the actual bootstrapping of the application, creating the Spring application context
+    ○ .run( Configuration Class, Command-line arguments )
+
+Writting a Spring Application
+• @Controller ,  general purpose annotation, but used for better descriptiveness
+• @GetMapping("/") ,  http get request handler
+  ♦ The return value is interpreted as the logical name of a view
+• The template for the 'home' view is in src/main/resources/templates/home.html
+• Images should referenced with Thymeleaf are written as follows:
+   <img th:src="@{/images/TacoCloud.png}"/>
+  ♦ Thymeleaf uses th:src attribute and an @{...} expression to reference the image with a context relative path
+• Images go in the dir src/main/resources/static/images/TacoCloud.png
+• @WebMvcTest ,  is a special test-annotation provided by Spring Boot that arranges for the test to run in the context of a Spring MVC application
+(pg.20(42))
+
+Test
 
