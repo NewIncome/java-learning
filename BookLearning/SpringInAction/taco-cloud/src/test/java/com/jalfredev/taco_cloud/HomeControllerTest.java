@@ -1,9 +1,7 @@
 package com.jalfredev.taco_cloud;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -13,7 +11,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-@RunWith(SpringRunner.class)
+
+// @WebMvcTest implicitly handles the Spring context setup,
+// so you don't need to specify an @ExtendWith annotation directly.
 @WebMvcTest(HomeController.class)
 public class HomeControllerTest {
 
@@ -30,3 +30,12 @@ public class HomeControllerTest {
                 ));
     }
 }
+/* *
+ * • When using Spring Boot's @WebMvcTest (and other @...Test annotations), 
+ * the necessary extension (SpringExtension) is implicitly registered, so
+ * you don't even need to include the @ExtendWith annotation. This makes
+ * the code cleaner.
+ * 
+ * • While not required, test methods in JUnit 5 do not need to be public.
+ * You can declare them with default (package-private) visibility.
+ */
