@@ -56,5 +56,11 @@ Writting a Spring Application
 • @WebMvcTest ,  is a special test-annotation provided by Spring Boot that arranges for the test to run in the context of a Spring MVC application
 (pg.20(42))
 
-Test
+• SpringBoot Dev Tools
+  comes with:
+  ♦ Automatic application restart when code changes
+  ♦ Automatic browser refresh when browser-destined resources (such as templates, JavaScript, stylesheets, and so on) change
+  ♦ Automatic disable of template caches
+  ♦ Built in H2 Console if the H2 database is in use
+    ○ Accesible at http://localhost:8080/h2-console , to gain insight into the data your application is working with
 
