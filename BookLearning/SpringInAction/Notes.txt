@@ -64,3 +64,34 @@ Writting a Spring Application
   ♦ Built in H2 Console if the H2 database is in use
     ○ Accesible at http://localhost:8080/h2-console , to gain insight into the data your application is working with
 
+Important dependencies and what they offer
+• The 'core Spring Framework'
+  ♦ is the foundation of everything else in the Spring universe
+  ♦ it provides:
+    ○ the core container 
+    ○ dependency injection framework
+    ○ Spring MVC
+    ○ some elemental data persistence support, specifically template-based JDBC support
+    ○ support for reactive-style programming (Spring WebFlux)
+• 'SpringBoot'
+  ♦ starter dependencies
+  ♦ autoconfiguration
+  ♦ the 'Actuator', provides runtime insight into the inner workings of an application
+  ♦ flexible specification of environment properties
+  ♦ additional testing support
+  ♦ Spring Boot CLI,  an alternative programming model based on Groovy scripts
+• 'Spring Data'
+  ♦ adds the ability to define your application’s data repositories as simple Java interfaces
+  ♦ using a naming convention when defining methods to drive how data is stored and retrieved
+  ♦ is capable of working with different kinds of DBs like: JPA, Mongo, Neo4j
+• 'Spring Security'
+  ♦ addresses authentication, authorization, and API security
+• ' Spring Integration' and 'Spring Batch'
+  ♦  provide the implementation of patterns of application integration
+• 'Spring Cloud'
+  ♦ a collection of projects for developing cloud-native applications with Spring
+  ♦ helps microservices
+
+//• A repository ,  is a software design pattern used to manage data persistence
+     It acts as an abstraction layer between the application's business logic and the
+     data source (like a database, file system, or a remote API)
