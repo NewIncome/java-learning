@@ -92,6 +92,8 @@ Important dependencies and what they offer
   ♦ a collection of projects for developing cloud-native applications with Spring
   ♦ helps microservices
 
-//• A repository ,  is a software design pattern used to manage data persistence
+//• A "repository" ,  is a software design pattern used to manage data persistence
      It acts as an abstraction layer between the application's business logic and the
      data source (like a database, file system, or a remote API)
+    ♦ When developers talk about repositories, they're referring to a class or interface
+    that handles all the low-level details of how to: Create, Read, Update, and Delete an object
