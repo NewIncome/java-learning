@@ -97,3 +97,8 @@ Important dependencies and what they offer
      data source (like a database, file system, or a remote API)
     ♦ When developers talk about repositories, they're referring to a class or interface
     that handles all the low-level details of how to: Create, Read, Update, and Delete an object
+
+• Domain
+  ♦ An application’s domain is the subject area that it addresses—the ideas and
+  concepts that influence the understanding of the application
+
