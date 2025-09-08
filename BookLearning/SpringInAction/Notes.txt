@@ -123,6 +123,11 @@ Important dependencies and what they offer
   ♦ (enumeration) is a special data type in Java that allows a variable to be a set of predefined constants
   ♦ The enum declaration defines a class (called an enum type)
   ♦ More Than Just Constants, They are classes under the hood and can have their own fields, constructors, and methods
+  ♦ An enum is essentially a class with a fixed number of instances(the Constants) which are public, static, and final
+  ♦ key features of enums:
+    ○ Type safety: the values cannot be repeated and are checked against l/u-cassing
+    ○ Readability: due to the use of named constants
+    ○ Versatility: because they're not simple constants. They are classes under the hood and can have their own fields, constructors, and methods
   ♦ ie.:  public enum DayOfWeek { MONDAY, TUESDAY, WEDNESDAY, THURSDAY,
             FRIDAY, SATURDAY, SUNDAY }
           //you use it like so:
@@ -150,7 +155,37 @@ Important dependencies and what they offer
     ○ A static values() method that returns an array containing all of the values of the enum in the order they are declared
     ○ A constructor for the enum type that must be package-private or private access(by default)
       ◘ It automatically creates the constants that are defined at the beginning of the enum body
+         It accepts all final properties as arguments
       ◘* You cannot invoke an enum constructor yourself
       ◘//* Check the Planet.java as a great example for the enum type, with all it's special feats
             run the Planet.class with:  $ java Planet 175  # to get:  Your weight on MERCURY is 66.107583 ...
 
+Controller creation
+•// Logger: software component or utility used to record and output information about a program's execution
+  ♦ This information is typically written to a log file, console, or another output stream
+• @Slf4j ,  is a Lombok-provided annotation for logger creation
+  ♦ at runtime will automatically generate an SLF4J (Simple Logging Facade for Java, https://www.slf4j.org/) Logger in the class
+  ♦ this annotation is the same as adding the following line:
+     private static final org.slf4j.Logger log =
+      org.slf4j.LoggerFactory.getLogger(DesignTacoController.class);
+  ♦ It essentially does three things:
+    1○ Declares a logger variable: It automatically creates a private static final field named log (or LOG) of type org.slf4j.Logger
+    2○ Initializes the logger
+    3○ Hides the boilerplate
+• @Controller ,  mark the class as a candidate for component scanning
+  //so that Spring will discover it and automatically create an instance of the Controller as a bean in the Spring application context
+• @RequestMapping("path") ,  specifies the kind of requests that this controller handles
+• @GetMapping ,  specifies that when an HTTP GET request is received for the page specified in the @RequestMapping, the following method will be called to handle the request
+  ♦  Prior to Spring 4.3, you might have used a method-level @RequestMapping annota tion instead:
+      @RequestMapping(method=RequestMethod.GET)
+• Spring MVC request-mapping annotations
+  ♦ @RequestMapping    General-purpose request handling
+  ♦ @GetMapping        Handles HTTP GET requests
+  ♦ @PostMapping       Handles HTTP POST requests
+  ♦ @PutMapping        Handles HTTP PUT requests
+  ♦ @DeleteMapping     Handles HTTP DELETE requests
+  ♦ @PatchMapping      Handles HTTP PATCH requests
+• Model ,  is an object that ferries data between a controller and whatever view is charged with rendering that data
+  ♦ class imported from org.springframework.ui.Model
+  ♦ data that’s placed in Model attributes is copied into the servlet response attributes,
+    where the view can find them
