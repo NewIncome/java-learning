@@ -119,3 +119,38 @@ Important dependencies and what they offer
           ♣ it's crucial for correctly storing and retrieving objects in hash-based collections like HashMap and HashSet
       ◘ @RequiredArgsConstructor ,  generates a constructor for every final field and every field annotated with @NonNull that is not already initialized
 
+• ENUM
+  ♦ (enumeration) is a special data type in Java that allows a variable to be a set of predefined constants
+  ♦ The enum declaration defines a class (called an enum type)
+  ♦ More Than Just Constants, They are classes under the hood and can have their own fields, constructors, and methods
+  ♦ ie.:  public enum DayOfWeek { MONDAY, TUESDAY, WEDNESDAY, THURSDAY,
+            FRIDAY, SATURDAY, SUNDAY }
+          //you use it like so:
+          DayOfWeek today = DayOfWeek.MONDAY;
+  ♦ It can have it's own 'main' method for testing
+  ♦ ie.(example with Fields and Methods):
+      public enum DayOfWeekWithFields {
+        MONDAY(true), TUESDAY(true), WEDNESDAY(true), THURSDAY(true),
+        FRIDAY(true), SATURDAY(false), SUNDAY(false);
+
+        private final boolean isWeekday;
+
+        // Constructor for the enum constants
+        DayOfWeekWithFields(boolean isWeekday) {
+            this.isWeekday = isWeekday;
+        }
+
+        // Method to check the value
+        public boolean isWeekday() {
+            return isWeekday;
+        }
+      }
+  ♦ an enum cannot extend anything else, besides the implicite extend for java.lang.Enum
+  ♦ The compiler automatically adds some special methods when it creates an enum:
+    ○ A static values() method that returns an array containing all of the values of the enum in the order they are declared
+    ○ A constructor for the enum type that must be package-private or private access(by default)
+      ◘ It automatically creates the constants that are defined at the beginning of the enum body
+      ◘* You cannot invoke an enum constructor yourself
+      ◘//* Check the Planet.java as a great example for the enum type, with all it's special feats
+            run the Planet.class with:  $ java Planet 175  # to get:  Your weight on MERCURY is 66.107583 ...
+
