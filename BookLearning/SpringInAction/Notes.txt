@@ -101,4 +101,21 @@ Important dependencies and what they offer
 • Domain
   ♦ An application’s domain is the subject area that it addresses—the ideas and
   concepts that influence the understanding of the application
+  ♦ Like: +taco designs, +ingredients, +customers, and +taco-orders
+•* for Domain classes it's very usefull to make use of 2 special Java feats:
+  1♦ Lombok ,  Java library(dependency) that reduces boilerplate code
+    ○* all the boilerplate that is normally associated with simple POJOs (Plain Old Java Objects) and beans
+    ○ It uses annotations to automatically generate code during the compile phase, such as
+      ◘ @Getter ,  creates the getter method to the field
+      ◘ @Setter ,  creates the setter method to the field
+      ◘ @Data ,  bundles several annotations together
+        ◙ Getters: for all private fields
+        ◙ Setters: for all non-final fields (these will be set in the constructor)
+        ◙ toString(): with @ToString it provides string representation of the object details(fields)
+          ♣ it includes the class name and the value of each field
+        ◙ equals(): to directly compare objects(automatically does it by value)
+        ◙ hashCode(): using the @EqualsAndHashCode annotation
+          ♣ it computes a hash code from all the non-static, non-transient fields in the class
+          ♣ it's crucial for correctly storing and retrieving objects in hash-based collections like HashMap and HashSet
+      ◘ @RequiredArgsConstructor ,  generates a constructor for every final field and every field annotated with @NonNull that is not already initialized
 
