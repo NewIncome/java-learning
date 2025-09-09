@@ -1,4 +1,4 @@
-package com.jalfredev.taco_cloud;
+package com.jalfredev.taco_cloud.web;
 
 import java.util.Arrays;
 import java.util.List;
