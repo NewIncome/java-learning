@@ -160,7 +160,7 @@ Important dependencies and what they offer
       ◘//* Check the Planet.java as a great example for the enum type, with all it's special feats
             run the Planet.class with:  $ java Planet 175  # to get:  Your weight on MERCURY is 66.107583 ...
 
-Controller creation
+Controller Creation
 •// Logger: software component or utility used to record and output information about a program's execution
   ♦ This information is typically written to a log file, console, or another output stream
 • @Slf4j ,  is a Lombok-provided annotation for logger creation
@@ -190,3 +190,39 @@ Controller creation
   ♦ class imported from org.springframework.ui.Model
   ♦ data that’s placed in Model attributes is copied into the servlet response attributes,
     where the view can find them
+
+View Creation
+• Spring options for defining views:
+  ♦ JavaServer Pages (JSP), Thymeleaf, FreeMarker, Mustache, and Groovy-based templates
+• Thymeleaf ,  
+  ♦ View libraries such as Thymeleaf are designed to be decoupled from any particular web framework
+  ♦ they’re unaware of Spring’s model abstraction and are unable to work with the data that the controller places in Model
+  ♦ But they can work with "servlet request attributes"
+  ♦ Thymeleaf-namespaced attribute that perform actions or data binding:
+    ○ you use them as attributes of html elements
+    ○ th:text , to retrieve text  ->   <p th:text="${message}">placeholder message</p>
+       and replaces the text value of the element with the th-text-value
+    ○ th:each ,  for iteration  -> ie.:  th:each="itemVariable : collection"
+       ie.: <div th:each="ingredient : ${wrap}">
+              <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
+              <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+            </div>
+      ◘ : ${wrap} ,  to render just the list of "wrap" ingredients
+    ○ th:value ,   sets the rendered <input> element’s value attribute to the th:value found
+    ○ th:href ,  to define href attribute  ->  <link rel="stylesheet" th:href="@{/styles.css}"/>
+    ○ th:src ,  to define src attribute  ->  <img th:src="@{/images/TacoCloud.png}"/>
+    ○ th:field ,  to define field attribute  ->  <input type="text" th:field="*{name}"/>
+    ○ th:object ,  ->  <form method="POST" th:object="${design}">
+      ◘ Serves as the central model for your form
+      ◘ Sets the Context: tells the form to bind its fields to the properties of the design object passed from the Spring controller
+      ◘ Facilitates Data Binding: Once the object is set, you can use th:field on form inputs (like <input>, <select>, and <textarea>)
+        to bind them to a specific property of that object.
+      ◘ Error Handling: It works with Spring's validation framework.
+      ◘ If a form submission fails validation, th:object and th:field can automatically display error messages next to the corresponding form fields.
+    * another example for the iteration with Thymeleaf:
+       //Java file
+       model.addAttribute("tacos", List.of(new Taco("Carnitas"), new Taco("Veggie")));
+       //HTML
+       <ul id="tacoList">
+         <li th:each="taco : ${tacos}" th:text="${taco.name}">placeholder to be replaced</li>
+
