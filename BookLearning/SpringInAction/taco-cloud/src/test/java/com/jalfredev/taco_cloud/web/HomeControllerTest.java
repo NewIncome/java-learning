@@ -1,4 +1,4 @@
-package com.jalfredev.taco_cloud;
+package com.jalfredev.taco_cloud.web;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

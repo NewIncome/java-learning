@@ -19,6 +19,10 @@ public class Ingredient {
   private final String name;
   private final Type type;
 
+  /* enum named Type behind the scenes creates a class for each object
+   * inside the enum, that's why you can call them Ingredient.WRAP,
+   * since it's static
+  */
   public static enum Type {
     WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
   }
