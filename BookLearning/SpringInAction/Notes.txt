@@ -175,6 +175,7 @@ Controller creation
 • @Controller ,  mark the class as a candidate for component scanning
   //so that Spring will discover it and automatically create an instance of the Controller as a bean in the Spring application context
 • @RequestMapping("path") ,  specifies the kind of requests that this controller handles
+  ♦ Maps web requests to specific methods in a controller class
 • @GetMapping ,  specifies that when an HTTP GET request is received for the page specified in the @RequestMapping, the following method will be called to handle the request
   ♦  Prior to Spring 4.3, you might have used a method-level @RequestMapping annota tion instead:
       @RequestMapping(method=RequestMethod.GET)

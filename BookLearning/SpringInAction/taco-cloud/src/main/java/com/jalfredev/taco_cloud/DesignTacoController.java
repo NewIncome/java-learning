@@ -12,17 +12,17 @@ import com.jalfredev.taco_cloud.Ingredient.Type;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Slf4j        //...
-@Controller
-@RequestMapping("/design")
+@Slf4j          //Generates a Logger in the class
+@Controller     //Mark the class as a candidate for component scanning
+@RequestMapping("/design")  //Map web requests to specific methods in a controller class
 public class DesignTacoController {
 
-  /* //specifies that when an HTTP GET request is received for the page specified in
-   * the @RequestMapping, the following method will be called to handle the request
+  /* @GetMapping Specifies that when an HTTP GET request is received for the page specified
+   * in the @RequestMapping, the following method will be called to handle the request
    */
   @GetMapping
   public String showDesignForm(Model model) {
-    //Model is an object that ferries data between a controller and whatever view is charged with rendering that data
+    /* Model is an object that ferries data between a controller and whatever view is charged with rendering that data */
 
     //hardcoded list of ingredients, for now...
     List<Ingredient> ingredients = Arrays.asList(
@@ -38,7 +38,7 @@ public class DesignTacoController {
       new Ingredient("SRCR", "Sour Cream", Type.SAUCE)
     );
 
-    //Filters the list by ingredient type
+    //filters the list by ingredient type
     Type[] types = Ingredient.Type.values();
     for(Type type : types) {
       model.addAttribute(type.toString().toLowerCase(),
