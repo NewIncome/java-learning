@@ -4,17 +4,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jalfredev.taco_cloud.Ingredient.Type;
+import jakarta.validation.Valid;
+
 import com.jalfredev.taco_cloud.Ingredient;
+import com.jalfredev.taco_cloud.Ingredient.Type;
 import com.jalfredev.taco_cloud.Taco;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
 
 @Slf4j          //Generates a Logger in the class
 @Controller     //Mark the class as a candidate for component scanning
@@ -48,6 +54,14 @@ public class DesignTacoController {
     }
   }
 
+  private List<Ingredient> filterByType(List<Ingredient> ingredients,
+                                        Type type) {
+      return ingredients
+              .stream()
+              .filter(x -> x.getType().equals(type))
+              .collect(Collectors.toList());
+  }
+
   /* @GetMapping Specifies that when an HTTP GET request is received for the page specified
    * in the @RequestMapping, the following method will be called to handle the request
    */
@@ -58,12 +72,17 @@ public class DesignTacoController {
     return "design";
   }
 
-  private List<Ingredient> filterByType(List<Ingredient> ingredients,
-                                        Type type) {
-      return ingredients
-              .stream()
-              .filter(x -> x.getType().equals(type))
-              .collect(Collectors.toList());
+  //TODO: process POST request
+  @PostMapping
+  public String processDesign(@Valid @ModelAttribute("design") Taco design,
+                              Errors errors, Model model) {
+      if(errors.hasErrors()) return "design";
+
+      // Save taco design later...
+      log.info("Processing design: " + design);
+      
+      return "redirect:/orders/current";
   }
+  
 
 }
