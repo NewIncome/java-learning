@@ -275,3 +275,33 @@ Model in Java
         }
 •//* ¡¡¡The Model object only exists within the scope of your controller method!!!
 
+DEBUGGING
+• In IntellijIDEA
+  1♦ Add Run > Edit Configurations... > Remote JVM Debug
+  2♦ Use a better name, everything else stays the same
+  3♦ It'll listen on port 5005, so you’ll need to run mvn cli
+  4♦ In your project terminal run:
+    $ mvn spring-boot:run -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+
+• In VSCode
+  1♦ Install the 'Spring Boot Extension Pack'
+  2♦ Click on the SpringBootDashboard button
+  3♦ Right click in apps > YourProjectName > debug
+  4♦ VSCode Spring Boot extension should take care of the configuration
+    ○ It created this config in launch.json:
+      {
+        "configurations": [
+          {
+            "type": "java",
+            "name": "Spring Boot-TacoCloudApplication<taco-cloud>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.jalfredev.taco_cloud.TacoCloudApplication",
+            "projectName": "taco-cloud",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+          }
+        ]
+      }
+  !♦ DO NOT TRY TO DEBUG STRAIGHT FROM THE 'RUN AND DEBUG' BUTTON, who knows with what it works
+
