@@ -305,3 +305,33 @@ DEBUGGING
       }
   !♦ DO NOT TRY TO DEBUG STRAIGHT FROM THE 'RUN AND DEBUG' BUTTON, who knows with what it works
 
+Proccessing form submission
+• Important points in form to review/check
+  ♦ 'method' attribute - POST, the request
+  ♦ 'action' attribute - action or method to be called on submission
+    ○ Basically to do a 'redirect'
+    ○ Without an action specified, the form would submit an HTTP POST request
+      back to the same URL that presented
+    ○ So it is used when you want the form to take you to a -different URL-
+ the form.
+• A controller handler method is needed for that specific POST request
+• @PostMapping ,  annotation used to handle POST requests
+
+Validation
+• @Valid ,  is an annotation used to validate an object meets all its defined validation
+            constraints (like @NotNull, @Size, etc.)ect
+  ♦ You need to add the Hibernate Validator and Jakarta EE Validation API dependencies
+    with the dependency:  spring-boot-starter-validation
+  ♦ And you use it like:
+     public String processTaco(@Valid Taco taco, Errors errors) {
+        if (errors.hasErrors()) {
+            return "design"; // Go back to the form if there are validation errors
+        }
+  ♦ @Valid tells Spring to check the Taco object for any violations of its validation rules
+  ♦ The Errors object is then used to check if any errors occurred
+• Errors class
+  ♦ is an interface in the org.springframework.validation package
+  ♦ Crucial Spring MVC tool for handling validation errors that occur during form submissions
+  ♦ It works in tandem with the @Valid annotation
+  ♦ Each error is represented as an instance of the FieldError or ObjectError class,
+    providing information about which field failed and why
