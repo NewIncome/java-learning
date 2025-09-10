@@ -225,6 +225,7 @@ View Creation
        //HTML
        <ul id="tacoList">
          <li th:each="taco : ${tacos}" th:text="${taco.name}">placeholder to be replaced</li>
+    ○ th:if ,  if true what's inside that element will be visible
 
 Model in Java
 • A Model is a class that represents a data structure or a real-world object
