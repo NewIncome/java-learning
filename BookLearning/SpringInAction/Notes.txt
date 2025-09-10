@@ -226,3 +226,52 @@ View Creation
        <ul id="tacoList">
          <li th:each="taco : ${tacos}" th:text="${taco.name}">placeholder to be replaced</li>
 
+Model in Java
+• A Model is a class that represents a data structure or a real-world object
+• It's a core component of the Model-View-Controller (MVC) design pattern
+• Its primary purpose is to hold and manage the application's data and business logic
+• The model knows nothing about how it will be displayed on a web page or how it will be created from a form
+• The org.springframework.ui.Model
+  ♦ is a core interface in Spring MVC
+  ♦ It's a lightweight, map-like object that acts as a container for data,
+    -passing it from a controller to a view-
+  ♦ when assigned as method parameter  ->  public String showDesignForm(Model model)
+    assigned n called by key value to the view  ->  model.addAttribute("key", "value");
+      model.addAttribute("message", "Hello, world!");
+      model.addAttribute("user", user);  //user is the whole object with it's instance variables and methods
+      view-> ${message}  ${user.name}
+• @ModelAttribute ,  Spring annotation to bind data from a web request to a Java object
+  ♦ It works in two main ways, depending on where you place it
+    1○ As a Method Parameter. (Most common use)IT tell spring to do the following:
+      ◘ Create an instance of the specified object
+      ◘ Bind data from the incoming request (e.g., form fields) to the object's properties
+      ◘ Add this newly populated object to the Model so it can be accessed in the view
+      ◘ ie.:
+        @PostMapping("/orders")
+        public String processOrder(@ModelAttribute Order order) {
+          orderRepository.save(order);
+          return "redirect:/";
+        }
+        // The 'order' object is automatically created and populated with form data.
+        // It's also added to the model with the key "order".
+    2○ As a Method-Level Annotation. When placed on a method
+      ◘ It tells Spring to execute that method before any request-mapping methods in the same controller
+        The return value of the method is then added to the Model
+      ◘ ie.:
+        @Controller
+        public class DesignController {
+            
+            // This method will be called before any other methods in this controller.
+            @ModelAttribute(name = "ingredients")
+            public List<Ingredient> addIngredientsToModel() {
+                return ingredientRepository.findAll();
+            }
+            
+            @GetMapping("/design")
+            public String showDesignForm() {
+                // The "ingredients" list is already in the model and can be used in the "design" view.
+                return "design";
+            }
+        }
+•//* ¡¡¡The Model object only exists within the scope of your controller method!!!
+
