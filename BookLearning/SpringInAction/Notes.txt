@@ -211,7 +211,10 @@ View Creation
     ○ th:value ,   sets the rendered <input> element’s value attribute to the th:value found
     ○ th:href ,  to define href attribute  ->  <link rel="stylesheet" th:href="@{/styles.css}"/>
     ○ th:src ,  to define src attribute  ->  <img th:src="@{/images/TacoCloud.png}"/>
-    ○ th:field ,  to define field attribute  ->  <input type="text" th:field="*{name}"/>
+    ○ th:field ,  to define 'name' attribute  ->  <input type="text" th:field="*{name}"/>
+      ◘ th:field="*{name-field-inString}"
+      ◘ if you use this approach to set the name of any input elm it's fine
+        BUT if used for checkboxes, it creates 2 input elements, for some reason...
     ○ th:object ,  ->  <form method="POST" th:object="${design}">
       ◘ Serves as the central model for your form
       ◘ Sets the Context: tells the form to bind its fields to the properties of the design object passed from the Spring controller
@@ -226,6 +229,11 @@ View Creation
        <ul id="tacoList">
          <li th:each="taco : ${tacos}" th:text="${taco.name}">placeholder to be replaced</li>
     ○ th:if ,  if true what's inside that element will be visible
+    ○ th:action ,  mainly used in <form> POST reqs for redirection
+      ◘ ie.:  th:action="@{/orders}"  //being displayed in designTaco view
+      ◘  @{…} ,  this operator can be used for a context-relative path
+
+    th:field="*{name-field-string}"
 
 Model in Java
 • A Model is a class that represents a data structure or a real-world object
@@ -305,6 +313,8 @@ DEBUGGING
         ]
       }
   !♦ DO NOT TRY TO DEBUG STRAIGHT FROM THE 'RUN AND DEBUG' BUTTON, who knows with what it works
+  ♦ 'Watch' expressions to check in your controller:
+    ◘ model.getAttribute("myObjectKey")
 
 Proccessing form submission
 • Important points in form to review/check
@@ -336,3 +346,4 @@ Validation
   ♦ It works in tandem with the @Valid annotation
   ♦ Each error is represented as an instance of the FieldError or ObjectError class,
     providing information about which field failed and why
+
