@@ -346,4 +346,18 @@ Validation
   ♦ It works in tandem with the @Valid annotation
   ♦ Each error is represented as an instance of the FieldError or ObjectError class,
     providing information about which field failed and why
-
+Validations:
+• @NotBlank
+• @NotNull
+• @Size
+  ♦ @Size(min=5, message="Name must be at least 5 characters long")
+• @Pattern
+  ♦ @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$", message="Must be formatted MM/YY")
+• @Digits
+  ♦ ie.:  @Digits(integer=3, fraction=0, message="Invalid CVV")
+• @CreditCardNumber
+  ♦ comes from:  org.hibernate.validator.constraints.CreditCardNumber
+• Most come from:  javax.validation.constraints
+• //All can have or not values in parenthesis
+  Most will be for a specific desired Message, or for more specific validation definitions
+  Like for @Size and @Pattern, and @Digits
