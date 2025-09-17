@@ -339,7 +339,10 @@ Validation
             return "design"; // Go back to the form if there are validation errors
         }
   ♦ @Valid tells Spring to check the Taco object for any violations of its validation rules
-  ♦ The Errors object is then used to check if any errors occurred
+     perform validation on the submitted Taco object
+     before the processDesign() method is called
+
+  ♦ The Errors object is then used to store any errors occurred
 • Errors class
   ♦ is an interface in the org.springframework.validation package
   ♦ Crucial Spring MVC tool for handling validation errors that occur during form submissions
@@ -353,11 +356,28 @@ Validations:
   ♦ @Size(min=5, message="Name must be at least 5 characters long")
 • @Pattern
   ♦ @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$", message="Must be formatted MM/YY")
+  ♦ good site to check for regex exp www.regular-expressions.info
 • @Digits
   ♦ ie.:  @Digits(integer=3, fraction=0, message="Invalid CVV")
 • @CreditCardNumber
   ♦ comes from:  org.hibernate.validator.constraints.CreditCardNumber
+  ♦ must be a valid credit card number that passes the Luhn algorithm check, or "mod 10" algorithm
+    ◘ This prevents user mistakes and deliberately bad data but doesn’t guarantee that the credit card 
+      number is actually assigned to an account or that the account can be used for charging
 • Most come from:  javax.validation.constraints
 • //All can have or not values in parenthesis
   Most will be for a specific desired Message, or for more specific validation definitions
   Like for @Size and @Pattern, and @Digits
+
+• Thymeleaf offers convenient access to the Errors object via:
+  ♦ the fields property and
+  ♦ with its th:errors attribute
+  ♦ ie.:   <input type="text" th:field="*{ccNumber}"
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('ccNumber')}"      <!- if, to show the span elem ->
+                  th:errors="*{ccNumber}">CC Num Error</span>
+
+
+
+*** Add Validation checking in OrderController!!!
+
