@@ -181,6 +181,11 @@ Controller Creation
       @RequestMapping(method=RequestMethod.GET)
 • Spring MVC request-mapping annotations
   ♦ @RequestMapping    General-purpose request handling
+    ◘ can be used specialized, like:  @RequestMapping(value="/path", method=RequestMethod.GET)
+    ◘ It's a Class-level annotation that maps all requests whose path begins with /orders to this controller
+    ◘ It helps organize your application's endpoints
+  /* The following are Method-level annotations
+     They are request shortcut annotations:  */
   ♦ @GetMapping        Handles HTTP GET requests
   ♦ @PostMapping       Handles HTTP POST requests
   ♦ @PutMapping        Handles HTTP PUT requests
@@ -233,7 +238,18 @@ View Creation
       ◘ ie.:  th:action="@{/orders}"  //being displayed in designTaco view
       ◘  @{…} ,  this operator can be used for a context-relative path
 
-    th:field="*{name-field-string}"
+• Creating a ViewController for straightforward views, with no data to handle
+  ♦ a controller that does nothing but forward the request to a view
+  ♦ Typically called a 'WebConfig', this class would implement 'WebMvcConfigurer' interface
+  ♦ To add views ,  You need to @Override the addViewControllers method from the interface
+  ♦ And with a 'ViewControllerRegistry' class, use the registry objects methods addViewController, and setViewName like so:
+  ♦ ie.:  @Configuration                                           //import org.springframework.context.annotation.Configuration;
+          public class WebConfig implements WebMvcConfigurer {     //import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+            @Override
+            public void addViewControllers(ViewControllerRegistry registry) {  //import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+              registry.addViewController("/").setViewName("home");
+            }
+          }
 
 Model in Java
 • A Model is a class that represents a data structure or a real-world object
@@ -378,7 +394,9 @@ Validations:
                   th:if="${#fields.hasErrors('ccNumber')}"      <!- if, to show the span elem ->
                   th:errors="*{ccNumber}">CC Num Error</span>
 
-***
+
+
+//***
 @Size(min=1)
 List<> objects are set to null be default, and the @Size looks for [], it doesnt see null
 therefor you have 2 options:
@@ -386,8 +404,3 @@ therefor you have 2 options:
     ♦  <input type="hidden" th:field="*{ingredients}" value="" />
   •2  Add the @NotNull annotation for null scenarios
   • add both for best user experience and robustness
-
-
-
-*** Add Validation checking in OrderController!!!
-
