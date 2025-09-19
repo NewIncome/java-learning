@@ -251,6 +251,20 @@ View Creation
             }
           }
 
+• Template caching
+  ♦ By default, templates are only parsed once, when they’re first used, and then cached for subsequent use
+  ♦ to disable caching, (for development purposes) you need to set the template caching property to false 
+  ♦ ie.(for thymeleaf):  in application.properties add ->  spring.thymeleaf.cache=false
+  ♦* be sure to remove that line before deploying to production. Or set it in a profile
+
+Choosing a view Template Library
+• Template options supported by Spring Boot autoconfiguration:
+    FreeMarker             -  spring-boot-starter-freemarker
+    Groovy Templates       -  spring-boot-starter-groovy-templates
+    JavaServer Pages (JSP)  -  None (provided by Tomcat or Jetty)   //* is only an option if you’re building your application as a WAR file and deploying it in a traditional servlet container
+    Mustache                -  spring-boot-starter-mustache
+    Thymeleaf               -  spring-boot-starter-thymeleaf
+
 Model in Java
 • A Model is a class that represents a data structure or a real-world object
 • It's a core component of the Model-View-Controller (MVC) design pattern
