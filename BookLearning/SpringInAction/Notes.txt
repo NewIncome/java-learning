@@ -354,6 +354,7 @@ Validations:
 • @NotNull
 • @Size
   ♦ @Size(min=5, message="Name must be at least 5 characters long")
+  ♦* !!only validates non-null collections
 • @Pattern
   ♦ @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$", message="Must be formatted MM/YY")
   ♦ good site to check for regex exp www.regular-expressions.info
@@ -376,6 +377,15 @@ Validations:
             <span class="validationError"
                   th:if="${#fields.hasErrors('ccNumber')}"      <!- if, to show the span elem ->
                   th:errors="*{ccNumber}">CC Num Error</span>
+
+***
+@Size(min=1)
+List<> objects are set to null be default, and the @Size looks for [], it doesnt see null
+therefor you have 2 options:
+  •1  Add a hidden input to your form to set the base value as an empty array
+    ♦  <input type="hidden" th:field="*{ingredients}" value="" />
+  •2  Add the @NotNull annotation for null scenarios
+  • add both for best user experience and robustness
 
 
 
