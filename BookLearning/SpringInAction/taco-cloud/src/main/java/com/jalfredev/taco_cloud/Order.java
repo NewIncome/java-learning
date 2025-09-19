@@ -10,7 +10,6 @@ import lombok.Data;
 @Data
 public class Order {
 
-  @NotBlank(message="Name ir required")
   @NotBlank(message="Name is required")
   private String name;
 
@@ -28,6 +27,7 @@ public class Order {
 
   @CreditCardNumber(message="Not a valid credit card number")
   private String ccNumber;
+  //valid ccNumber:  17893729974
 
   @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$",
            message="Must be formatted MM/YY")
