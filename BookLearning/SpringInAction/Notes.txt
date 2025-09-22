@@ -238,7 +238,7 @@ View Creation
       ◘ ie.:  th:action="@{/orders}"  //being displayed in designTaco view
       ◘  @{…} ,  this operator can be used for a context-relative path
 
-• Creating a ViewController for straightforward views, with no data to handle
+• Creating a Static-View Controller for straightforward views, with no data to handle
   ♦ a controller that does nothing but forward the request to a view
   ♦ Typically called a 'WebConfig', this class would implement 'WebMvcConfigurer' interface
   ♦ To add views ,  You need to @Override the addViewControllers method from the interface
@@ -408,8 +408,6 @@ Validations:
                   th:if="${#fields.hasErrors('ccNumber')}"      <!- if, to show the span elem ->
                   th:errors="*{ccNumber}">CC Num Error</span>
 
-
-
 //***
 @Size(min=1)
 List<> objects are set to null be default, and the @Size looks for [], it doesnt see null
@@ -418,3 +416,28 @@ therefor you have 2 options:
     ♦  <input type="hidden" th:field="*{ingredients}" value="" />
   •2  Add the @NotNull annotation for null scenarios
   • add both for best user experience and robustness
+
+
+--------------- Chapter 3 - Working with Data ---------------
+• To add data persistence an existing Spring support is JDBC (Java Database Connectivity) which to eliminate boilerplate code
+• Then you rework the data repositories to work with the JPA (Java Persistence API), to eliminate even more code
+• SQL and relational databases are the leading choice for data persistence
+• Spring JDBC support is rooted in the JdbcTemplate class, and helps with querying a DB in a simpler form
+• To query a DB without help, with raw Java code, your query needs to surrounded by code that creates a connection,
+  creates a statement, and cleans up by closing the connection, statement, and result set
+
+• Adapting your domain(main objects/tables) for persistence
+  ♦ You need a field for a unique identifier : id
+  ♦ And created date and time fields
+
+Jdbc Template
+• You'll need to create an interface that defines what operations your Domain repository will perform
+• ie.:  the Ingredients repo will need to:
+        + Query for all ingredients into a collection of Ingredient objects
+        + Query for a single Ingredient by its id
+        + Save an Ingredient object
+
+
+
+//***
+• A checked exception ,  is a type of exception in Java that must be handled by the programmer at compile time
