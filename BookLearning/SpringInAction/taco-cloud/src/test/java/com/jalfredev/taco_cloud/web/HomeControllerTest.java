@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 // @WebMvcTest implicitly handles the Spring context setup,
 // so you don't need to specify an @ExtendWith annotation directly.
-@WebMvcTest(HomeController.class)
+@WebMvcTest()
 public class HomeControllerTest {
 
     @Autowired
