@@ -1,5 +1,7 @@
 package com.jalfredev.taco_cloud;
 
+import java.sql.Date;
+
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import jakarta.validation.constraints.Digits;
@@ -7,8 +9,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
-@Data
+@Data     //in charge of creating the getter and setter methods as needed
 public class Order {
+
+  private Long id;
+
+  private Date placedAt;
 
   @NotBlank(message="Name is required")
   private String name;

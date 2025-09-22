@@ -1,13 +1,18 @@
 package com.jalfredev.taco_cloud;
 
+import java.sql.Date;
 import java.util.List;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-@Data
+@Data   //in charge of creating the getter and setter methods as needed
 public class Taco {
+
+  private Long id;
+
+  private Date createdAt;
 
   @NotNull
   @Size(min=5, message="Name must be at least 5 characters long")
