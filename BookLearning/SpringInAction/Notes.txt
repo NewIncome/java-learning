@@ -437,6 +437,34 @@ Jdbc Template
         + Query for all ingredients into a collection of Ingredient objects
         + Query for a single Ingredient by its id
         + Save an Ingredient object
+• @Repository ,  is a Spring annotation that marks the class as a repository component
+  ♦ It's a type of @Component but is more specific for classes that handle data access and persistence
+  ♦ Spring's component scanning will automatically detect this class and register it as a bean in the Spring application context
+• JdbcTemplate ,  is a core Spring class that simplifies working with databases by handling all the low-level JDBC boilerplate code for you
+  ♦ like opening and closing connections, and handling exceptions
+• JdbcTemplate's Instance Methods:
+  ♦ .query("SQL string query", RowMapper method)
+    ○ it returns a single object, specifically used when you expect a single row to be returned
+  ♦ .queryForObject("SQL string query", RowMapper method, param)
+    ○ it executes a SQL query and returns a list of objects
+    ○* SQL query placeholder (?) for a parameter
+  ♦ .update("SQL string query", params)
+    ○ can be used for any query that writes or updates data in the database
+    ○ used for SQL statements that modify the database, such as INSERT, UPDATE, or DELETE
+• ResultSet ,  is a Java object that represents a table of data retrieved from a database as a result of executing an SQL query
+  ♦ (the current row from the database) and the row number
+  ♦ When you execute a query, the data is returned from the database and stored temporarily in a ResultSet object
+  ♦ You can then use the ResultSet to iterate through the data, one row at a time
+  ♦* The ResultSet object maintains a cursor pointing to the current row
+  ♦ Key Characteristics:
+    ○ Cursor-Based: You move the cursor through the data using methods like next(), which advances the cursor to the next row
+    ○ Column Access: ou can retrieve the data from a specific column of the current row using various getter methods, such as getString(), getInt(), or getDate().
+        You can specify the column either by its index (starting from 1) or its name.
+    ○ Read-Only: By default, a ResultSet is read-only
+    ○ Automatic Closing: The ResultSet is a resource that needs to be properly closed to free up database connections.
+      However, JdbcTemplate in Spring handles this automatically for you, which is one of the main reasons it's so popular.
+  ♦ in simple: a ResultSet is the raw, tabular data that comes directly from your database,
+    and it's the job of a RowMapper (or a similar mechanism) to read this data and convert it into a Java object
 
 Logic
 • Iterable interface:  is a core part of the Java Collections Framework
@@ -447,6 +475,19 @@ Logic
     ○ means the method will return an object that you can iterate over
     ○ and each item in the sequence will be an Ingredient
     ○ it promises to return a collection, it not specifying which one
+• @Autowired ,   is a Spring annotation for dependency injection
+  ♦ used when you have >1 constructors and creates the base constructor with all the class fields
+• this::mapRowToIngredient ,  This is a method 'reference'
+  ♦ It's a shorthand for a lambda expression that simply calls a single method
+  ♦ it means you are passing a REFERENCE to the method itself as an argument,
+    -not the result of executing it-
+  ♦* Method references are most commonly used when working with Java 8 Streams and functional interfaces,
+     like a RowMapper in Spring's JdbcTemplate
+
+♣ the IngredientRepository interface
+  ♠ we need it to define the operations needed for the model-controller as method declarations
+  ♠  you’ll still need to write an implementation of IngredientRepository that uses JdbcTemplate to query the database
+
 
 
 
