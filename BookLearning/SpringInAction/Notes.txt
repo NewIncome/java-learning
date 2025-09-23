@@ -425,6 +425,7 @@ therefor you have 2 options:
 • Spring JDBC support is rooted in the JdbcTemplate class, and helps with querying a DB in a simpler form
 • To query a DB without help, with raw Java code, your query needs to surrounded by code that creates a connection,
   creates a statement, and cleans up by closing the connection, statement, and result set
+• For development purposes you can use an embedded DB, like H2
 
 • Adapting your domain(main objects/tables) for persistence
   ♦ You need a field for a unique identifier : id
@@ -436,6 +437,16 @@ Jdbc Template
         + Query for all ingredients into a collection of Ingredient objects
         + Query for a single Ingredient by its id
         + Save an Ingredient object
+
+Logic
+• Iterable interface:  is a core part of the Java Collections Framework
+  ♦ it's not a class, but an interface that represents a collection of elements that can be iterated over
+  ♦ Any class that implements the Iterable interface must provide an iterator() method
+    ○ This method returns an Iterator object, which is then used to traverse the elements one by one
+  ♦ Use like:  Iterable<Ingredient> findAll();
+    ○ means the method will return an object that you can iterate over
+    ○ and each item in the sequence will be an Ingredient
+    ○ it promises to return a collection, it not specifying which one
 
 
 
