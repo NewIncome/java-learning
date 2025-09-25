@@ -484,10 +484,55 @@ Logic
   ♦* Method references are most commonly used when working with Java 8 Streams and functional interfaces,
      like a RowMapper in Spring's JdbcTemplate
 
+• Type[] types = Ingredient.Type.values();
+  ♦ Ingredient.Type: This refers to an enum defined inside the Ingredient class(or it might be a static inner enum of Ingredient)
+  ♦ .values(): This is a static method that the Java compiler automatically adds to every enum you define
+    ○ It returns an array containing all of the enum's constants in the order they are declared
+  ♦ Type[] types: The result of the values() method (the array of enum constants) is assigned to a new array variable named types
+    ○ The type of this array is the enum itself (Type[])
+  //♦ This is commonly done when you need to iterate through or display every single possible value of an enum
+
 ♣ the IngredientRepository interface
   ♠ we need it to define the operations needed for the model-controller as method declarations
   ♠  you’ll still need to write an implementation of IngredientRepository that uses JdbcTemplate to query the database
+  ♠* You inject a repository class into a controller to provide information from a DB, instead of using harcoded values(llike we did in ch1 with addIngredientsToModel())
 
+SQL schema and DB data preload, in Spring/JPA
+• To create the squema, you do this in the file:  src/main/resources/schema.sql
+• To pre-populate the DB with some data, the file: src/main/resources/data.sql
+• Spring boot will execute both files from the root of the classpath when the application starts
+  ♦ typically for in-memory databases like H2
+• To create a table:
+  create table if not exists TableName (column type purpose);
+  create table if not exists Ingredient (name varchar(25) not null);
+• Relationships in direct SQL
+  ♦ One-to-Many ,  the foreign key goes on the "many" side's table
+    ○ Example: The Taco table would have a column order_id that references the Taco_Order table
+  ♦ Many-to-Many ,  Requires a separate join table (Taco_Order_Tacos)
+      with two foreign key columns, one referencing each primary table
+•* SQL File vs. Java Code (Schema Generation)
+  ♦A. Database-First (Using schema.sql)
+    ○ Pros: Gives you full, explicit control over the database schema, column names, and indices
+    ○ Cons: Requires you to write and maintain the SQL manually
+  ♦B. Code-First (Using JPA Annotations)
+    ○ You define your database structure entirely in your Java model classes using JPA annotations
+      You then configure Spring Boot to use the property spring.jpa.hibernate.ddl-auto (often set to create, update, or create-drop)
+    ○ Pros: Hibernate (the default JPA provider) will automatically generate the SQL schema (tables, columns, foreign keys) based on your Java code
+            This is usually faster and less error-prone
+    ○ Cons: You lose explicit control over the exact SQL generated, which can sometimes lead to suboptimal column types or names if not configured carefully
+• To initialize and reset the database, you use the data.sql file
+  ♦ It follows a pattern of clearing old data and then inserting a fixed set of new data
+  ♦1st  Data Cleanup and Reset
+    ○ You clear old data with  DELETE FROM TableName
+    ○ This is done to ensure a clean slate and consistent state every time the application runs
+    ○* Order of Deletion (Crucial for Foreign Keys)
+      ◘ The tables are deleted in a specific order to avoid foreign key constraint violations
+        You must delete data from the "child" tables(and join tables), before you delete data from the "parent" tables
+  ♦2nd  Data Insertion
+    ○ Done with the command INSERT INTO TableName (columns) values ('values')
+  ♦ This can also be done with Java
+    ○A. Using an ApplicationRunner or CommandLineRunner
+    ○B. Using @PostConstruct on a Component
 
 
 
