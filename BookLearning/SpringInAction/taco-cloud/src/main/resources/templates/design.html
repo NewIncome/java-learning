@@ -8,7 +8,7 @@
   <body>
     <h1>Design your taco!</h1>
     <img th:src="@{/images/taco-cloud.png}"/>
-    <form method="POST" th:object="${design}">
+    <form method="POST" th:object="${taco}">
       <input type="hidden" th:field="*{ingredients}" value="" />
       <!-- the above hidden-input is to set at least an empty array value instead of having the default value null in ingredients -->
 
