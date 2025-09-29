@@ -492,10 +492,28 @@ Logic
     ○ The type of this array is the enum itself (Type[])
   //♦ This is commonly done when you need to iterate through or display every single possible value of an enum
 
+-- Instructions by/from book example --
 ♣ the IngredientRepository interface
   ♠ we need it to define the operations needed for the model-controller as method declarations
   ♠  you’ll still need to write an implementation of IngredientRepository that uses JdbcTemplate to query the database
   ♠* You inject a repository class into a controller to provide information from a DB, instead of using harcoded values(llike we did in ch1 with addIngredientsToModel())
+♣ the DesignTacoController with the Taco @ModelAttribute
+  ♠ The @ModelAttribute(name = "taco") method in DesignTacoController creates a new Taco object
+    and adds it to the Model under the name taco for every request handled by the controller
+    ♥ ensures that a new Taco object is created and added to the Model with the key taco for every
+      request handled by the controller (e.g., GET /design)
+  ♠ This makes the Taco object available in the Thymeleaf view as ${taco}
+  ♠ Thymeleaf Form Binding
+  ♠ The <form th:object="${taco}"> in design.html binds the form to the Taco object, allowing form
+  fields (e.g., checkboxes for ingredients) to read and write to its properties (name, ingredients)
+♠ Model Contents (example):
+    {
+      taco: Taco(name=null, ingredients=null),
+      wrap: [Ingredient(id=FLTO, name=Flour Tortilla, type=WRAP), Ingredient(id=COTO, name=Corn Tortilla, type=WRAP)],
+      protein: [Ingredient(id=GRBF, name=Ground Beef, type=PROTEIN), ...],
+      ...
+    }
+
 
 SQL schema and DB data preload, in Spring/JPA
 • To create the squema, you do this in the file:  src/main/resources/schema.sql
@@ -533,6 +551,12 @@ SQL schema and DB data preload, in Spring/JPA
   ♦ This can also be done with Java
     ○A. Using an ApplicationRunner or CommandLineRunner
     ○B. Using @PostConstruct on a Component
+• Indexing
+  ♦ Used to better query a table by a specific column
+  ♦ with the code:
+     create index idx_taco_order_placed_at on Taco_Order (placedAt);
+  ♦ How does it work in Java?
+    ○ The database creates a separate data structure (often a B-tree) that maps placedAt values to their corresponding rows in Taco_Order
 
 
 
