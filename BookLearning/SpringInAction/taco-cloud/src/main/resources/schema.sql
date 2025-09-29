@@ -2,7 +2,8 @@
 CREATE TABLE IF NOT EXISTS Ingredient (
   id VARCHAR(4) NOT NULL,       /* unique, short identifier, PrimaryKey */
   name VARCHAR(25) NOT NULL,
-  type VARCHAR(10) NOT NULL
+  type VARCHAR(10) NOT NULL,
+  PRIMARY KEY (id)
 );
 
 /* This table stores the details of a single, custom-designed taco */
@@ -52,3 +53,5 @@ ALTER TABLE Taco_Order_Tacos
   ADD FOREIGN KEY (tacoOrder) REFERENCES Taco_Order(id);
 ALTER TABLE Taco_Order_Tacos
   ADD FOREIGN KEY (taco) REFERENCES Taco(id);
+
+CREATE INDEX idx_taco_order_placed_at ON Taco_Order (placedAt);
