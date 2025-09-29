@@ -1,7 +1,6 @@
 package com.jalfredev.taco_cloud.web;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +32,16 @@ public class DesignTacoController {
 
   private final IngredientRepository ingredientRepo;
 
+  /*
+   * Needed to add a Taco object to the model
+   *  This to add consistency to the form, so it'll work on a 'Taco' object, instead of 'design'
+   *  It'll create this new Taco instance on every http request
+   */
+  @ModelAttribute(name = "taco")
+  public Taco taco() {
+    return new Taco();
+  }
+
   @Autowired
   public DesignTacoController(IngredientRepository ingredientRepo) {
     this.ingredientRepo = ingredientRepo;
@@ -54,6 +63,7 @@ public class DesignTacoController {
                          filterByType(ingredients, type));
     }
 
+    log.info("Model attributes: {}", model.asMap());
     //the logical name of the view that will be used to render the model to the browser
     return "design";
   }
