@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -16,8 +15,10 @@ import jakarta.validation.Valid;
 import com.jalfredev.taco_cloud.Ingredient;
 import com.jalfredev.taco_cloud.Ingredient.Type;
 import com.jalfredev.taco_cloud.data.IngredientRepository;
+import com.jalfredev.taco_cloud.data.TacoRepository;
 import com.jalfredev.taco_cloud.Taco;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,9 +29,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller     //Mark the class as a candidate for component scanning
 @RequestMapping("/design")  //Map web requests to specific methods in a controller class
 @SessionAttributes("order")
+@AllArgsConstructor
 public class DesignTacoController {
 
   private final IngredientRepository ingredientRepo;
+
+  private TacoRepository designRepo;
 
   /*
    * Needed to add a Taco object to the model
@@ -40,11 +44,6 @@ public class DesignTacoController {
   @ModelAttribute(name = "taco")
   public Taco taco() {
     return new Taco();
-  }
-
-  @Autowired
-  public DesignTacoController(IngredientRepository ingredientRepo) {
-    this.ingredientRepo = ingredientRepo;
   }
  
   /* @GetMapping Specifies that when an HTTP GET request is received for the page specified
