@@ -1,6 +1,6 @@
 package com.jalfredev.taco_cloud;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.validation.constraints.NotNull;
@@ -21,6 +21,6 @@ public class Taco {
   /* already taken care of in view, but used to add robustness */
   @NotNull(message="Ingredients cannot be null")
   @Size(min=1, message="You must choose at least 1 ingredient")
-  private List <String> ingredients;
+  private List <Ingredient> ingredients;
   
 }
