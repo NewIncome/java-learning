@@ -8,17 +8,15 @@ import org.springframework.stereotype.Repository;
 
 import com.jalfredev.taco_cloud.Ingredient;
 
+import lombok.AllArgsConstructor;
+
 @Repository   // it's stereotype annotation like @Controller, @Component
+@AllArgsConstructor
 public class JdbcIngredientRepository implements IngredientRepository {
   /* Implementation of data access logic for Ingredient objects, following
      the repository design pattern to keep data concerns separate from business logic */
 
   private JdbcTemplate jdbc;
-
-  //@Autowired is not needed because we only have 1 constructor
-  public JdbcIngredientRepository(JdbcTemplate jdbc) {
-    this.jdbc = jdbc;
-  }
 
   @Override
   public Iterable<Ingredient> findAll() {
