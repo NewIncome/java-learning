@@ -558,6 +558,20 @@ SQL schema and DB data preload, in Spring/JPA
   ♦ How does it work in Java?
     ○ The database creates a separate data structure (often a B-tree) that maps placedAt values to their corresponding rows in Taco_Order
 
+//* Why we need an interface to define methods for a class:
+  •1. Abstraction: An interface defines a contract, without implementation details,
+      allowing you to swap implementations if needed(without changing code nor the contract)
+  •2. Dependency Injection: Spring uses interfaces to inject dependencies. Which decouples
+      certain classes like controllers making it easier to test or change data sources
+  •3. Flexibility: Interfaces allow multiple implementations to share the same method signatures,
+      supporting different databases or mock testing
+  •4. Maintainability: Interfaces centralize method definitions, making it clear what functionality
+      a repository must provide, improving code readability and scalability
+  •* After creating the Contract||Interface you follow creating the Implementation(class that codes
+     the methods proposed/needed by the contract)
+  •** In short, interfaces provide abstraction, flexibility, and testability, aligning with
+      Spring’s dependency injection and modular design principles.
+
 
 
 //***
