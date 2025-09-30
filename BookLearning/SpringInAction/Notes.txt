@@ -117,7 +117,9 @@ Important dependencies and what they offer
         ◙ hashCode(): using the @EqualsAndHashCode annotation
           ♣ it computes a hash code from all the non-static, non-transient fields in the class
           ♣ it's crucial for correctly storing and retrieving objects in hash-based collections like HashMap and HashSet
-      ◘ @RequiredArgsConstructor ,  generates a constructor for every final field and every field annotated with @NonNull that is not already initialized
+      ◘ @RequiredArgsConstructor ,  generates a constructor for every 'final' field and every field annotated with @NonNull that is not already initialized
+      ◘ @NoArgsConstructor ,  generates a no-argument (default) constructor
+      ◘ @AllArgsConstructor ,  generates a constructor with one parameter for every field in the class
 
 • ENUM
   ♦ (enumeration) is a special data type in Java that allows a variable to be a set of predefined constants
@@ -432,6 +434,7 @@ therefor you have 2 options:
   ♦ And created date and time fields
 
 Jdbc Template
+• Simplifies JDBC operations by handling resource management and exception translation
 • You'll need to create an interface that defines what operations your Domain repository will perform
 • ie.:  the Ingredients repo will need to:
         + Query for all ingredients into a collection of Ingredient objects
@@ -440,6 +443,9 @@ Jdbc Template
 • @Repository ,  is a Spring annotation that marks the class as a repository component
   ♦ It's a type of @Component but is more specific for classes that handle data access and persistence
   ♦ Spring's component scanning will automatically detect this class and register it as a bean in the Spring application context
+  ♦* It also enables Spring to translate JDBC-related exceptions (e.g., SQLException)
+     into Spring’s DataAccessException hierarchy for consistent error handling
+    ○ ie.: tells Spring that JdbcTacoRepository is a data access object (DAO) for Taco entities
 • JdbcTemplate ,  is a core Spring class that simplifies working with databases by handling all the low-level JDBC boilerplate code for you
   ♦ like opening and closing connections, and handling exceptions
 • JdbcTemplate's Instance Methods:
@@ -465,6 +471,17 @@ Jdbc Template
       However, JdbcTemplate in Spring handles this automatically for you, which is one of the main reasons it's so popular.
   ♦ in simple: a ResultSet is the raw, tabular data that comes directly from your database,
     and it's the job of a RowMapper (or a similar mechanism) to read this data and convert it into a Java object
+
+• to Auto-Generated an ID in the DB, that matches id identity in schema.sql
+  ♦ you need the KeyHolder, from org.springframework.jdbc.support.KeyHolder;
+  ♦ ie.:  KeyHolder keyHolder = new GeneratedKeyHolder();
+  ♦ to view or use the created ID:  keyHolder.getKey().longValue();
+• jdbc.update() ,  used to insert either new values or modify values in a table row
+  ♦ (PreparedStatementCreator psc) ,  option for parameters for update()
+  ♦ (String sql, Object ... args-values) ,  option for parameters for update()
+• PreparedStatementCreatorFactory ,  is a Spring JDBC utility class that creates a PreparedStatementCreator for a given SQL statement
+• PreparedStatementCreator , object that executes an SQL INSERT statement
+• .newPreparedStatementCreator() ,  creates a PreparedStatementCreator instance, binding actual values to the ? placeholders
 
 Logic
 • Iterable interface:  is a core part of the Java Collections Framework
