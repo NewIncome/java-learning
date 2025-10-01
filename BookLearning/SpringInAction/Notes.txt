@@ -283,7 +283,7 @@ Model in Java
       view-> ${message}  ${user.name}
 • @ModelAttribute ,  Spring annotation to bind data from a web request to a Java object
   ♦ It works in two main ways, depending on where you place it
-    1○ As a Method Parameter. (Most common use)IT tell spring to do the following:
+    1○ As a Method Parameter. (Most common use)IT tells spring to do the following:
       ◘ Create an instance of the specified object
       ◘ Bind data from the incoming request (e.g., form fields) to the object's properties
       ◘ Add this newly populated object to the Model so it can be accessed in the view
@@ -589,7 +589,14 @@ SQL schema and DB data preload, in Spring/JPA
   •** In short, interfaces provide abstraction, flexibility, and testability, aligning with
       Spring’s dependency injection and modular design principles.
 
+• @SessionAttributes ,  class-level annotation that specifies any model objects like the order attribute 
+    that should be kept in session and available across multiple requests
+
 
 
 //***
 • A checked exception ,  is a type of exception in Java that must be handled by the programmer at compile time
+
+* !! Issue, for now hidden input in design saving a blanc string
+* And get this error when saving a taco-design:
+    Failed to convert property value of type java.lang.String[] to required type java.util.List for property ingredients; Cannot convert value of type java.lang.String to required type com.jalfredev.taco_cloud.Ingredient for property ingredients[0]: no matching editors or conversion strategy found

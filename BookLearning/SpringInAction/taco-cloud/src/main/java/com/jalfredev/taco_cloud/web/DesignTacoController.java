@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import jakarta.validation.Valid;
 
 import com.jalfredev.taco_cloud.Ingredient;
+import com.jalfredev.taco_cloud.Order;
 import com.jalfredev.taco_cloud.Ingredient.Type;
 import com.jalfredev.taco_cloud.data.IngredientRepository;
 import com.jalfredev.taco_cloud.data.TacoRepository;
@@ -28,7 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Slf4j          //Generates a Logger in the class
 @Controller     //Mark the class as a candidate for component scanning
 @RequestMapping("/design")  //Map web requests to specific methods in a controller class
-@SessionAttributes("order")
+@SessionAttributes("order")   //so the 'order' attribute be kept in session and available across multiple requests
 @AllArgsConstructor
 public class DesignTacoController {
 
@@ -44,6 +45,10 @@ public class DesignTacoController {
   @ModelAttribute(name = "taco")
   public Taco taco() {
     return new Taco();
+  }
+  @ModelAttribute(name = "order")
+  public Order order() {
+    return new Order();
   }
  
   /* @GetMapping Specifies that when an HTTP GET request is received for the page specified
@@ -67,18 +72,21 @@ public class DesignTacoController {
     return "design";
   }
 
-  //TODO: process POST request
   @PostMapping
-  public String processDesign(@Valid @ModelAttribute("design") Taco design,
-                              Errors errors, Model model) {
+  public String processDesign(@Valid Taco design, Errors errors,
+                               @ModelAttribute Order order) {
+                      /* The Order parameter is annotated with @ModelAttribute to indicate
+                         that its value should come from the model and that Spring MVC
+                         shouldn’t attempt to bind request parameters to it */
       if(errors.hasErrors()) {
         log.info("Errors object, in ErrorIF: " + errors.getAllErrors());
         return "design";
       }
 
-      // Save taco design later...
       log.info("Processing design: " + design);
-      
+      Taco saved = designRepo.save(design);
+      //order.addDesign(saved);
+
       return "redirect:/orders/current";
   }
 
