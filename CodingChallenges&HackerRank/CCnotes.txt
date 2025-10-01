@@ -1,0 +1,7 @@
+Java cool methods and classes
+------------------------------
+
+• Collections.frequency(Collection<?> c, Object o)
+    ○ Returns the number of elements in the specified collection equal
+      to the specified object
+    ○ in java.util.Collections;
