@@ -9,4 +9,5 @@ List of Coding Challenges
 [✔] - BetweenTwoSets (wV)
 [✔] - SubarrayDivision (Success)
 [✔] - Migratory Birds (wV)
+[✔] - Day of the Programmer (Success_long)
 [ ] - 
