@@ -160,30 +160,83 @@ Is an alias for many other different annotations
     spring.datasource.driverClassName=org.h2.Driver
     spring.datasource.username=sa
     spring.datasource.password=password
+• for Testing, also has some specific settings to allow it to emulate quircks of some databases(like postgres)
+  ♦ ie.:  spring.datasource.url=jdbc:h2:mem:testdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    ◙ jdbc:h2:mem:testdb
+    ◙ MODE=PostgreSQL ,  to emulate postgres
+    ◙ DATABASE_TO_LOWER=TRUE ,  to set everything to lower-case to replicate postgres behaviour
 ▲  with PostgreSQL and other DB's
 • the Java code will be exactly the same
 • the difference will be in the configuration, in application.properties
 • then you just need to run/start the DB and it should work
   ♦ you can do so with docker
 
-
-
+• View on DBeaver, graphical view of DB's
+  ♦ keep open the DB connection (easier with Docker-compose)
+  ♦ open in same port
+  ♦ add password
+  ♦ test connection
+  ♦ finish
+• you can view it in the path:  postgres > Databases > postgres > Schemas > public > Tables > "tableName"
+  ♦ double click there, then selec tab 'Data' to view the info in the table
+  ♦ or 'ER Diagram' to view the column names
 
 * 1:17:00 ,  Interesting short code, pizza proj
   + uses well structured String.format
   + uses @Log, and @Data annotations (also @AllArgsConstructor, @NoArgsConstructor)
   + uses "lombok"(Logger), ... , has great annotations that automate code ...
 
+▲ JdbcTemplate and DAO pattern(Data Access Object)
+• DAO ,  objects that reference and map to tables in a DB
+• Those Dao's start being interfaces
+• Those interfaces need implementations
+  ♦ those will 'always' need the JdbcTemplate
+• @Configuration ,  Declares that a class is a source of Bean definitions
+  ♦  It tells the Spring container that this class contains one or more @Bean methods that Spring should process and manage
+  ♦* Sets like the 'Database Setup Blueprint'
+• @Bean , Marks a method whose return value should be registered as a Bean in the Spring application context
+• @Builder , It's purpose is to automatically implement the Builder Design Pattern for your class
+*** The Builder pattern
+  + is a creational design pattern that allows you to construct complex objects step-by-step using a fluent, readable API
+  + generates all the necessary code for this pattern, including:
+    > A static inner class (the actual "Builder")
+    > A static builder() method on the main class that returns an instance of the inner builder
+    > Methods on the builder class for each field
+    > A build() method that creates and returns the final object
+  + Solves the "Telescoping Constructor" Problem:
+    > When a class has many optional fields, you would traditionally need
+      to write a long, tedious constructor with all possible parameters
+      (or many overloaded constructors). The builder pattern, and thus
+      @Builder, solves this by allowing you to set only the fields you need,
+      in any order.
+  +* Facilitates Immutable Objects
+    > Commonly used to construct objects where all fields are final
+    > Since all values are passed to the builder before the object is created (when build() is called),
+      it's the ideal tool for creating fully immutable objects
+•• SetUp
+ ♦ The "Configuration Class way"
+  ◙ creating a configuration class to define all our beans that'll there be registered to the Spring Application Context
+  ◙ ie.:  config/DatabaseConfig.java  //(class) with many Contructor injected Beans
+• Base files:
+  1♦ Domain ,  class files for our Models / objects - to replicate DB tables
+  2♦ DAO's ,  interfaces that will be blueprint for the actions/methods performable to those
+  objects(the domain)
+  3♦ Implementations(impl's) ,  classes that will implement the DAO's interface methods
+• Test configuration
+  ♦ add the H2 DB with the scope of 'test', in the pom file
+  ♦ set-it-up in the test/resources/application.properties file
+
+
 
 
 /*
-Clear
-• Local Maven Repository Cache
-  Typically in: 
-  ~/.m2/repository
-• My JAVA_HOME dir
-/home/techrules4ever/.sdkman/candidates/java/21.0.6-amzn
-• My M2_HOME dir
-\usr\share\man\man1\mvn.1.gz
+  Clear
+  • Local Maven Repository Cache
+    Typically in: 
+    ~/.m2/repository
+  • My JAVA_HOME dir
+  /home/techrules4ever/.sdkman/candidates/java/21.0.6-amzn
+  • My M2_HOME dir
+  \usr\share\man\man1\mvn.1.gz
 */
 
