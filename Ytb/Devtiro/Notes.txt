@@ -138,7 +138,7 @@ Is an alias for many other different annotations
     //that code to be then injected(say via ConstructorInjection) to the main class for use
 
 
-► DataBase Layers
+► DataBase and DataBase Layers
 • Database Driver - allows to interact with the DB from your java code
 • JDBC (JavaDataBaseConnectivity) - LowLevel API, for sql queries
 • Spring JDBC - adds spring magic to normal JDBC with 'templates'
@@ -149,7 +149,22 @@ Is an alias for many other different annotations
 • Spring Data JPA - adds spring magic, such as defined repositories
 • Hibernate is an ORM
 
-▲  
+▲  H2 in-memory DB
+• You just connect to it by
+  ♦ injecting a DataSource dataSource dep
+  ♦ creating a new JdbcTemplate(dataSource)
+  ♦ and using the JdbcTemplate like:  restTemplate.execute("select 1");
+• You can configure it if desired in the application.properties file with:
+  ♦ spring.application.name=database01
+    spring.datasource.url=jdbc:h2:mem:testdb
+    spring.datasource.driverClassName=org.h2.Driver
+    spring.datasource.username=sa
+    spring.datasource.password=password
+▲  with PostgreSQL and other DB's
+• the Java code will be exactly the same
+• the difference will be in the configuration, in application.properties
+• then you just need to run/start the DB and it should work
+  ♦ you can do so with docker
 
 
 
