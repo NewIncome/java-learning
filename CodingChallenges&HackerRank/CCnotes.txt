@@ -5,3 +5,6 @@ Java cool methods and classes
     ○ Returns the number of elements in the specified collection equal
       to the specified object
     ○ in java.util.Collections;
+• String formatting
+    ○ Opt1:  String.format("%d.%d.%d", sumDays, month, y);
+    ○ Opt2:  System.out.printf("%d.%d.%d", sumDays, month, y);
