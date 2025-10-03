@@ -226,6 +226,18 @@ Is an alias for many other different annotations
   ♦ add the H2 DB with the scope of 'test', in the pom file
   ♦ set-it-up in the test/resources/application.properties file
 
+▲ Test Driven Development
+• Steps to a Create UNIT test:
+  1♦ Create the dao/AuthorDaoImplTests file
+  2♦ then test testThatCreatesAuthorAndGeneratesCorrectSql()
+    ◙ create an Author with Author.builder().build();  ie.: ...builder().id().name()...build();
+  3♦ then declare the AuthorDao interface create() method
+  4♦ then create the AuthorDaoImpl create() method, empty
+  5♦ then assert the test with argument matchers
+  6♦ then run the test, it should fail
+  7♦ then populate the AuthorDaoImpl create() method
+  8♦ then run the test, it should pass Ok
+('till 2:02:00)
 
 
 
