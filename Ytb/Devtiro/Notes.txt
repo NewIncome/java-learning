@@ -226,7 +226,7 @@ Is an alias for many other different annotations
   ♦ add the H2 DB with the scope of 'test', in the pom file
   ♦ set-it-up in the test/resources/application.properties file
 
-▲ Test Driven Development
+▲ Test Driven Development (TDD)
 • Steps to a Create UNIT test:
   1♦ Create the dao/AuthorDaoImplTests file
   2♦ then test testThatCreatesAuthorAndGeneratesCorrectSql()
@@ -238,6 +238,48 @@ Is an alias for many other different annotations
   7♦ then populate the AuthorDaoImpl create() method
   8♦ then run the test, it should pass Ok
 ('till 2:02:00)
+• @ExtendWith(*.class) ,  is a repeatable annotation that is used to register extensions for the annotated
+    test class, test interface, test method, parameter, or field
+  ♦ Annotated parameters are supported in test class constructors, in test methods, and in
+    @BeforeAll, @AfterAll, @BeforeEach, and @AfterEach lifecycle methods.
+  ♦ @ExtendWith fields may be either static or non-static
+  ♦ (*.class) ,  are sort of help classes that will be registered as extensions
+    ◙ It have many with repeated @ExtendWith annotations
+  ♦ @ExtendWith(MockitoExtension.class)
+    ◙ This annotation integrates Mockito with JUnit 5
+    ◙ It enables Mockito to initialize mocks and inject them into the test class
+• @Mock ,  this Mockito annotation creates a mock(fake) object of 'the JdbcTemplate class for example'
+  ♦ A mock is a fake object that simulates the behavior of the real JdbcTemplate
+• @InjectMocks ,  this annotation tells Mockito to create an instance of 'AuthorDaoImpl for example'
+  ♦ and automatically inject the mocked jdbcTemplate into it
+  ♦* Typically, 'AuthorDaoImpl for example' has a dependency on JdbcTemplate(the class annotated with Mock)
+  ♦ and Mockito handles this dependency injection for the test
+• @Test ,  is used to signal that the annotated method is a test method
+  ♦ This JUnit 5 annotation marks the method as a test case
+  ♦ body structure:
+    public void testThatCreateBookGeneratesCorrectSql() { //descriptive method name
+        Author author = Author.builder().id(1L).name("Abigail Rose").age(80).build(); //build the obj
+        underTest.create(author);   //create(db access to set) the obj
+
+        verify(jdbcTemplate).update(
+        eq("INSERT INTO authors (id, anme, age) VALUES (?, ?, ?)"),
+        eq(1L), eq("Abigail Rose"), eq(80));
+  ♦ verify(jdbcTemplate): This Mockito method checks whether a specific interaction occurred
+    with the mocked jdbcTemplate
+  ♦ .update(...): It verifies that the update method of jdbcTemplate was called exactly once
+    with the specified arguments
+  ♦ eq(field_data): Argument matcher used to match with specific field data
+• The Builder pattern
+  ♦ is like a helper that lets you build an object step-by-step
+  ♦ It is a design pattern that makes it easier to create complex objects
+with many fields or optional parameters in a clean, readable, and flexible way.
+  ♦ It’s especially useful when you want to avoid messy constructors with lots of arguments or
+    when some fields are optional.
+  ♦ .builder() ,  inner class to set the fields one at a time
+  ♦ .build() ,  method to create the final object
+  ♦ Avoids Constructor Overload
+    ◙ if you might need multiple constructors for different combinations, the Builder pattern uses
+    one clear way to set any combination of fields
 
 
 
