@@ -280,6 +280,35 @@ with many fields or optional parameters in a clean, readable, and flexible way.
   ♦ Avoids Constructor Overload
     ◙ if you might need multiple constructors for different combinations, the Builder pattern uses
     one clear way to set any combination of fields
+• org.mockito.ArgumentMatchers
+  ♦ Allow flexible verification or stubbing
+
+▲ CRUD (Create Read Update Delete)
+• C - create
+• R - read. There are typically 2 ways of doing it:
+  ♦ read one obj ,  and look for it by 'id'
+    ◙ if no object is found return null typically or empty
+  ♦ read many ,  and either show a large list
+                      show a filtered sub-set of the list
+    ◙ if no objects show in the list show an empty list
+
+• Optional<ObjectClass>
+  ♦ used to get an Optional obj back from a query if nothing is found, instead of getting null
+  ♦ A container object which may or may not contain a non-null value
+  ♦ If a value is present, isPresent() returns true
+  ♦ If no value is present, the object is considered empty and isPresent() returns false
+  ♦ when crud method auto-generated from interface to implementationClass it comes with:
+      return Optional.empty();
+
+▲ RowMapper
+• Used to convert from a ResultSet and convert it into an object
+  ♦* Also used to query a DB with a defined object structure
+• ResultSet ,  is whats returned when querying a database
+• Because we are using Jdbc and DAO pattern,
+  we need to handle the conversion to-and-from SQL and Java objects our selfs
+  For this we can use RowMappers, ResultSetExtractors, RowBackHandlers
+• Querying a DB with JdbcTemplate and RowMapper, to get a list of objects
+  ♦ List<Author> list = jdbcTemplate.query(String sql, RowMapper<Author> rowMapper, @Nullable Object... args)
 
 
 
