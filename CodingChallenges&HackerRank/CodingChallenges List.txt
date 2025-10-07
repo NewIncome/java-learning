@@ -11,4 +11,6 @@ List of Coding Challenges
 [✔] - Migratory Birds (wV)
 [✔] - Day of the Programmer (Success_long)
 [✔] - Drawing Book (got to 1TCfailed)
+[/] - Forming a Magic Square (not fully understood)
 [ ] - 
+
