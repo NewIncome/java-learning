@@ -227,7 +227,7 @@ Is an alias for many other different annotations
   ♦ set-it-up in the test/resources/application.properties file
 
 ▲ Test Driven Development (TDD)
-• Steps to a Create UNIT test:
+•> Steps to a Create UNIT test:
   1♦ Create the dao/AuthorDaoImplTests file
   2♦ then test testThatCreatesAuthorAndGeneratesCorrectSql()
     ◙ create an Author with Author.builder().build();  ie.: ...builder().id().name()...build();
@@ -282,6 +282,21 @@ with many fields or optional parameters in a clean, readable, and flexible way.
     one clear way to set any combination of fields
 • org.mockito.ArgumentMatchers
   ♦ Allow flexible verification or stubbing
+•> Steps to create INTEGRATION tests
+  ♦ in this case to run the sql agains an in-memory DB
+• @SpringBootTest ,  to startup a test version of our application when our test runs
+  ♦ This Spring Boot annotation is used for integration tests.
+  ♦ It sets up a full Spring application context, loads beans, and enables Spring-specific
+    features like dependency injection and transaction management.
+  ♦ Importantly, @SpringBootTest already includes @ExtendWith(SpringExtension.class) as part
+    of its implementation (via its meta-annotations)
+  ♦** Here a Constructor for ConstructorInjection is necessary
+    ◙ AND it's necessary that it uses the @Autowired annotation
+    ◙* It's necessary to write the ConstructorInjection method and use the @Autowired annotation because:
+      ◘ in Tests beans are not managed like the Spring Application, that's why you can't use @*ArgsConstructor
+      ◘ And @Autowired is convention in integration tests
+•*** @Transactional ,  rolls back all database changes
+      (e.g., inserting authors or books) after each test, ensuring a clean database state for subsequent tests
 
 ▲ CRUD (Create Read Update Delete)
 • C - create
@@ -309,6 +324,8 @@ with many fields or optional parameters in a clean, readable, and flexible way.
   For this we can use RowMappers, ResultSetExtractors, RowBackHandlers
 • Querying a DB with JdbcTemplate and RowMapper, to get a list of objects
   ♦ List<Author> list = jdbcTemplate.query(String sql, RowMapper<Author> rowMapper, @Nullable Object... args)
+
+(now at 2:34:00)
 
 
 
