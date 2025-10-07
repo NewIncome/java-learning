@@ -8,3 +8,5 @@ Java cool methods and classes
 • String formatting
     ○ Opt1:  String.format("%d.%d.%d", sumDays, month, y);
     ○ Opt2:  System.out.printf("%d.%d.%d", sumDays, month, y);
+
+• Integer.MAX_VALUE; //A constant holding the maximum value an int can have: 231-1
