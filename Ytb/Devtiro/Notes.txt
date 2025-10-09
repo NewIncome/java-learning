@@ -295,8 +295,28 @@ with many fields or optional parameters in a clean, readable, and flexible way.
     ◙* It's necessary to write the ConstructorInjection method and use the @Autowired annotation because:
       ◘ in Tests beans are not managed like the Spring Application, that's why you can't use @*ArgsConstructor
       ◘ And @Autowired is convention in integration tests
-•*** @Transactional ,  rolls back all database changes
+•* @Transactional ,  it wraps the test in a database transaction and rolls back all database changes(by default)
       (e.g., inserting authors or books) after each test, ensuring a clean database state for subsequent tests
+  ♦ the default behaviour is configurable with @Transactional(rollback = false)
+  ♦ Can specify transaction propagation, isolation levels, and timeouts (e.g., @Transactional(propagation = Propagation.REQUIRES_NEW))
+  ♦ Purpose: Manages database transactions and rollbacks
+  ♦ Scope: Database operations within a test
+  ♦ Performance Impact: Minimal, as it only manages transactions
+• @DirtiesContext ,    Marks a test as "dirtying" the Spring application context, forcing Spring to recreate the context for subsequent tests
+  ♦ Ensures that context modifications don’t affect other tests, preventing test interference
+  ♦ from org.springframework.test.annotation.DirtiesContext
+  ♦ Spring caches the application context between tests for performance
+    If a test modifies the context (e.g., by changing bean definitions, configurations, or
+    in-memory database state), @DirtiesContext tells Spring to discard the current context and
+    create a fresh one for the next test
+  ♦ Supports different scopes for context invalidation
+    (e.g., @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD) orClassMode.AFTER_CLASS)
+  ♦ Purpose: Use @DirtiesContext when a test alters the Spring application context (e.g., bean definitions,
+    properties, or shared resources) and you need to ensure a fresh context for other tests to avoid side effects
+  ♦ Scope: Spring application context state
+  ♦ Performance Impact: Higher, as recreating the context is resource-intensive
+    ◙ thus, avoid overusing, use it only when necessary (e.g., when shared resources or beans are modified)
+  //♦* In some cases, you might use both annotations in a test
 
 ▲ CRUD (Create Read Update Delete)
 • C - create
