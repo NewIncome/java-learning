@@ -67,27 +67,29 @@ public class ClimbingTheLeaderboard {
   }//end main
 
    public static List<Integer> result2(List<Integer> ranked, List<Integer> player) {
+    System.out.println("-- ranked=" + ranked + ", player=" + player + " --");
     ArrayList<Integer> leaderboard = (ArrayList<Integer>)ranked;
     ArrayList<Integer> playerScores = (ArrayList<Integer>)player;
     ArrayList<Integer> ranks = new ArrayList<Integer>();
-    HashMap<Integer, Integer> rankings = new HashMap<>();   //<Scores, Rank>
+    HashMap<Integer, Integer> ranking = new HashMap<>();   //<Scores, Rank>
     int rank = 1;
 
     for (int score : leaderboard) {
-      if(rankings.containsKey(score) == false) {
-        rankings.put(score, rank++);
+      if(ranking.containsKey(score) == false) {
+        ranking.put(score, rank++);
       }
     }
 
     int initial = leaderboard.size() - 1;
     for (int score : playerScores) {
       for (int i = initial; i >= 0; i--) {
-        System.out.println("score: " + score + ", i: " + i+ ", leaderboard.get(i): "
-                            + leaderboard.get(i) + ", rankings.get(score): " + rankings.get(score)
-                            + ", rankings: " + rankings);
+        /* System.out.println("score: " + score + ", i: " + i+ ", leaderboard.get(i): "
+                            + leaderboard.get(i) + ", ranking.get(score): " + ranking.get(score)
+                            + ", ranking: " + ranking); */
         if(score >= leaderboard.get(i)) {
-          rank = rankings.get(score);
-          initial = i - 1;
+        //[{80=3, 100=1, 90=2}]   [[100, 90, 90, 80]]
+          rank = ranking.get(leaderboard.get(i));
+          initial = i - 1;    //Might have been missing this in my approach!
         } else {
           break;
         }

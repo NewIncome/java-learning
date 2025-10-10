@@ -1,7 +1,7 @@
 List of Coding Challenges
 --------------------------
 -  didn't pass any or not finished
-/  passed some test cases
+/  passed some test cases || passedWithVideo
 ✔  done
 
 [✔] - ApplesAndOranges
@@ -12,5 +12,5 @@ List of Coding Challenges
 [✔] - Day of the Programmer (Success_long)
 [✔] - Drawing Book (got to 1TCfailed)
 [/] - Forming a Magic Square (not fully understood)
-[-] - Climbing the Leaderboard
+[/] - Climbing the Leaderboard (wV)
 [ ] - 
