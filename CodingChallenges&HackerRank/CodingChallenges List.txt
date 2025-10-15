@@ -13,4 +13,5 @@ List of Coding Challenges
 [✔] - Drawing Book (got to 1TCfailed)
 [/] - Forming a Magic Square (not fully understood)
 [/] - Climbing the Leaderboard (wV)
+[✔] - Designer PDF Viewer (Success)
 [ ] - 
