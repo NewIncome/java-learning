@@ -368,7 +368,7 @@ Changes regarding files and directories
 Changes regarding new dirs, files
 9. Create the package repositories/
   ○ with the interfaces AuthorRepository and BookRepository
-*10. Update our Domain objects(POJOS) to become ENTITIES
+*10. Update our Data/Domain AccessObjects(DAO's) or POJOS(PlainOldJavaObject) to become ENTITIES
 • to convert the POJOS into Entities:
   ♦ @Entity ,  label object as an Entity that can be used with Soring Data Jpa
   ♦ @Table(name = "authors") ,  to define which table it maps to in the DB
@@ -397,7 +397,57 @@ Create end-point and ReadOne
     delete, deleteAllById, deleteAll
 
 
+/*
+  Setting a custom BANNER to appear, in console
 
+  • For simple Banner for tests you can just add the resources/banner.txt file
+  ***• If you'll use advanced banner createion, remove the/any banner.txt file
+
+  Z• To setup the color
+  Red: \u001B[31m
+  Green: \u001B[32m
+  Yellow: \u001B[33m
+  Blue: \u001B[34m
+  Reset (to default color)(at end of colored section): \u001B[0m
+
+  A• Banner for Application Context Initialization
+    ♦ This banner displays when the Spring application context starts loading (e.g., at app
+      startup or test context init). Use a custom implementation of Spring's Banner interface
+      for full control over dynamic content.
+    ♦ Steps:
+      1◙ Create a custom Banner class that generates dynamic content (e.g., current timestamp, Spring Boot version).
+        //CustomContextBanner
+      2◙ Configure it in application.properties or via a SpringApplication builder (for tests, override in application-test.properties).
+      3◙ Placeholders like ${application.title} can be used, but for advanced dynamics, override printBanner.
+  B• Banner for Running Tests
+    ♦ This banner displays specifically during test execution (e.g., before/after each test
+      method or class). Use JUnit's @BeforeEach, @BeforeAll, or a custom TestExecutionListener
+      for more control. For dynamic data, access test metadata or runtime info.
+    ♦ Steps:
+      //CustomTestListener
+      1◙ Use @BeforeEach (per test method) or @BeforeAll (per class) to print the banner.
+      2◙ For more advanced, implement TestExecutionListener to hook into test lifecycle events.
+      3◙ Include dynamic data like test name, method count, or current time.
+  C• Banner for Database Loading
+    //DatabaseInitBanner
+    ♦ This "banner" displays during database initialization (e.g., when the datasource is
+      created, schema is applied via JPA/Hibernate, or data is loaded via data.sql).
+    ♦ Spring doesn't have a built-in banner for this, but you can hook into events like
+      DataSourceInitializedEvent or use a @PostConstruct method in a datasource-dependent bean.
+    ♦ Steps:
+      1◙ Create a bean that listens for database events or initializes after the datasource.
+      2◙ Use ApplicationListener for DataSourceInitializedEvent (fired after datasource setup).
+      3◙ Print dynamic data like DB URL, schema version, or row count
+    ♦ Different methods / approaches:
+| DB Approach     | Event/Class                  | When it runs          | Recommended?         |
+| --------------- | ---------------------------- | --------------------- | -------------------- |
+| **Old way**     | `DataSourceInitializedEvent` | After datasource init | ❌ Removed            |
+| **Modern way**  | `ApplicationReadyEvent`      | After app is ready    | ✅ Recommended        |
+| **Alternative** | `SmartInitializingSingleton` | After all beans init  | ✅ Good internal hook |
+
+  • In https://patorjk.com   -you can find the-   /Text to ASCII Art Generator
+  or directly:  https://patorjk.com/software/taag/
+*/
 /*
   Clear
   • Local Maven Repository Cache
