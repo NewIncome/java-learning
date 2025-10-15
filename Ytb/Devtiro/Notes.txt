@@ -368,6 +368,7 @@ Changes regarding files and directories
 Changes regarding new dirs, files
 9. Create the package repositories/
   ○ with the interfaces AuthorRepository and BookRepository
+  //typically Repositories are not tested because the Dependency does the implementations already
 *10. Update our Data/Domain AccessObjects(DAO's) or POJOS(PlainOldJavaObject) to become ENTITIES
 • to convert the POJOS into Entities:
   ♦ @Entity ,  label object as an Entity that can be used with Soring Data Jpa
@@ -380,6 +381,12 @@ Changes regarding new dirs, files
 
 ▲ Hibernate Auto DDL
 Help to setup the schema for you
+• DDL stands for Data Definition Language
+  ♦ DDL commands are used in SQL to manage the structure and schema of the database
+  ♦ The most common DDL operations are:
+    ◙ CREATE (tables, indexes, etc.)
+    ◙ DROP (delete tables, indexes, etc.)
+    ◙ ALTER (modify table structure)
 • in resources/application.properties add
   ♦ spring.jpa.hibernate.ddl-auto=update
     #so our schema is updated when we change our Entities
@@ -389,12 +396,15 @@ Help to setup the schema for you
 
 Create end-point and ReadOne
 • With JPA ENTITES you don't need to make the implementations(for CRUD func)
-  ♦ it's done by extending your entity interface with CrudRepository
+  ♦ it's done by extending your entity interface with CrudRepository<ObjType, IDtype>
   ♦ ... extends CrudRepository<Author, Long> {..}
-• JPA's CrudRepository<> interface adds many method implementations like:
+• JPA's CrudRepository<T ID> interface adds many method implementations like:
   //♦ can be seen in the org.springframework.data.repository.CrudRepository interface
   ♦ save, saveAll, existsById, findById, findAll, findAllById, count, deleteById
     delete, deleteAllById, deleteAll
+  ♦ Is an Interface for generic CRUD operations on a repository for a specific type
+  ♦ Methods exposed through this interface allow entities to participate in lifecycle events,
+    and optimistic locking if applicable except for some bulk operation methods
 
 
 /*
@@ -457,5 +467,20 @@ Create end-point and ReadOne
   /home/techrules4ever/.sdkman/candidates/java/21.0.6-amzn
   • My M2_HOME dir
   \usr\share\man\man1\mvn.1.gz
+
+  Regarding Tests, Activated profiles, and application-<profile>.properties
+  • Profiles: dev, test, prod
+  • That name is only visible if profiles are being set and called upon
+  • If not, only application.properties will be visible
+  • If you are not, or do not want to set/call profiles,
+    you need to explicitely activate it in(talikng about test) you test class
+    ♦ ie.:  @ActiveProfiles("test") //adding that annotation
+  • As per Profiles, you can set them:
+    1♦ Via command line
+      ○ mvn test -Dspring.profiles.active=test
+      or
+      ○ export SPRING_PROFILES_ACTIVE=test
+    2♦ In application.properties, adding: 
+      ○ spring.profiles.active=test
 */
 
