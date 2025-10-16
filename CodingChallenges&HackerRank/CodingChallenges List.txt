@@ -1,7 +1,7 @@
 List of Coding Challenges
 --------------------------
--  didn't pass any or not finished
-/  passed some test cases || passedWithVideo
+❌  didn't pass any, not finished, not understood
+/  passed >= half test cases || passedWithVideo
 ✔  done
 
 [✔] - ApplesAndOranges
@@ -14,4 +14,5 @@ List of Coding Challenges
 [/] - Forming a Magic Square (not fully understood)
 [/] - Climbing the Leaderboard (wV)
 [✔] - Designer PDF Viewer (Success)
+[✔] - Utopian Tree
 [ ] - 
