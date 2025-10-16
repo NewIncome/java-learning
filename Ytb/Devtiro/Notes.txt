@@ -376,6 +376,10 @@ Changes regarding new dirs, files
   ♦ @Id ,  to define the field as the PrimaryKey of the entity/table
   ♦ @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_id_seq")
     ◙ Used to auto-generate id's(numeric values starting from 1)
+    ◙*  This tells JPA:
+        - “Use a database sequence named author_id_seq to generate IDs for new Authors.” -
+        //If you manually set .id(1L) in your test data, Hibernate sees that and thinks:
+          - “This Author already exists (it already has an ID), so I should update it, not insert it.” -
 • @ManyToOne(cascade = CascadeType.ALL) ,  to specify the relationship with the ForeignKey
   ♦ and to be able to get the authorObj when we call the bookObj
 
@@ -405,6 +409,11 @@ Create end-point and ReadOne
   ♦ Is an Interface for generic CRUD operations on a repository for a specific type
   ♦ Methods exposed through this interface allow entities to participate in lifecycle events,
     and optimistic locking if applicable except for some bulk operation methods
+
+@Slf4j
+a logger from Lombok
+• to use it:
+  ♦ log.info();
 
 
 /*
@@ -482,5 +491,23 @@ Create end-point and ReadOne
       ○ export SPRING_PROFILES_ACTIVE=test
     2♦ In application.properties, adding: 
       ○ spring.profiles.active=test
+  *• QuickFix for issue with test DB not being reset correclty by annotations:
+    ♦ use the setUp method with the @BeforeEach annotation
+    ♦ ie.:  @BeforeEach
+            void setUp() {
+                authorRepository.deleteAll();   //authorRepository needs to have been injected
+            }
+  
+  • Hibernate
+    ♦ when using "cascade = CascadeType.ALL" in a @ManyToOne(), it ASSUMES!! like so:
+        -- “This Author already exists (it already has an ID), so I should update it, not insert it.” --
+          Then it executes something like:  update author set name=?, age=? where id=1
+        -- “Wait, nothing was updated — the entity must not exist.” --
+          Error! ObjectOptimisticLockingFailureException!
+      ◙ A Book entity referencing an Author that has an id=1.
+      ◙ “Author with ID 1 must already exist in the database.”
+      ◙ It tries to update or attach it.
+      ◙ But since that Author was never persisted before, the database has no row with ID 1.
+      ◙ → BOOM 💥 ObjectOptimisticLockingFailureException.
 */
 
