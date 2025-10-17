@@ -327,6 +327,13 @@ with many fields or optional parameters in a clean, readable, and flexible way.
     ◙ matches(b), isEqualTo(b), isNull(), isNotNull(), isEmpty(), isPresent(),
       .hasSize(i), contains(obj,...), and many more..
   ♦ these assertions can be sequential, or added one after another in one assertThat()
+• •* CustomQuery's WITHOUT implementation!!!
+  ♦ Spring JPA is able to workout(auto-implement) custom queries based on just:
+    -how you name your methods-
+    -and the correlation of the methodParam vs the instanceVariables in the Object at hand
+      ◙ ie.:  Iterable<Author> ageLessThan(int age);  //declaration, no manual implementation
+                //propertyLessThan(T Object.property)
+              Iterable<Author> result = underTest.ageLessThan(50);  //usage
 
 ▲ CRUD (Create Read Update Delete)
 • C - create
@@ -389,12 +396,6 @@ Changes regarding new dirs, files
           - “This Author already exists (it already has an ID), so I should update it, not insert it.” -
 • @ManyToOne(cascade = CascadeType.ALL) ,  to specify the relationship with the ForeignKey
   ♦ and to be able to get the authorObj when we call the bookObj
-•* CustomQuery's WITHOUT implementation!!!
-  ♦ Spring JPA is able to workout(auto-implement) custom queries based on just:
-    -how you name your methods-
-      ◙ ie.:  Iterable<Author> ageLessThan(int age);  //declaration, no manual implementation
-                //propertyLessThan(T Object.property)
-              Iterable<Author> result = underTest.ageLessThan(50);  //usage
 
 ▲ Hibernate Auto DDL
 Help to setup the schema for you
