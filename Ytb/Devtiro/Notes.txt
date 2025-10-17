@@ -481,6 +481,39 @@ a logger from Lombok
   ♦ class based annotation
   ♦ used to ignore(not blow up) when additional values come in the Json String
 
+► REST API Design | Structure
+• -It is built on the concept of RESOURCES-
+  ♦ -the URL structure, is all about Resources-
+• Design Steps:
+  1♦ Step 1: Establish what Resources we're going to use
+    ◙ for now: Books, and Authors
+  2♦ Step 2: Define where to -Persist- those Resources
+    ◙ for now: PostgreSQL Database
+  3♦ Step 3: Build a Service-Layer
+  4♦ Step 3: Build a Presentation-Layer
+• Our CRUD EndPoints (routes) for Book
+  ♦// the object in the URL is in plural by convention
+   PUT     /books/{isbn}   //Create 1 book; response->HTTP:201 + bookJson
+   GET     /books/{isbn}   //Read 1 book; response-> HTTP:200 + bookJson
+   GET     /books          //ReadMany books; always response-> HTTP:200 + emptyList || bookListJson
+   PUT     /books/{isbn}   //Update; response-> HTTP:200 + bookJson
+   PATCH   /books/{isbn}   //PartialUpdate; response-> HTTP:200 + bookJson
+   DELETE  /books/{isbn}   //Delete; response-> HTTP:204 + noBody
+  ♦// status 200 for success, and the json response for GETs
+      status 201 for success in Creation
+      status 404 for failed
+  ♦//* PUT is used for the creation because WE are providing the id:isbn instead of the DB-byAuto
+        POST is used when the system(DB) generates the ID's
+  ♦//* PUT requires AllOfThe_Attributes of the Objetc, and updates the entire Object
+        PATCH updates only the attributes you provide
+• Our CRUD EndPoints (routes) for Author
+*  POST    /authors        //Create 1 author; response->HTTP:201 + authorJson
+   GET     /authors/{id}   //Read 1 author; response-> HTTP:200 + authorJson
+   GET     /authors          //ReadMany authors; always response-> HTTP:200 + emptyList || authorListJson
+   PUT     /authors/{id}   //FullUpdate; response-> HTTP:200 + authorJson
+   PATCH   /authors/{id}   //PartialUpdate; response-> HTTP:200 + authorJson
+   DELETE  /authors/{id}   //Delete; response-> HTTP:204 + noBody
+
 
 
 /*
@@ -534,6 +567,7 @@ a logger from Lombok
   • In https://patorjk.com   -you can find the-   /Text to ASCII Art Generator
   or directly:  https://patorjk.com/software/taag/
 */
+
 /*
   Clear
   • Local Maven Repository Cache
