@@ -320,6 +320,13 @@ with many fields or optional parameters in a clean, readable, and flexible way.
   ♦ Performance Impact: Higher, as recreating the context is resource-intensive
     ◙ thus, avoid overusing, use it only when necessary (e.g., when shared resources or beans are modified)
   //♦* In some cases, you might use both annotations in a test
+▲ Assertions
+• assertThat(queryResult) ,  used to assess a result of a query operation(like find*)
+  ♦ therefor it is used upon a Collection of elements like: List<>, Optional<>, Iterable<>
+  ♦ it has many sub-implementations like:
+    ◙ matches(b), isEqualTo(b), isNull(), isNotNull(), isEmpty(), isPresent(),
+      .hasSize(i), contains(obj,...), and many more..
+  ♦ these assertions can be sequential, or added one after another in one assertThat()
 
 ▲ CRUD (Create Read Update Delete)
 • C - create
@@ -382,6 +389,12 @@ Changes regarding new dirs, files
           - “This Author already exists (it already has an ID), so I should update it, not insert it.” -
 • @ManyToOne(cascade = CascadeType.ALL) ,  to specify the relationship with the ForeignKey
   ♦ and to be able to get the authorObj when we call the bookObj
+•* CustomQuery's WITHOUT implementation!!!
+  ♦ Spring JPA is able to workout(auto-implement) custom queries based on just:
+    -how you name your methods-
+      ◙ ie.:  Iterable<Author> ageLessThan(int age);  //declaration, no manual implementation
+                //propertyLessThan(T Object.property)
+              Iterable<Author> result = underTest.ageLessThan(50);  //usage
 
 ▲ Hibernate Auto DDL
 Help to setup the schema for you
@@ -414,6 +427,7 @@ Create end-point and ReadOne
 a logger from Lombok
 • to use it:
   ♦ log.info();
+
 
 
 /*
