@@ -6,13 +6,14 @@ List of Coding Challenges
 
 [✔] - ApplesAndOranges
 [✔] - NumberLineJumps  (can further understand a Math approach)
-[✔] - BetweenTwoSets (wV)
-[✔] - SubarrayDivision (Success)
-[✔] - Migratory Birds (wV)
-[✔] - Day of the Programmer (Success_long)
-[✔] - Drawing Book (got to 1TCfailed)
-[/] - Forming a Magic Square (not fully understood)
-[/] - Climbing the Leaderboard (wV)
+[✔] - BetweenTwoSets  (wV)
+[✔] - SubarrayDivision  (Success)
+[✔] - Migratory Birds  (wV)
+[✔] - Day of the Programmer  (Success_long)
+[✔] - Drawing Book  (got to 1TCfailed)
+[/] - Forming a Magic Square  (not fully understood)
+[/] - Climbing the Leaderboard  (wV)
 [✔] - Designer PDF Viewer (Success)
-[✔] - Utopian Tree
+[✔] - Utopian Tree  (Success)
+[✔] - Viral Advertising  (Success)
 [ ] - 
