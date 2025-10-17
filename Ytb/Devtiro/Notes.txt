@@ -429,6 +429,58 @@ a logger from Lombok
 • to use it:
   ♦ log.info();
 
+▲ HQL (Hibernate Query Language)
+• is a powerful, object-oriented query language used in Hibernate, an ORM (Object-Relational
+  Mapping) framework for Java.
+• It allows developers to write database queries using entity names and their properties
+  instead of raw SQL tables and columns
+• It supports operations like SELECT, INSERT, UPDATE, DELETE, joins, aggregations, and
+  subqueries, with syntax similar to SQL but focused on Java objects
+• @Query
+  ♦ used If you can't do a simple query and you do need to add some Query using HQL
+  ♦ Is part of the Java Persistence API (JPA), is used in Spring Data JPA or other JPA
+  implementations to define custom queries directly on repository methods.
+  ♦ Supports both JPQL (Java Persistence Query Language, similar to HQL) and native SQL queries
+  ♦ when using a native query, a @NativeQuery variant is available
+
+► Jackson and JSON
+• Jackson ,  popular library for dealing with json in Java and Spring
+  ♦ At it’s core Jackson is there to turn a Java object and turn it into JSON,
+    through a process called "Marshalling"
+  ♦ and then do the opposite, convert json and put it into a Java object called "Un-marshalling"
+• Jackson & Spring Web
+  ♦ when already added as a dependency, it automatically detects sent Objects (via Requests),
+    (sent asString()!)and converts them into json before sending it/them
+    ◙ and the other way around, it detects the received json,
+      and converts it into an expected Object
+  ♦ No additional annotations nor code needed
+• Manual conversion:
+  ♦ with ObjectMapper class
+  ♦ from objectToJson, we use ObjectMapper class, with the .writeValueAsString(Object) method; like:
+    ◙ Test example:  //the test will ask for:    throws JsonProcessingException
+       ObjectMapper objectMapper = new ObjectMapper();
+       Book book = TestDataUtil.createTestBook(); //for this example's sake
+       String result = objectMapper.writeValueAsString(book);
+       assertThat(result)
+         .isEqualTo(
+             "{\"isbn\":\"978-0-13-478627-5\",\"title\":\"The Enigma of Eternity\",\"author\":\"Aria"
+                 + " Montgomery\",\"year\":\"2005\"}");
+  ♦ from objectToJson, we use ObjectMapper class, with the .readValue(jsonString, Object.class) method; like:
+      ◙ Test example:
+         String json = "{\"isbn\":\"978-0-13-478627-5\",\"title\":\"The Enigma of"
+             + " Eternity\",\"author\":\"Aria Montgomery\",\"yearPublished\":\"2005\"}";
+         final ObjectMapper objectMapper = new ObjectMapper();
+         Book result = objectMapper.readValue(json, Book.class);
+         assertThat(result).isEqualTo(book);
+•// the jsonString_Attributes must match the instanceVariable_Names, and viceversa
+• @JsonProperty annotation
+  ♦ to a different instanceVariable_Name than the one defined, to the json Object, and viceversa
+  ♦ this, to not modify the existing variable names
+  ♦ to be used in our DomainObject class field declarations
+• @JsonIgnoreProperties(ignoreUnknown = true)
+  ♦ class based annotation
+  ♦ used to ignore(not blow up) when additional values come in the Json String
+
 
 
 /*
