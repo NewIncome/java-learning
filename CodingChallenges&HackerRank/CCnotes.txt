@@ -1,6 +1,11 @@
 Java cool methods and classes
 ------------------------------
 
+• toEnter java -jshell- tool
+     $ jshell
+    ○ to exit
+     $ /exit
+
 • Collections.frequency(Collection<?> c, Object o)
     ○ Returns the number of elements in the specified collection equal
       to the specified object
