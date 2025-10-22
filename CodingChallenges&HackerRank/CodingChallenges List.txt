@@ -17,5 +17,5 @@ List of Coding Challenges
 [✔] - Utopian Tree  (Success)
 [✔] - Viral Advertising  (Success)
 [✔] - Save the Prisoner!  (wV)
-[/] - Circular Array Rotation (timeLimitExceeded)
+[✔] - Circular Array Rotation (timeLimitExceeded)(2ndDay Passed)
 [ ] - 
