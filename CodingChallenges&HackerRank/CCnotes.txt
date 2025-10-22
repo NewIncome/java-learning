@@ -21,8 +21,9 @@ Java cool methods and classes
     ○ Opt2:  sentence.split(" ");  //String[]
 • Convert String-to-ArrayList
     ○ Opt1:  new ArrayList<>(Arrays.asList(10, 20, 30, 40, 50));  //mutable ; PREFERRED
-    ○ Opt2:  List.of(100, 200, 300);              //immutable ; Java 9+ Factory Method
-    ○ Opt3:  new ArrayList<>(List.of(1, 2, 3));   //mutable ; Java 8 Stream API (Flexible)
+    ○ Opt1.1:  Arrays.asList()
+    ○ Opt2:  new ArrayList<>(List.of(1, 2, 3));   //mutable ; Java 8 Stream API (Flexible)
+    ○ Opt2.2:  List.of(100, 200, 300);              //immutable ; Java 9+ Factory Method
 
 • num % denom ,  use of the MODulus operator
   ♦ examples in a loop
@@ -30,3 +31,10 @@ Java cool methods and classes
                           expept when num == denom, then % = 0, meaning the end
     ○ if  num > denom  ; then you will get the remainder of the division num / denom
                           ie.:  10 % 3 = 1  ...  10 / 3 = 3 .: 3x3 = 9-10 = 1
+
+• count occurrences in a String
+  ○ with Java 8+ Stream API
+    
+
+str.chars().mapToObj(c -> (char) c).collect(Collectors.toList()); //for a List<Character>
+  
