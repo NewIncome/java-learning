@@ -34,7 +34,9 @@ Java cool methods and classes
 
 • count occurrences in a String
   ○ with Java 8+ Stream API
-    
+    HashMap<String, Integer> count01 = new HashMap<>();
+    Arrays.asList(str.split("")).stream().forEach(e -> count01.put(e, count01.containsKey(e) ? count01.get(e) + 1 : 1));
+    System.out.println(count01); System.out.println();
 
 str.chars().mapToObj(c -> (char) c).collect(Collectors.toList()); //for a List<Character>
   
