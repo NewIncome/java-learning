@@ -63,12 +63,12 @@ public class StreamAPIpractice01 {
 
   //default: package-private, so only accessible in the same package
   static void populatePersons(List<Person> persons) {
-    persons.add(new Person("Lara", 35));
-    persons.add(new Person("Peter", 21));
-    persons.add(new Person("Zach", 45));
-    persons.add(new Person("Karl", 50));
-    persons.add(new Person("Barbara", 17));
-    persons.add(new Person("Lois", 16));
+    persons.add(new Person("Lara", 35, 0));
+    persons.add(new Person("Peter", 21, 0));
+    persons.add(new Person("Zach", 45, 0));
+    persons.add(new Person("Karl", 50, 0));
+    persons.add(new Person("Barbara", 17, 0));
+    persons.add(new Person("Lois", 16, 0));
   }
 }//end populatePersons
 
@@ -78,16 +78,19 @@ public class StreamAPIpractice01 {
 class Person {
   String name;
   int age;
+  int salary;
 
   //constructor
-  public Person(String name, int age) {
+  public Person(String name, int age, int salary) {
     this.name = name;
     this.age = age;
+    this.salary = salary;
   }
 
   //getters
   public String getName() { return name; }
   public int getAge() { return age; }
+  public int getSalary() { return salary; }
 
   @Override
   public String toString() {
