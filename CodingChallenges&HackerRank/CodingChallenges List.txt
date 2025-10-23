@@ -18,4 +18,5 @@ List of Coding Challenges
 [✔] - Viral Advertising  (Success)
 [✔] - Save the Prisoner!  (wV)
 [✔] - Circular Array Rotation (timeLimitExceeded)(2ndDay Passed)
+[✔] - Sequence Equation  (understood wV)
 [ ] - 
