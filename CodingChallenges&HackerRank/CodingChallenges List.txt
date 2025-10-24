@@ -19,4 +19,6 @@ List of Coding Challenges
 [✔] - Save the Prisoner!  (wV)
 [✔] - Circular Array Rotation (timeLimitExceeded)(2ndDay Passed)
 [✔] - Sequence Equation  (understood wV)
+[✔] - Jumping on the Clouds: Revisited
 [ ] - 
+
