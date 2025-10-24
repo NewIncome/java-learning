@@ -62,6 +62,7 @@ public class StreamReducePractice {
           .sum();
   System.out.println(sumSalary); */
 
+  /* Now with Collectors.groupingBy(), show list-of-employees by grade */
   List<Employee> employees =  Stream.of(
               new Employee(101,"john","A",60000),
               new Employee(109,"peter","B",30000),
@@ -73,7 +74,6 @@ public class StreamReducePractice {
   Map<String, List<Employee>> employeeMap = employees
                                 .stream()
                                 .collect(Collectors.groupingBy(Employee::getGrade));
-                                //.forEach(e -> System.out.println(e));
   System.out.println (employeeMap);
   }
 }
