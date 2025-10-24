@@ -1,13 +1,17 @@
-
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StreamReducePractice {
+  public static void main(String[] args) {
   /* Methods mainly from Basant's code
    * https://github.com/Java-Techie-jt/java8/blob/master/map_reduce/MapReduceExample.java
    */
-  List<Integer> numbers = Arrays.asList(3, 7, 8, 1, 5, 9);
+  /* List<Integer> numbers = Arrays.asList(3, 7, 8, 1, 5, 9);
 
   List<String> words = Arrays.asList("corejava", "spring", "hibernate");
 
@@ -56,6 +60,61 @@ public class StreamReducePractice {
           .map(employee -> employee.getSalary())
           .mapToDouble(i -> i)
           .sum();
-  System.out.println(sumSalary);
+  System.out.println(sumSalary); */
 
+  List<Employee> employees =  Stream.of(
+              new Employee(101,"john","A",60000),
+              new Employee(109,"peter","B",30000),
+              new Employee(102,"mak","A",80000),
+              new Employee(103,"kim","A",90000),
+              new Employee(104,"json","C",15000))
+              .collect(Collectors.toList());
+
+  Map<String, List<Employee>> employeeMap = employees
+                                .stream()
+                                .collect(Collectors.groupingBy(Employee::getGrade));
+                                //.forEach(e -> System.out.println(e));
+  System.out.println (employeeMap);
+  }
+}
+
+class EmployeeDatabase {
+    public static List<Employee> getEmployees(){
+      return  Stream.of(new Employee(101,"john","A",60000),
+              new Employee(109,"peter","B",30000),
+              new Employee(102,"mak","A",80000),
+              new Employee(103,"kim","A",90000),
+              new Employee(104,"json","C",15000))
+              .collect(Collectors.toList());
+    }
+}
+
+class Employee {
+  private int id;
+  private String name;
+  private String grade;
+  private double salary;
+
+  public Employee() {}
+
+  public Employee(int id, String name, String grade, double salary) {
+      this.id = id;
+      this.name = name;
+      this.grade = grade;
+      this.salary = salary;
+  }
+  //getters
+  public int getId() { return id; }
+  public String getName() { return name; }
+  public String getGrade() { return grade; }
+  public double getSalary() { return salary; }
+  public void setId(int id) { this.id = id; }
+  public void setName(String name) { this.name = name; }
+  public void setGrade(String grade) { this.grade = grade; }
+  public void setSalary(double salary) { this.salary = salary; }
+
+  @Override
+  public String toString() {
+    return "Employee [id=" + id + ", name=" + name + ", grade=" + grade + ", salary=" + salary + "]";
+  }
 }
