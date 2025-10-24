@@ -7,7 +7,7 @@ Java && Spring  -snippets-
 • Install the desired version
  $ sdk install java 21.0.6-amzn
 • to check installed versions, and currently used
- $ sdk list java | grep installed
+ $ sdk list java | grep installed (or local)
 $ sdk current java
 • to make any version as the default version
  $ sdk default java 21.0.6-amzn
