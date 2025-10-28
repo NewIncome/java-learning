@@ -514,8 +514,75 @@ a logger from Lombok
    PATCH   /authors/{id}   //PartialUpdate; response-> HTTP:200 + authorJson
    DELETE  /authors/{id}   //Delete; response-> HTTP:204 + noBody
 
+▲ Presentation Layer
+• with/thanksTo spring-boot-starter-web
+• Typpically done with the Controller Pattern
+  ♦ just means the Presentation Layer is built and called upon by controllers
+• @RestController
+  ♦ class level annotation needed to start creating a RestAPI Controller,
+    resfull(that'll work with crud functionality)
+• @PostMapping(path = "/authors")
+  ♦ method level annotation, to define a method that will make a POST:HTTP request
+• @RequestBody
+  ♦ tells spring to look at the httpRequestBody for the AuthorObj represented as json
+  ♦ public Author createAuthor(@RequestBody Author author)
+
+▲ Service Layer
+• to link together the Persistence-Layer and the Presentation-Layer
+• typically worked in a "services" package (dir /services)
+• And Typically done by:
+  ♦ interfaces to state the actions/methods to be used in the controller
+
+//• Right now our Author is an Entity,
+    + which is an object that should only exist in OUR Persistence-layer
+    + and maybe our Service-layer, but go no further than that
+    + our Presentation-layer should have no knowledge of how our Persistence-layer works
+      * One approach is to use a DTO (Data Transfer Object)
+*       + which would create a "Mapping-layer" in between to link Presentation+Persistence
+        + those DTO's are typically located in /domain/dto package
+        + and are POJOS
+        + those POJOS will typically need these annotations:
+          - @Data
+          - @AllArgsConstructor
+          - @NoArgsConstructor  //needed for Jackson
+          - @Builder
+      //* Jackson will create an object using a -NoArgsConstructor-, and then
+          use setters and getters to set the values on the object
+        + it should look exactly like the Entity(as for the fields),
+          without the domain-Author DB 'persistence' annotations
+
+*** A common and debatable issue when separating layers is how much???
+• ie.:  in the Controller-Post-createAuthor() method, what object to use?
+        - in our case we'll use AuthorDto(interface)-injectedObject as the intermediary
+    /* It's ok for the Service-layer to deal with Entities, it's your business logic
+       so some knowledge of the underlying entities that the persistence layer uses
+       It's debatable and up to the Coder
+       But a rule is to definitely seperate the Presentation, Service & Persistance layers
+     */
+• Now, to map one to the other, AuthorEntity-to-AuthorDto
+  ♦ it could be done manually, byt there are libraries that do this for you
+  ♦ like the ModelMapper library, used for Object mapping
+    ◙ to have access to the ModelMapper(in ApplicationContext), to be called via config/MapperConfig class
+    ◙ to use it, we add a package and /mappers/Mapper interface
+      *To encapsulate all of the logic for mapping all our application
+      ◘ we can implement that interface with Beans, then inject those beans when/where needed
+        That allows us to swap things out
+        * And we'll need an AuthorMapper for Implementations
+
+▲ Spring Boot Application Architecture : Layers
+• Three tier(or 3 layer) Arquitecture
+  ♦ Controller Layer:      Rest API logic
+  ♦ Service Layer:         Business logic
+  ♦ DAO(Repository) Layer: Persistence logic, or DB logic
+• DTO's: are used to transfer data between client(Postman) and server(Controllers-to-DB)
+
+*** Class that implements the "CrudRepository interface" methods
+public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T, ID>
 
 
+
+
+/* Additional Info / Comments / Notes */
 /*
   Setting a custom BANNER to appear, in console
 
