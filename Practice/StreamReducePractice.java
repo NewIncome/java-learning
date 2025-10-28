@@ -1,7 +1,9 @@
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -70,11 +72,55 @@ public class StreamReducePractice {
               new Employee(103,"kim","A",90000),
               new Employee(104,"json","C",15000))
               .collect(Collectors.toList());
-
-  Map<String, List<Employee>> employeeMap = employees
+  
+  /* Approach #1:   with .collect(Collectors.groupingBy()
+      group employees by grade */
+  Map<String, List<Employee>> employeeMap1 = employees
                                 .stream()
                                 .collect(Collectors.groupingBy(Employee::getGrade));
-  System.out.println (employeeMap);
+
+  /* Approach #2:   with Custom Comparator
+      group employees by grade And filter them by highestSalary */
+  Comparator<Employee> compareBySalary = Comparator.comparing(Employee::getSalary);
+  Map<String, Optional<Employee>> employeeMap2 = employees
+                                .stream()
+                                .collect(
+                                  Collectors.groupingBy(
+                                      Employee::getGrade,
+                                      Collectors.reducing(BinaryOperator.maxBy(compareBySalary)))
+                                );
+
+  /* Approach #3:   with Collectors.collectingAndThen() 
+      same... */
+  Map<String, Employee> employeeMap3 = employees
+                                .stream()
+                                .collect(Collectors.groupingBy(
+                                    Employee::getGrade,
+                                    Collectors.collectingAndThen(
+                                        BinaryOperator.maxBy(
+                                            Comparator.comparingDouble(Employee::getSalary)
+                                        ),
+                                        Optional::get
+                                      )
+                                ));
+  /* Error in Approach#3:
+   *  error: method collectingAndThen in class Collectors cannot be applied to given types;
+   *  
+   *  required: Collector<T#1,A,R>,Function<R,RR>
+   * found:    BinaryOperator<Employee>,Optional::get
+   * reason: cannot infer type-variable(s) T#1,A,R,RR
+   *   (argument mismatch; no instance(s) of type variable(s) T#2 exist so that BinaryOperator<T#2> conforms to Collector<T#1,A,R>)
+   * where T#1,A,R,RR,T#2 are type-variables:
+   *   T#1 extends Object declared in method <T#1,A,R,RR>collectingAndThen(Collector<T#1,A,R>,Function<R,RR>)
+   *   A extends Object declared in method <T#1,A,R,RR>collectingAndThen(Collector<T#1,A,R>,Function<R,RR>)
+   *   R extends Object declared in method <T#1,A,R,RR>collectingAndThen(Collector<T#1,A,R>,Function<R,RR>)
+   *   RR extends Object declared in method <T#1,A,R,RR>collectingAndThen(Collector<T#1,A,R>,Function<R,RR>)
+   *   T#2 extends Object declared in method <T#2>maxBy(Comparator<? super T#2>)
+   */
+
+  System.out.println(employeeMap1);
+  System.out.println(employeeMap2);
+  System.out.println(employeeMap3);
   }
 }
 
