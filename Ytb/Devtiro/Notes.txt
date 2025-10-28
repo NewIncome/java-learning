@@ -516,7 +516,7 @@ a logger from Lombok
 
 ▲ Presentation Layer
 • with/thanksTo spring-boot-starter-web
-• Typpically done with the Controller Pattern
+• Typically done with the Controller Pattern
   ♦ just means the Presentation Layer is built and called upon by controllers
 • @RestController
   ♦ class level annotation needed to start creating a RestAPI Controller,
@@ -526,6 +526,11 @@ a logger from Lombok
 • @RequestBody
   ♦ tells spring to look at the httpRequestBody for the AuthorObj represented as json
   ♦ public Author createAuthor(@RequestBody Author author)
+• ResponseEntity<ReturnedObject>
+  ♦ used as a Wrapper, it allows to control things like the StatusCode of the response
+  ♦ syntax:  constructor: ResponseEntity(@Nullable T body, HttpStatusCode status)
+  ♦ ie.(in a @PostMapping return stmnt):
+     return new ResponseEntity<>(authorMapper.mapTo(savedAuthorEntity), HttpStatus.CREATED);
 
 ▲ Service Layer
 • to link together the Persistence-Layer and the Presentation-Layer
@@ -578,6 +583,57 @@ a logger from Lombok
 
 *** Class that implements the "CrudRepository interface" methods
 public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T, ID>
+
+▲ Send HTTP requests via terminal (with CURL)
+•GET:  This type of HTTP request is for retrieving data
+• GET request
+   $ curl https://crawlbase.com
+   $ curl http://httpbin.org/get  #Curl defaults to get so you don't need to specify it
+• GET and save output/response to a file
+   $ curl -o output.html https://example.com
+• GET with params
+  ♦ Opt1: Using the -G and -d Options
+    $ curl -G -d "param1=value1" -d "param2=value2" http://httpbin.org/get
+    ◙ -G , option allows you to send data with a GET request
+    ◙ -d or --data , option specifies the parameters
+  ♦ Opt2: Appending Parameters to the URL
+    $ curl 'http://httpbin.org/get?param1=value1&param2=value2'
+• GET and fetch JSON Data
+   $ curl -H "Accept: application/json" http://httpbin.org/get
+   ♦ -H or --header, to specify an action in the header: JSON data to be received
+     ◙ For multiple headers you can repeat the -H flag as many times as necessary
+• GET with redirect as a response
+   $ curl -L http://httpbin.org/redirect-to?url=http://httpbin.org/get
+   ♦ -L or --location , option
+//♦ --data-urlencode , option, alone or w-param. This approach ensures proper URL-encoding of query strings
+     ie.:  --data-urlencode "query=keyword"
+• GET and include headers with response
+   $ curl -i http://httpbin.org/headers
+• GET with just headers no body
+   $ curl --head http://httpbin.org/headers
+•POST:  This type of HTTP request is for creating a new entry in a database
+• POST simple, 2 params
+   $ curl -d “name=Alex&course=Unreal” -X POST http://localhost:3000/api/people
+  ♦ -d , to specify the next code will be data
+  ♦ -X , to specify the next code will be the type of request
+  ♦// Because we have 2 properties of our object, we enclose them in double quotation marks “”
+• POST Request sending JSON data
+   $ curl -d '{"id":2,"name":"Python for Automation","instructor":"Mammoth Interactive"}' \
+          -H "Content-Type: application/json" \
+          -X POST http://localhost:42212/products
+•PUT req:  This type of HTTP request is for updating an entry entirely in the database
+• PUT
+   $ curl -d “name=Alex&course=Excel” -X PUT http://localhost:3000/api/people/61326891216b79d8768c6edd
+• PUT + JSON data
+   $ curl -d '{"instructor":""Mammoth Interactive INC"}' \
+          -H "Content-Type: application/json" \
+          -X PUT http://localhost:42212/products/2
+•PATCH req:  This type of HTTP request is for updating 1 property of an entry in the database
+• PATCH
+   $ curl -d name=Mammoth -X PATCH http://localhost:3000/api/people/61326891216b79d8768c6edd
+•DELETE req:  This type of HTTP request is for deleting an entry in a database
+• DELETE
+   $  curl -X DELETE http://localhost:3000/api/people/61325f4594bd88dec1e165cb
 
 
 
