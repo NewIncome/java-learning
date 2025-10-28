@@ -25,6 +25,10 @@ Java cool methods and classes
     ○ Opt2:  new ArrayList<>(List.of(1, 2, 3));   //mutable ; Java 8 Stream API (Flexible)
     ○ Opt2.2:  List.of(100, 200, 300);              //immutable ; Java 9+ Factory Method
 
+• Convert integer to String
+  ○ Opt1: String.valueOf(number);
+  ○ Opt2: String.format("%d", number);
+
 • num % denom ,  use of the MODulus operator
   ♦ examples in a loop
     ○ if  demon > num  ; then the result will be the same number,
@@ -40,3 +44,31 @@ Java cool methods and classes
 
 str.chars().mapToObj(c -> (char) c).collect(Collectors.toList()); //for a List<Character>
   
+• for VERY LONG VALUES
+  ○ BigInteger: represents immutable arbitrary-precision integers
+    ◙ It is similar to the primitive integer types but allows arbitrary large values.
+      Used when the integers involved are larger than the limit of the long type
+    ◙ Can be created from a String or from a ByteArray
+    ◙ Operations: .add(j), .subtract(j), .divide(j), .multiply(j), 
+      Bit and logical manipulation methods
+      also GCD computation and Modular arithmetic methods:
+       .gcd(k), .multiply(k).mod(i), .modInverse(i), .modPow(k, i),
+      and prime generation and primality testing:
+       .isProbablePrime(1000)
+  ○ BigDecimal: represents an immutable arbitrary-precision signed decimal number.
+    ◙ It consists of two parts: Unscaled value(integer without decimal point), and Scale(how many digits are to the right of the decimal point)
+    ◙ Can be created from String, character array, int, long, and BigInteger
+       new BigDecimal(123412345678901L)
+    ◙ To convert a double or long to BigDecimal, we can use the valueOf() static method
+       BigDecimal.valueOf(0.1d);   BigDecimal.valueOf(123412345678901L);
+    ◙ Other operations besides the same as BigInteger are:
+       .precision() //num of integers&decimals
+       .scale() //the number of decimals
+       .signum() //the sign: 1 or -1
+      rounding(CEILING, FLOOR , UP, DOWN, HALF_UP, HALF_DOWN, HALF_EVEN, UNNECESSARY ):
+       .round(new MathContext(1, RoundingMode.HALF_EVEN));
+       //HALF_EVEN is also known as the banker’s rounding; frequently used
+  ○ Predefined BuiltIn Constant Values
+     .ONE, .TWO, .TEN, .ZERO
+    ◙* Commonly used with comparisons
+       .compareTo(BigInt.ZERO) > 0
