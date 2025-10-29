@@ -527,10 +527,20 @@ a logger from Lombok
   ♦ tells spring to look at the httpRequestBody for the AuthorObj represented as json
   ♦ public Author createAuthor(@RequestBody Author author)
 • ResponseEntity<ReturnedObject>
-  ♦ used as a Wrapper, it allows to control things like the StatusCode of the response
+  ♦ Extension of HttpEntity that adds an HttpStatusCode status code.
+    Used in RestTemplate as well as in @Controller methods.
+  ♦ class used as a Wrapper, it allows to control parts of the response and/or header,
+    like the StatusCode of the response
   ♦ syntax:  constructor: ResponseEntity(@Nullable T body, HttpStatusCode status)
   ♦ ie.(in a @PostMapping return stmnt):
      return new ResponseEntity<>(authorMapper.mapTo(savedAuthorEntity), HttpStatus.CREATED);
+• @PathVariable
+  ♦ annotation to get a var-value from the Path/Params
+  ♦ Annotation which indicates that a method parameter should be bound to a URI template variable.
+    Supported for RequestMapping annotated handler methods.
+  ♦ Syntax:  @PathVariable("varName") Type varToAssignValueTo
+  ♦ ie.:  @PutMapping("/books/{isbn}")
+          public ResponseEntity<BookEntity> createBook(@PathVariable("isbn") String isbn)
 
 ▲ Service Layer
 • to link together the Persistence-Layer and the Presentation-Layer
@@ -580,6 +590,10 @@ a logger from Lombok
   ♦ Service Layer:         Business logic
   ♦ DAO(Repository) Layer: Persistence logic, or DB logic
 • DTO's: are used to transfer data between client(Postman) and server(Controllers-to-DB)
+
+▲ Trying to understand this layered architecture
+• HttpRequest > objDTO > objEntity > objService > toDB
+• fromDB > objService > objEntity > objDTO > HttpRequest
 
 *** Class that implements the "CrudRepository interface" methods
 public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T, ID>
