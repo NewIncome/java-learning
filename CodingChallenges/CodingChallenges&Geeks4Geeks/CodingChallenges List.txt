@@ -1,0 +1,8 @@
+List of Coding Challenges
+--------------------------
+❌  didn't pass any, not finished, not understood
+/  passed >= half test cases || passedWithVideo
+✔  done
+
+[ ] - Top K Frequent in Array
+[ ] - 

@@ -591,9 +591,9 @@ a logger from Lombok
   ♦ DAO(Repository) Layer: Persistence logic, or DB logic
 • DTO's: are used to transfer data between client(Postman) and server(Controllers-to-DB)
 
-▲ Trying to understand this layered architecture
-• HttpRequest > objDTO > objEntity > objService > toDB
-• fromDB > objService > objEntity > objDTO > HttpRequest
+▲ *** Trying to understand this layered architecture
+• HttpRequest  >=>  objDTO      >=>  objEntity  >=>  objService  >=>  toDB
+•  fromDB      >=>  objService  >=>  objEntity  >=>  objDTO      >=>  HttpRequest
 
 *** Class that implements the "CrudRepository interface" methods
 public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T, ID>
@@ -652,7 +652,7 @@ public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T
 
 
 
-/* Additional Info / Comments / Notes */
+/* === >==>--- Additional Info / Comments / Notes ---<==< === */
 /*
   Setting a custom BANNER to appear, in console
 
