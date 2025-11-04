@@ -21,5 +21,5 @@ List of Coding Challenges
 [✔] - Sequence Equation  (understood wV)
 [✔] - Jumping on the Clouds: Revisited (video helpedABit, was missing parenthesis)
 [✔] - Extra Long Factorials (passed w-forLoop, w-help for recursion)
-[/] - Append and Delete (passed 10/12)(w-vid, needs better understanding)
+[✔] - Append and Delete (passed 10/12)(w-vid, needs better understanding)(understood w-HR-Discussions)
 [ ] - 

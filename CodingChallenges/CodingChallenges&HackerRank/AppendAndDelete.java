@@ -2,8 +2,8 @@
  * You have two strings of lowercase English letters. You can perform two
  * types of operations on the first string:
  * 1. Append a lowercase English letter to the end of the string.
- * 2. Delete the last character of the string. Performing this operation
- * on an empty string results in an empty string.
+ * 2. DELETE the last character of the string. Performing this operation
+ * ON AN EMPTY STRING results in an empty string.
  * Given an integer, k, and two strings, s and t, determine whether or not
  * you can convert s to t by performing exactly k of the above operations
  * on s. If it's possible, print Yes. Otherwise, print No.
@@ -25,6 +25,7 @@
  *  ♦ s = "hackerhappy", t = "hackerrank", k = 9   //Yes
  *  ♦ s = "aba", t = "aba", k = 7   //Yes
  *  ♦ s = "ashley", t = "ash", k = 2   //No
+ *  ♦ s = "y", t = "yu", k = 2    //No
  */
 /*
  * Pseudocode
@@ -38,11 +39,57 @@
 public class AppendAndDelete {
 
   public static void main(String[] args) {
-    System.out.println(solution03("abc", "def", 6)); //Yes
-    System.out.println(solution03("hackerhappy", "hackerrank", 9));
-    System.out.println(solution03("aba", "aba", 7)); //Yes
-    System.out.println(solution03("ashley", "ash", 2)); //No
+    System.out.println(solution05("abc", "def", 6)); //Yes
+    System.out.println(solution05("hackerhappy", "hackerrank", 9)); //Yes
+    System.out.println(solution05("aba", "aba", 7)); //Yes
+    System.out.println(solution05("ashley", "ash", 2)); //No
+    System.out.println(solution05("y", "yu", 2)); //No
   }//end main
+
+  public static String solution05(String s, String t, int k) {  //Mine
+    int totalL = s.length() + t.length();
+    int eqChars = 0;
+    int remSnT;
+    /* //Case#1 s == t //they're already the same
+    if(s == t) return "Yes #1"; */
+    //Case#2 tLength <= k //can replace the whole string
+    if(totalL <= k) return "Yes #1";
+    //Case#3 "hackerhappy", "hackerrank"
+    for (int i = 0; i < s.length() && i < t.length(); i++) {
+      //System.out.println("i: " + i + ", s.split(\"\")[i]: " + s.split("")[i] + ", eqChars: " + eqChars);
+      if(s.toCharArray()[i] == t.toCharArray()[i]) eqChars+=1;
+      else break;
+    }
+    remSnT = (s.length() - eqChars) + (t.length() - eqChars);
+    if (remSnT > k) return "No #1"; //MUST HAVE TAKEN THIS INTO ACCOUNT!!!
+    //Because of the next line; % takes values as absolute, doesn't matter the sign(-)
+    else if((k - remSnT) % 2 == 0) return "Yes #2";  //You can use a step to delete from "an empty String"
+    //System.out.println("remSnT: " + remSnT + ", (s.length() - eqChars): " + (s.length() - eqChars) + ", (t.length() - eqChars): " + (t.length() - eqChars));
+
+    return "No #2";
+  }//end solution05
+
+  public static String solution04(String s, String t, int k) { //WORKING, from HRdiscussions
+    int sLen = s.length();
+    int tLen = t.length();
+    int i = 0;
+    char[] a = s.toCharArray();
+    char[] b = t.toCharArray();
+
+    while (i < sLen && i < tLen && a[i] == b[i]) i++;
+
+    int opsNeeded = (sLen - i) + (tLen - i);
+
+    if (opsNeeded > k) {
+        return "No #1";
+    }
+    else if ((k - opsNeeded) % 2 == 0 || k >= sLen + tLen) {
+        return "Yes";
+    }
+    else {
+        return "No #2";
+    }
+  }//end solution04
 
   //having the same issue/error/bad answer, as in solution02()
   public static String solution03(String s, String t, int k) {
@@ -91,7 +138,7 @@ public class AppendAndDelete {
         }
   }//end solution02
 
-  public static String solution01(String s, String t, int k) {
+  public static String solution01(String s, String t, int k) {  //Mine
     if(s == t) return "Yes";
     if((s.length() + t.length()) <= k) return "Yes";
     if(Math.abs(s.length() - t.length()) > k) return "No";
