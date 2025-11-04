@@ -1,0 +1,8 @@
+--- Multithreading ---
+
+• Why Multithreading?
+  ♦ Better CPU utilization
+    ◘ by switching from 1Process & 1Thread to another
+  ♦ Better IO utilization (network, disc, etc)
+  ♦ High application responsiveness (Heavy long-running task in separate thread)
+    ◘ UI in the main thread for better UX
