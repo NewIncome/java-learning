@@ -1,4 +1,4 @@
-List of Coding Challenges
+G4G List of Coding Challenges
 --------------------------
 ❌  didn't pass any, not finished, not understood
 /  passed >= half test cases || passedWithVideo

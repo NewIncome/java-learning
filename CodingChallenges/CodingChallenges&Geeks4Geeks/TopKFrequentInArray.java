@@ -32,7 +32,7 @@ public class TopKFrequentInArray {
   }//end main
 
   public ArrayList<Integer> topKFreq(int[] arr, int k) {
-    
+    Arrays.asList(arr).stream().
   }//end topKFreq
 
 }
