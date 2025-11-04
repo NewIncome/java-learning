@@ -1,2 +1,4 @@
+#all are files IntellijIdea creates when opened via Terminal
 .idea/
 out/
+*.iml
