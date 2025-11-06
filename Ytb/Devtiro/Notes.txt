@@ -523,6 +523,7 @@ a logger from Lombok
     resfull(that'll work with crud functionality)
 • @PostMapping(path = "/authors")
   ♦ method level annotation, to define a method that will make a POST:HTTP request
+  ♦ to Create 1 object, in this case in the DB, with an auto-Id
 • @RequestBody
   ♦ tells spring to look at the httpRequestBody for the AuthorObj represented as json
   ♦ public Author createAuthor(@RequestBody Author author)
@@ -534,6 +535,10 @@ a logger from Lombok
   ♦ syntax:  constructor: ResponseEntity(@Nullable T body, HttpStatusCode status)
   ♦ ie.(in a @PostMapping return stmnt):
      return new ResponseEntity<>(authorMapper.mapTo(savedAuthorEntity), HttpStatus.CREATED);
+• @PutMapping("/books/{isbn}")
+  ♦ method level annotation, to define a method that will make a PUT:HTTP request
+    + for a FULL-UPDATE or CREATE(w-CustomId)
+  ♦ to do a FullUpdate of 1 object(or create it if non-exitent), in this case in the DB, with a specific ID
 • @PathVariable
   ♦ annotation to get a var-value from the Path/Params
   ♦ Annotation which indicates that a method parameter should be bound to a URI template variable.
@@ -649,10 +654,50 @@ public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T
 • DELETE
    $  curl -X DELETE http://localhost:3000/api/people/61325f4594bd88dec1e165cb
 
+► WEB Layer Testing (for HTTP requests), wih Spring Boot MockMVC
+• to make Controller Integration Tests
+• MockMvc
+  ♦ Is part of Spring Test, MockMvc simulates HTTP requests to Spring MVC controllers
+  ♦ from org.springframework.test.web.servlet.MockMvc;
+  ♦ MockMvc allows us to test the web layer without starting the full HTTP server, start an in-memory one
+• @AutoConfigureMockMvc
+  ♦ Used by SpringBoot to -inject- a "MockMvc instance" that we can use to simulate HTTP requests and verify responses
+• private MockMvc mockMvn;
+  ♦ MockMVC instance that needs to be inject to be able to use:
+    ◘ .perform() ,  to make http requests, with:  MockMvcRequestBuilders class methods(chained)
+      ◙ like:  .post( "url / urlTemplate" )
+               .contentType( MediaType.APPLICATION_JSON )
+               .content( objectJson )
+    ◙ and chain to it assertions with(as many as needed, one per assertion recommended):
+    ◙ .andExpect(
+    // with MockMvcResultMatchers class methods like .jsonPath(expression) :
+                  .status().isCreated()
+                  .jsonPath( "$.id" )  .isNumber()     //.jsonPath( expression-to-find-in-the-json )
+                  .jsonPath( "$.name" ).value("Abigail Rose")   //$.name  to check for the name attribute in the json-object
+                  .jsonPath( "$.age" ) .value("80")
+                );
+• ObjectMapper instance injection
+  ♦ needed to use Jackson to conver to-and-from Json formatt
+  ♦ from com.fasterxml.jackson.databind.ObjectMapper;
+  ♦ .writeValueAsString( Object );
+    ◘ used to convert from POJO to JSON
+* throws Exception ,  is needed for MockMvn
+  ☼ and already handles JsonProcessingException (needed for objectMapper.writeValueAsString)
+
 
 
 
 /* === >==>--- Additional Info / Comments / Notes ---<==< === */
+/*
+► *** Trying to understand this layered architecture
+  • Controller  >=>    objDTO    >=>  objEntity  >=>  objService  >=>  objRepository  >=>  toDB
+  • Controller  <=<    objDTO    <=<  objEntity  <=<  objService  <=<  objRepository  <=<  toDB
+    (View/Reqs)                                   (Make-TheObjRepoCALLS)
+                  4Separation       ModelOfTable                   
+  ^ PRESENTATION ^             ^ - - SERVICE LAYER - - ^         ^ - - PERSISTENCE LAYER - - ^
+    - LAYER -                        +Mappers                             +Entites
+  * Interfaces areUsed:  to Encapsulate all the logic for the specific purpose
+*/
 /*
   Setting a custom BANNER to appear, in console
 
