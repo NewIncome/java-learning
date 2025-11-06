@@ -22,4 +22,5 @@ List of Coding Challenges
 [✔] - Jumping on the Clouds: Revisited (video helpedABit, was missing parenthesis)
 [✔] - Extra Long Factorials (passed w-forLoop, w-help for recursion)
 [✔] - Append and Delete (passed 10/12)(w-vid, needs better understanding)(understood w-HR-Discussions)
+[ ] - Sherlock and Squares
 [ ] - 
