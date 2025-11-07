@@ -36,6 +36,12 @@ public class SherlockAndSquares {
     
   }
 
+  public static int solution2(int a, int b) {
+    int ceilNum = (int) Math.ceil(Math.sqrt(a));
+    int floorNum = (int) Math.floor(Math.sqrt(b));
+    return floorNum - ceilNum + 1;
+  }
+
   public static int squares(int a, int b) { //too time consumming
     ArrayList<Integer> sqrs = new ArrayList<>();
     for (int i = a; i <= b; i++) {
