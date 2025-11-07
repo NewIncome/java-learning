@@ -637,9 +637,12 @@ public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T
   ♦ -X , to specify the next code will be the type of request
   ♦// Because we have 2 properties of our object, we enclose them in double quotation marks “”
 • POST Request sending JSON data
-   $ curl -d '{"id":2,"name":"Python for Automation","instructor":"Mammoth Interactive"}' \
+   $ curl -d '{"name":"Abigail Rose","instructor":"Mammoth Interactive"}' \
           -H "Content-Type: application/json" \
           -X POST http://localhost:42212/products
+//* $ curl -d '{"name":"Abigail Rose","age":80}' \
+          -H "Content-Type: application/json" \
+          -X POST http://localhost:8080/authors
 •PUT req:  This type of HTTP request is for updating an entry entirely in the database
 • PUT
    $ curl -d “name=Alex&course=Excel” -X PUT http://localhost:3000/api/people/61326891216b79d8768c6edd
@@ -647,6 +650,11 @@ public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T
    $ curl -d '{"instructor":""Mammoth Interactive INC"}' \
           -H "Content-Type: application/json" \
           -X PUT http://localhost:42212/products/2
+//* $ curl -d '{"isbn":2,"title":"Python for Automation","author":null}' \
+          -H "Content-Type: application/json" \
+          -X PUT http://localhost:8080/books/978-1-2345-6789-0
+//* in the above example we add the "isbn" in the json req-body to prove that the one
+    to be used is the one in the url(sent via params), due to our code definition
 •PATCH req:  This type of HTTP request is for updating 1 property of an entry in the database
 • PATCH
    $ curl -d name=Mammoth -X PATCH http://localhost:3000/api/people/61326891216b79d8768c6edd
@@ -654,10 +662,11 @@ public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T
 • DELETE
    $  curl -X DELETE http://localhost:3000/api/people/61325f4594bd88dec1e165cb
 
-► WEB Layer Testing (for HTTP requests), wih Spring Boot MockMVC
+► WEB Layer Testing (for HTTP requests), with Spring Boot MockMVC
 • to make Controller Integration Tests
 • MockMvc
   ♦ Is part of Spring Test, MockMvc simulates HTTP requests to Spring MVC controllers
+  ♦ Main entry point for server-side Spring MVC test support.
   ♦ from org.springframework.test.web.servlet.MockMvc;
   ♦ MockMvc allows us to test the web layer without starting the full HTTP server, start an in-memory one
 • @AutoConfigureMockMvc
@@ -667,7 +676,7 @@ public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T
     ◘ .perform() ,  to make http requests, with:  MockMvcRequestBuilders class methods(chained)
       ◙ like:  .post( "url / urlTemplate" )
                .contentType( MediaType.APPLICATION_JSON )
-               .content( objectJson )
+               .content( objectJsonString )
     ◙ and chain to it assertions with(as many as needed, one per assertion recommended):
     ◙ .andExpect(
     // with MockMvcResultMatchers class methods like .jsonPath(expression) :
@@ -679,6 +688,10 @@ public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T
 • ObjectMapper instance injection
   ♦ needed to use Jackson to conver to-and-from Json formatt
   ♦ from com.fasterxml.jackson.databind.ObjectMapper;
+    ◘ ObjectMapper provides functionality for reading and writing JSON, either to and from basic
+      POJOs (Plain Old Java Objects), or to and from a general-purpose JSON Tree Model (JsonNode),
+      as well as related functionality for performing conversions.
+    ◘ It also supports more advanced Object concepts...
   ♦ .writeValueAsString( Object );
     ◘ used to convert from POJO to JSON
 * throws Exception ,  is needed for MockMvn
