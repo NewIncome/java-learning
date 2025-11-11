@@ -18,9 +18,9 @@
  *  There are three square integers in the range: 25,36 and 49. Return 3.
  *
  * • TestCases
- *  ♦ a=3, b=9   //3
- *  ♦ a=17, b=24   //3
- *  ♦ a=62, b=999999982   //31613
+ *  ♦ a=3, b=9   //2
+ *  ♦ a=17, b=24   //0  //
+ *  ♦ a=62, b=999999982   //31615
  */
 /*
  * Pseudocode
@@ -33,10 +33,29 @@ import java.util.ArrayList;
 
 public class SherlockAndSquares {
   public static void main(String[] args) {
-    
+    System.out.println(solution2(24, 49)); //3
+    System.out.println(solution2(3, 9)); //2
+    System.out.println(solution2(17, 24)); //0
+    System.out.println(solution2(62, 999999982)); //31613
   }
 
-  public static int solution2(int a, int b) {
+  public static int solution3(int a, int b) { //Passed Ok
+    int sqA = (int) Math.sqrt(a);
+    int sqB = (int) Math.sqrt(b);
+    int res = sqB - sqA;
+    if(sqA*sqA >= a) res += 1;
+    /*
+     * Explanation:
+     * To know how many perfectSquaresIntegers there are between a range
+     * of numbers, you get the square of each no matter if they are not
+     * perfectSquares, you substract them and that's the answer
+     * And you check cases where 'a' is also counted, like if it where 16
+     * or 25, then we add 1 to our substraction.
+     */
+    return res;
+  }
+
+  public static int solution2(int a, int b) { //Passed Ok
     int ceilNum = (int) Math.ceil(Math.sqrt(a));
     int floorNum = (int) Math.floor(Math.sqrt(b));
     return floorNum - ceilNum + 1;
@@ -95,6 +114,5 @@ public class SherlockAndSquares {
 31617
 31620
 31618
-31615
-31613{-truncated-}
+31615{-truncated-}
  */
