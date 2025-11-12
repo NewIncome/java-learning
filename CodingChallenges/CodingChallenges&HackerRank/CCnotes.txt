@@ -1,6 +1,23 @@
 Java cool methods and classes
 ------------------------------
 
+List
+----
+• toEnter java -jshell- tool
+• Collections.frequency(Collection<?> c, Object o)
+• String formatting
+• Convert String-to-charArray
+• Convert String-to-ArrayList
+• Convert integer to String
+• num % denom ,  use of the MODulus operator
+• count occurrences in a String
+• quickly SORT a List
+• Copy a List, shallow copies(doen's matter for primitives)
+• Copy a List of Objects, deep copy (streams)
+
+
+Content
+-------
 • toEnter java -jshell- tool
      $ jshell
     ○ to exit
@@ -13,18 +30,14 @@ Java cool methods and classes
 • String formatting
     ○ Opt1:  String.format("%d.%d.%d", sumDays, month, y);
     ○ Opt2:  System.out.printf("%d.%d.%d", sumDays, month, y);
-
-• Integer.MAX_VALUE; //A constant holding the maximum value an int can have: 231-1
-
 • Convert String-to-charArray
     ○ Opt1:  str.toCharArray();    //char[]
     ○ Opt2:  sentence.split(" ");  //String[]
 • Convert String-to-ArrayList
     ○ Opt1:  new ArrayList<>(Arrays.asList(10, 20, 30, 40, 50));  //mutable ; PREFERRED
-    ○ Opt1.1:  Arrays.asList()
     ○ Opt2:  new ArrayList<>(List.of(1, 2, 3));   //mutable ; Java 8 Stream API (Flexible)
-    ○ Opt2.2:  List.of(100, 200, 300);              //immutable ; Java 9+ Factory Method
-
+    ○ Opt3:  Arrays.asList()                    //Mutable Elements, but FIXED-SIZE(immutable in size)
+    ○ Opt4:  List.of(100, 200, 300);            //Fully IMMUTABLE ; Java 9+ Factory Method
 • Convert integer to String
   ○ Opt1: String.valueOf(number);
   ○ Opt2: String.format("%d", number);
@@ -42,9 +55,46 @@ Java cool methods and classes
     Arrays.asList(str.split("")).stream().forEach(e -> count01.put(e, count01.containsKey(e) ? count01.get(e) + 1 : 1));
     System.out.println(count01); System.out.println();
 
-str.chars().mapToObj(c -> (char) c).collect(Collectors.toList()); //for a List<Character>
+• quickly SORT a List
+  ○ with Collections, doesn't return anything, Modifies the array in place
+     List<Integer> arr = new ArrayList<>(Arrays.asList(3, 1, 4, 1, 5, 9, 2));
+      or just    = Arrays.asList(3, 1, 4, 1, 5, 9, 2);
+ >>  Collections.sort(arr);  //Sorts the list in-place
+     System.out.println(arr);  //Print the sorted list
+  ○ with Arrays, for primitives (int[])
+     Arrays.sort(arr);  //Sorts the list in-place, doesn't return anything
+  ○ with Comparator (Java 8+)
+    ◘ list.sort(Comparator.naturalOrder());
+    ◘ list.sort(Comparator.comparing(String::length));
+  ○ with Streams
+    ◘ list.stream() .sorted() .toList();
+  ○ with ParallelStream, for veery large lists(has overhead)
+    ◘ list.parallelStream() .sorted() .collect(Collectors.toList());
+
+• Copy a List, shallow copies(doen's matter for primitives)
+  ○ Immutable (Java 10+)
+     List<String> copy = List.copyOf(originalListString);
+  ○ Mutable copy
+     List<Object> copy = new ArrayList<>(originalList);
+/* In List of Primitives(wraps) there's no problem in having a shallow copy,
+   but in Objects, and List of Objects, referencing them WILL change the original
+*/
+• Copy a List of Objects, deep copy (streams)
+   List<Person> deepCopy = original.stream()
+    .map(Person::clone)  // assuming clone() defined or new constructor () empty
+    .collect(Collectors.toList());
+/* 'record' reserved word, to create an Immutable class for immutable objects
+   + (introduced in Java 16) , and avoids a lot of boilerplate code
+   + typically used as Simple data holder(DTO, config, result)
+   + No need to extend other classes
+*/
+
+
+
+// Integer.MAX_VALUE; //A constant holding the maximum value an int can have: 231-1
+//• str.chars().mapToObj(c -> (char) c).collect(Collectors.toList()); //for a List<Character>
   
-• for VERY LONG VALUES
+• BigInteger, BigDecimal, for VERY LONG VALUES
   ○ BigInteger: represents immutable arbitrary-precision integers
     ◙ It is similar to the primitive integer types but allows arbitrary large values.
       Used when the integers involved are larger than the limit of the long type
