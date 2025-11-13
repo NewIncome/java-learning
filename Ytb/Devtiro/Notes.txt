@@ -630,6 +630,8 @@ public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T
    $ curl -i http://httpbin.org/headers
 • GET with just headers no body
    $ curl --head http://httpbin.org/headers
+//*for project:
+    curl -i -H "Accept: application/json" http://localhost:8080/authors
 •POST:  This type of HTTP request is for creating a new entry in a database
 • POST simple, 2 params
    $ curl -d “name=Alex&course=Unreal” -X POST http://localhost:3000/api/people
@@ -696,6 +698,17 @@ public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T
     ◘ used to convert from POJO to JSON
 * throws Exception ,  is needed for MockMvn
   ☼ and already handles JsonProcessingException (needed for objectMapper.writeValueAsString)
+
+* Code to get a list as an Iterable from the DB, and convert it to a List with streams
+public List<AuthorEntity> findAll() {
+ //authorRepository.findAll(); //it returns an iterable, to make it a list we do:
+ return StreamSupport    /*Low-level utility methods for creating and manipulating streams*/
+          .stream(       /*Creates a new sequential or parallel Stream from a Spliterator*/
+              authorRepository      /*the class that extends the CrudRepository class querying-functionality*/
+                    .findAll()      /*returns an iterable; extended CrudRepository-class-method that Returns all instances of the type*/
+                    .spliterator(), /*Creates a Spliterator over the elements described by this Iterable*/
+              false)     /*to define the stream as true=parallel, false=sequential*/
+          .collect(Collectors.toList());  //to collect/convert the resulting stream into a List
 
 
 
