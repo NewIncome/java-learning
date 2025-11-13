@@ -50,7 +50,7 @@ Content
                           ie.:  10 % 3 = 1  ...  10 / 3 = 3 .: 3x3 = 9-10 = 1
 
 • count occurrences in a String
-  ○ with Java 8+ Stream API
+  ○ with Stream API (Java 8+)
     HashMap<String, Integer> count01 = new HashMap<>();
     Arrays.asList(str.split("")).stream().forEach(e -> count01.put(e, count01.containsKey(e) ? count01.get(e) + 1 : 1));
     System.out.println(count01); System.out.println();
