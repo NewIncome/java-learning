@@ -1,4 +1,4 @@
-List of Coding Challenges
+List of Coding Challenges, Algorithms
 --------------------------
 ❌  didn't pass any, not finished, not understood
 /  passed >= half test cases || passedWithVideo
@@ -24,5 +24,6 @@ List of Coding Challenges
 [✔] - Append and Delete (passed 10/12)(w-vid, needs better understanding)(understood w-HR-Discussions)
 [✔] - Sherlock and Squares (w-vid, needs better understanding)
 [✔] - Library Fine (finished, had2refactor4edgeCase)
-[ ] - Cut the sticks
+[/] - Cut the sticks (passed 1 tc)
+[ ] - Dynamic Array
 [ ] - 
