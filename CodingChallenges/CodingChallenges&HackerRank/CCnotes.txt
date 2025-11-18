@@ -54,6 +54,8 @@ Content
     HashMap<String, Integer> count01 = new HashMap<>();
     Arrays.asList(str.split("")).stream().forEach(e -> count01.put(e, count01.containsKey(e) ? count01.get(e) + 1 : 1));
     System.out.println(count01); System.out.println();
+  ○ Better writen line, with HashMap-Instance.getOrDefault(key, defaultVal)
+    YourArray.stream().forEach(e -> count01.put(e, count01.get(e, 0) + 1));
 
 • quickly SORT a List
   ○ with Collections, doesn't return anything, Modifies the array in place
