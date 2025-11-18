@@ -25,5 +25,5 @@ List of Coding Challenges, Algorithms
 [✔] - Sherlock and Squares (w-vid, needs better understanding)
 [✔] - Library Fine (finished, had2refactor4edgeCase)
 [/] - Cut the sticks (passed 1 tc)
-[ ] - Dynamic Array
+[❌] - Non-Divisible Subset (passed 1)
 [ ] - 
