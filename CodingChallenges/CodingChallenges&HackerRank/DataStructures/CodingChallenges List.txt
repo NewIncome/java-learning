@@ -4,5 +4,6 @@ List of Coding Challenges, DataStructures
 /  passed >= half test cases || passedWithVideo
 ✔  done
 
-[ ] - Dynamic Array
+[✔] - Dynamic Array (tookVeryLong)
+[✔] - Left Rotation (passedOK)
 [ ] - 
