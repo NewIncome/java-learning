@@ -73,6 +73,25 @@ Content
   ○ with ParallelStream, for veery large lists(has overhead)
     ◘ list.parallelStream() .sorted() .collect(Collectors.toList());
 
+• Get the Key of the max Value of a HashMap
+  ○ using .entrySet() method, to avoid extra looking when repeated key hashcodes
+    ◘  String topKey = scores.entrySet().stream()
+                          .max(Map.Entry.comparingByValue())
+                          //.max(Comparator.comparingInt(Map.Entry::getValue))  //other option, with Comparator
+                          .map(Map.Entry::getKey)
+                          .orElse(null);            //in case the map might be empty
+  ○ using Collections.max()
+    ◘  String topKey = Collections.max(scores.entrySet(),
+                          Comparator.comparingInt(Map.Entry::getValue))
+                          .getKey();
+    ◘  String topKey = Collections.max( scores.keySet(),
+                          Comparator.comparingInt(scores::get) );  // compares keys by their mapped value
+
+  ○ using keySet()
+    ◘  String topKey = scores.keySet().stream()
+                          .filter(key -> scores.get(key).equals(maxValue))
+                          .findFirst();
+
 • Copy a List, shallow copies(doen's matter for primitives)
   ○ Immutable (Java 10+)
      List<String> copy = List.copyOf(originalListString);
