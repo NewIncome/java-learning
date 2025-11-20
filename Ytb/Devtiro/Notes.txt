@@ -687,6 +687,49 @@ public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T
                   .jsonPath( "$.name" ).value("Abigail Rose")   //$.name  to check for the name attribute in the json-object
                   .jsonPath( "$.age" ) .value("80")
                 );
+*• @AutoConfigureMockMvc does NOT auto-create a MockMvc bean in the application context.
+  *♦ It only configuresMockMvc to be auto-injected via --@Autowired fields--.
+  *♦ It does not make MockMvc available for constructor injection unless you explicitly add it.
+  *♦ therefor you can(besides using that annotation with a constructor and another annotation):
+    1◘ use @WebMvcTest
+      @WebMvcTest(BookController.class)
+      ...
+      private final MockMvc mockMvc;      // field injection, auto-done by @WebMvcTest
+      private final ObjectMapper objectMapper;
+      private final BookService bookService;
+    2◘ Use Field Injection (Simpler & Common), with the @AutoConfigureMockMvc annotation
+      @Autowired MockMvc mockMvc;
+      @Autowired ObjectMapper objectMapper;
+      @MockBean BookService bookService;  // or @Autowired if real bean exists
+• @WebMvcTest vs @AutoConfigureMockMvc
+Feature                     @WebMvcTest                     @AutoConfigureMockMvc
+--------                    ------------                    ----------------------
+→Loads full                 No (web layer only)             Yes (@SpringBootTest)
+ ApplicationContext?
+→Auto-creates               Yes                             No
+ MockMvc bean?
+→Supports field             Yes                             Yes
+ injection of MockMvc?
+→Supports constructor       Yes (if single constructor)     No
+ injection without @Autowired?
+→Requires @Autowired        Optional                        Required
+ on constructor?
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Use Case                                 Use This
+---------                                ---------
+→Fast unit test of a single              @WebMvcTest
+ controller
+→Integration test with full              @SpringBootTest + @AutoConfigureMockMvc
+ app context (DB, services, etc.)
+→Testing security, filters, or           @SpringBootTest + @AutoConfigureMockMvc
+ full request pipeline
+→You want to mock only the               @WebMvcTest
+ service layer
+→You need real beans (e.g.               @SpringBootTest + @AutoConfigureMockMvc
+ @Configuration, @Component)
+→Controller UNIT Tests                   @WebMvcTest                                ←***
+→FULL INTEGRATION Tests                  @SpringBootTest + @AutoConfigureMockMvc    ←***
+
 • ObjectMapper instance injection
   ♦ needed to use Jackson to conver to-and-from Json formatt
   ♦ from com.fasterxml.jackson.databind.ObjectMapper;
