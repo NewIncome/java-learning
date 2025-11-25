@@ -6,7 +6,10 @@ List of Coding Challenges, DataStructures
 
 [✔] - Dynamic Array (tookVeryLong)
 [✔] - Left Rotation (passedOK)
-[ ] - Sparse Arrays (passed-<5min)
-[ ] - Print the Elements of a Linked List (passed-<5min)
-[ ] - Insert a Node at the Tail of a Linked List (passed, tookTimeOn:whileLoop)
+[✔] - Sparse Arrays (passed-<5min)
+[✔] - Print the Elements of a Linked List (passed-<5min)
+[✔] - Insert a Node at the Tail of a Linked List (passed, tookTimeOn:whileLoop)
+[✔] - Insert a node at the head of a linked list (passed-<10min)
+[✔] - Delete a Node
+[✔] - Print in Reverse
 [ ] - 
