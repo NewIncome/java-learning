@@ -52,84 +52,127 @@ import java.util.List;
 public class QueensAttackII {
 
   public static void main(String[] args) {
-    //System.out.println(queensAttack(8, 1, 4, 4, List.of(List.of(3,5)))); //24
-    //System.out.println(queensAttack(4, 0, 4, 4, List.of())); //9
+    System.out.println(queensAttack(8, 1, 4, 4, List.of(List.of(3,5)))); //24
+    System.out.println(queensAttack(4, 0, 4, 4, List.of())); //9
     System.out.println(queensAttack(5, 3, 4, 3, List.of(List.of(5,5),List.of(4,2),List.of(2,3)))); //10
   }//end main
 
+  /* public static int queensAttack1(int n,
+    int k, int r_q, int c_q, List<List<Integer>> obstacles) { //wVid
+    return null;
+  } */
+
   /* List.of() was introduced in Java 9!! */
   public static int queensAttack(int n,
-    int k, int r_q, int c_q, List<List<Integer>> obstacles) {
+    int k, int r_q, int c_q, List<List<Integer>> obstacles) {   //Mine.passed 2 TC
     int attack = 0, axis = 0;
 
     //System.out.println("Constains obstacle(3,5)? " + obstacles.contains(List.of(3,5)));
+    //System.out.println("n: " + n + ", queen: (" + r_q + "," + c_q + "), obstacles: " + obstacles.toString());
 
     //up
     axis=1;
-    while(c_q+axis <= n) {
-      if(obstacles.contains(Arrays.asList(c_q+axis,r_q))) break;
+    while(r_q+axis <= n) {
+      //System.out.println("check (cq+axis,rq)=(" + (r_q+axis) + "," + c_q + ") ; while(" + r_q + "+" + axis + " <= " + n + ")");
+      if(obstacles.contains(Arrays.asList(r_q+axis,c_q))) break;
       attack += 1;
       axis += 1;
     }
-    System.out.println("up:          " + attack + " attacks, " + axis + " axisMoves");
+    //System.out.println("up:          " + attack + " attacks, " + axis + " axisMoves");
     //up-left
     axis=1;
-    while(r_q-axis >= 1 && c_q+axis <= n) {
-      if(obstacles.contains(Arrays.asList(c_q+axis,r_q-axis))) break;
+    while(r_q+axis <= n && c_q-axis >= 1) {
+      if(obstacles.contains(Arrays.asList(r_q+axis,c_q-axis))) break;
       attack += 1;
       axis += 1;
     }
-    System.out.println("up-left:     " + attack + " attacks, " + axis + " axisMoves");
+    //System.out.println("up-left:     " + attack + " attacks, " + axis + " axisMoves");
     //up-right
     axis=1;
     while(r_q+axis <= n && c_q+axis <= n) {
-      if(obstacles.contains(Arrays.asList(c_q+axis,r_q+axis))) break;
+      if(obstacles.contains(Arrays.asList(r_q+axis,c_q+axis))) break;
       attack += 1;
       axis += 1;
     }
-    System.out.println("up-right:    " + attack + " attacks, " + axis + " axisMoves");
+    //System.out.println("up-right:    " + attack + " attacks, " + axis + " axisMoves");
+
     //right
     axis=1;
-    while(r_q+axis <= n) {
-      if(obstacles.contains(Arrays.asList(c_q,r_q+axis))) break;
+    while(c_q+axis <= n) {
+      if(obstacles.contains(Arrays.asList(r_q,c_q+axis))) break;
       attack += 1;
       axis += 1;
     }
-    System.out.println("right:      " + attack + " attacks, " + axis + " axisMoves");
+    //System.out.println("right:      " + attack + " attacks, " + axis + " axisMoves");
     //down-right
     axis=1;
-    while(r_q+axis <= n && c_q-axis >= 1) {
-      if(obstacles.contains(Arrays.asList(c_q-axis,r_q+axis))) break;
+    while(r_q-axis >= 1 && c_q+axis <= n) {
+      if(obstacles.contains(Arrays.asList(r_q-axis,c_q+axis))) break;
       attack += 1;
       axis += 1;
     }
-    System.out.println("down-right: " + attack + " attacks, " + axis + " axisMoves");
+    //System.out.println("down-right: " + attack + " attacks, " + axis + " axisMoves");
     //down
     axis=1;
-    while(c_q-axis >= 1) {
-      if(obstacles.contains(Arrays.asList(c_q-axis,r_q))) break;
+    while(r_q-axis >= 1) {
+      if(obstacles.contains(Arrays.asList(r_q-axis,c_q))) break;
       attack += 1;
       axis += 1;
     }
-    System.out.println("down:       " + attack + " attacks, " + axis + " axisMoves");
+    //System.out.println("down:       " + attack + " attacks, " + axis + " axisMoves");
     //down-left
     axis=1;
     while(r_q-axis >= 1 && c_q-axis >= 1) {
-      if(obstacles.contains(Arrays.asList(c_q-axis,r_q-axis))) break;
+      if(obstacles.contains(Arrays.asList(r_q-axis,c_q-axis))) break;
       attack += 1;
       axis += 1;
     }
-    System.out.println("down-left:  " + attack + " attacks, " + axis + " axisMoves");
+    //System.out.println("down-left:  " + attack + " attacks, " + axis + " axisMoves");
     //left
     axis=1;
-    while(r_q-axis >= 1) {
-      if(obstacles.contains(Arrays.asList(c_q,r_q-axis))) break;
+    while(c_q-axis >= 1) {
+      if(obstacles.contains(Arrays.asList(r_q,c_q-axis))) break;
       attack += 1;
       axis += 1;
     }
-    System.out.println("left:       " + attack + " attacks, " + axis + " axisMoves");
+    //System.out.println("left:       " + attack + " attacks, " + axis + " axisMoves");
 
     return attack;
   }//end queensAttack
 
 }
+
+/* n=5, k=3, r_q=4, c_q=3, obstacles=[[5,5],[4,2],[2,3]]   //10
+
+    5   . ○ ○ ○ x
+    4   . x Q ○ ○
+    3   . ○ ○ ○ .
+    2   ○ . x . ○
+    1   . . . . .
+    
+        1 2 3 4 5
+ */
+
+/* T.C.1  n=4, k=0, r_q=4, c_q=4, obstacles=[]   //9
+
+    4   ○ ○ ○ Q
+    3   . . ○ ○
+    2   . ○ . ○
+    1   ○ . . ○
+
+        1 2 3 4
+ */
+
+/* Example  n=8, k=1, r_q=4, c_q=4, obstacles=[[3,5]]   //24
+
+    8   . . . ○ . . . ○
+    7   ○ . . ○ . . ○ .
+    6   . ○ . ○ . ○ . .
+    5   . . ○ ○ ○ . . .
+    4   ○ ○ ○ Q ○ ○ ○ ○
+    3   . . ○ ○ x . . .
+    2   . ○ . ○ . . . .
+    1   ○ . . ○ . . . .
+    
+        1 2 3 4 5 6 7 8
+ */
