@@ -1,0 +1,145 @@
+Java cool methods and classes
+------------------------------
+
+List
+----
+• toEnter java -jshell- tool
+• Collections.frequency(Collection<?> c, Object o)
+• String formatting
+• Convert String-to-charArray
+• Convert String-to-ArrayList
+• Convert integer to String
+• num % denom ,  use of the MODulus operator
+• count occurrences in a String
+• quickly SORT a List
+• Copy a List, shallow copies(doen's matter for primitives)
+• Copy a List of Objects, deep copy (streams)
+
+
+Content
+-------
+• toEnter java -jshell- tool
+     $ jshell
+    ○ to exit
+     $ /exit
+
+• Collections.frequency(Collection<?> c, Object o)
+    ○ Returns the number of elements in the specified collection equal
+      to the specified object
+    ○ in java.util.Collections;
+• String formatting
+    ○ Opt1:  String.format("%d.%d.%d", sumDays, month, y);
+    ○ Opt2:  System.out.printf("%d.%d.%d", sumDays, month, y);
+• Convert String-to-charArray
+    ○ Opt1:  str.toCharArray();    //char[]
+    ○ Opt2:  sentence.split(" ");  //String[]
+• Convert String-to-ArrayList
+    ○ Opt1:  new ArrayList<>(Arrays.asList(10, 20, 30, 40, 50));  //mutable ; PREFERRED
+    ○ Opt2:  new ArrayList<>(List.of(1, 2, 3));   //mutable ; Java 8 Stream API (Flexible)
+    ○ Opt3:  Arrays.asList()                    //Mutable Elements, but FIXED-SIZE(immutable in size)
+    ○ Opt4:  List.of(100, 200, 300);            //Fully IMMUTABLE ; Java 9+ Factory Method
+• Convert integer to String
+  ○ Opt1: String.valueOf(number);
+  ○ Opt2: String.format("%d", number);
+
+• num % denom ,  use of the MODulus operator
+  ♦ examples in a loop
+    ○ if  demon > num  ; then the result will be the same number,
+                          expept when num == denom, then % = 0, meaning the end
+    ○ if  num > denom  ; then you will get the remainder of the division num / denom
+                          ie.:  10 % 3 = 1  ...  10 / 3 = 3 .: 3x3 = 9-10 = 1
+
+• count occurrences in a String
+  ○ with Stream API (Java 8+)
+    HashMap<String, Integer> count01 = new HashMap<>();
+    Arrays.asList(str.split("")).stream().forEach(e -> count01.put(e, count01.containsKey(e) ? count01.get(e) + 1 : 1));
+    System.out.println(count01); System.out.println();
+  ○ Better writen line, with HashMap-Instance.getOrDefault(key, defaultVal)
+    YourArray.stream().forEach(e -> count01.put(e, count01.get(e, 0) + 1));
+
+• quickly SORT a List
+  ○ with Collections, doesn't return anything, Modifies the array in place
+     List<Integer> arr = new ArrayList<>(Arrays.asList(3, 1, 4, 1, 5, 9, 2));
+      or just    = Arrays.asList(3, 1, 4, 1, 5, 9, 2);
+ >>  Collections.sort(arr);  //Sorts the list in-place
+     System.out.println(arr);  //Print the sorted list
+  ○ with Arrays, for primitives (int[])
+     Arrays.sort(arr);  //Sorts the list in-place, doesn't return anything
+  ○ with Comparator (Java 8+)
+    ◘ list.sort(Comparator.naturalOrder());
+    ◘ list.sort(Comparator.comparing(String::length));
+  ○ with Streams
+    ◘ list.stream() .sorted() .toList();
+  ○ with ParallelStream, for veery large lists(has overhead)
+    ◘ list.parallelStream() .sorted() .collect(Collectors.toList());
+
+• Get the Key of the max Value of a HashMap
+  ○ using .entrySet() method, to avoid extra looking when repeated key hashcodes
+    ◘  String topKey = scores.entrySet().stream()
+                          .max(Map.Entry.comparingByValue())
+                          //.max(Comparator.comparingInt(Map.Entry::getValue))  //other option, with Comparator
+                          .map(Map.Entry::getKey)
+                          .orElse(null);            //in case the map might be empty
+  ○ using Collections.max()
+    ◘  String topKey = Collections.max(scores.entrySet(),
+                          Comparator.comparingInt(Map.Entry::getValue))
+                          .getKey();
+    ◘  String topKey = Collections.max( scores.keySet(),
+                          Comparator.comparingInt(scores::get) );  // compares keys by their mapped value
+//the Comparator can be used also to filter Objects
+  ○ using keySet()
+    ◘  String topKey = scores.keySet().stream()
+                          .filter(key -> scores.get(key).equals(maxValue))
+                          .findFirst();
+
+• Copy a List, shallow copies(doen's matter for primitives)
+  ○ Immutable (Java 10+)
+     List<String> copy = List.copyOf(originalListString);
+  ○ Mutable copy
+     List<Object> copy = new ArrayList<>(originalList);
+/* In List of Primitives(wraps) there's no problem in having a shallow copy,
+   but in Objects, and List of Objects, referencing them WILL change the original
+*/
+• Copy a List of Objects, deep copy (streams)
+   List<Person> deepCopy = original.stream()
+    .map(Person::clone)  // assuming clone() defined or new constructor () empty
+    .collect(Collectors.toList());
+/* 'record' reserved word, to create an Immutable class for immutable objects
+   + (introduced in Java 16) , and avoids a lot of boilerplate code
+   + typically used as Simple data holder(DTO, config, result)
+   + No need to extend other classes
+*/
+
+
+
+// Integer.MAX_VALUE; //A constant holding the maximum value an int can have: 231-1
+//• str.chars().mapToObj(c -> (char) c).collect(Collectors.toList()); //for a List<Character>
+  
+• BigInteger, BigDecimal, for VERY LONG VALUES
+  ○ BigInteger: represents immutable arbitrary-precision integers
+    ◙ It is similar to the primitive integer types but allows arbitrary large values.
+      Used when the integers involved are larger than the limit of the long type
+    ◙ Can be created from a String or from a ByteArray
+    ◙ Operations: .add(j), .subtract(j), .divide(j), .multiply(j), 
+      Bit and logical manipulation methods
+      also GCD computation and Modular arithmetic methods:
+       .gcd(k), .multiply(k).mod(i), .modInverse(i), .modPow(k, i),
+      and prime generation and primality testing:
+       .isProbablePrime(1000)
+  ○ BigDecimal: represents an immutable arbitrary-precision signed decimal number.
+    ◙ It consists of two parts: Unscaled value(integer without decimal point), and Scale(how many digits are to the right of the decimal point)
+    ◙ Can be created from String, character array, int, long, and BigInteger
+       new BigDecimal(123412345678901L)
+    ◙ To convert a double or long to BigDecimal, we can use the valueOf() static method
+       BigDecimal.valueOf(0.1d);   BigDecimal.valueOf(123412345678901L);
+    ◙ Other operations besides the same as BigInteger are:
+       .precision() //num of integers&decimals
+       .scale() //the number of decimals
+       .signum() //the sign: 1 or -1
+      rounding(CEILING, FLOOR , UP, DOWN, HALF_UP, HALF_DOWN, HALF_EVEN, UNNECESSARY ):
+       .round(new MathContext(1, RoundingMode.HALF_EVEN));
+       //HALF_EVEN is also known as the banker’s rounding; frequently used
+  ○ Predefined BuiltIn Constant Values
+     .ONE, .TWO, .TEN, .ZERO
+    ◙* Commonly used with comparisons
+       .compareTo(BigInt.ZERO) > 0
