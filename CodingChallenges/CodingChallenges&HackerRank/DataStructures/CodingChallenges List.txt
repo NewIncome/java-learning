@@ -12,4 +12,6 @@ List of Coding Challenges, DataStructures
 [✔] - Insert a node at the head of a linked list (passed-<10min)
 [✔] - Delete a Node
 [✔] - Print in Reverse
+[✔] - Reverse a linked list (passedByMe, error in HRcodeNotCompiling)
+[✔] - Compare two linked lists (passed-<15min)
 [ ] - 
