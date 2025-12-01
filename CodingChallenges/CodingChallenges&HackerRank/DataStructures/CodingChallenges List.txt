@@ -14,4 +14,5 @@ List of Coding Challenges, DataStructures
 [✔] - Print in Reverse
 [✔] - Reverse a linked list (passedByMe, error in HRcodeNotCompiling)
 [✔] - Compare two linked lists (passed-<15min)
+[❌] - Merge two sorted linked lists (stuck, ❌)
 [ ] - 
