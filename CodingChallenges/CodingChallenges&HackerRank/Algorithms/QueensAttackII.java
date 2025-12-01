@@ -47,24 +47,117 @@
  * ○ return attack
  */
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class QueensAttackII {
 
   public static void main(String[] args) {
-    System.out.println(queensAttack(8, 1, 4, 4, List.of(List.of(3,5)))); //24
-    System.out.println(queensAttack(4, 0, 4, 4, List.of())); //9
-    System.out.println(queensAttack(5, 3, 4, 3, List.of(List.of(5,5),List.of(4,2),List.of(2,3)))); //10
+    //System.out.println(queensAttack1(8, 1, 4, 4, List.of(List.of(3,5)))); //24
+    //System.out.println(queensAttack1(4, 0, 4, 4, List.of())); //9
+    System.out.println(queensAttack1(5, 3, 4, 3, List.of(List.of(5,5),List.of(4,2),List.of(2,3)))); //10
+    //System.out.println(queensAttack1(5, 3, 4, 3, List.of(List.of(4,5),List.of(5,3),List.of(3,3),List.of(5,5),List.of(4,2),List.of(2,3)))); //10
   }//end main
 
-  /* public static int queensAttack1(int n,
-    int k, int r_q, int c_q, List<List<Integer>> obstacles) { //wVid
-    return null;
-  } */
+
+  //FIRST MAKE IT WORK, THEN REFACTOR!!!
+  public static int queensAttack1(int n, int k, int r_q, int c_q,
+                                  List<List<Integer>> obstacles) { //mathematical approach
+    int attack = 0;
+    int closestObs = 0;
+    List<Integer> closeObs;
+
+    //up
+    if(r_q != n) {
+      //check if obstacles
+      filteredObstacles(attack, 0, n, r_q, c_q, obstacles, obs -> obs.get(0) > r_q && obs.get(1) == c_q);
+
+      /* List<List<Integer>> upObs = obstacles.stream()
+                            .filter(obs -> obs.get(0) > r_q && obs.get(1) == c_q)
+                            .sorted(Comparator.comparingInt(i -> i.get(0)))
+                            .collect(Collectors.toList());
+      if(upObs.isEmpty()) attack += n-r_q;
+      else {
+        closestObs = Collections.min(upObs, Comparator.comparing(e->e.get(0))).get(0);
+        attack += (closestObs-(n+1));
+      } */
+      System.out.println("attack: " + attack + ", upClosestOrbs: " + closestObs + ", upObs: " + upObs);
+    }
+
+    //down
+    if(r_q != 1) {
+      //check if obstacles
+      List<List<Integer>> downObs = obstacles.stream()
+                            .filter(obs -> obs.get(0) < r_q && obs.get(1) == c_q)
+                            .sorted(Comparator.comparingInt(i -> i.get(0)))
+                            .collect(Collectors.toList());
+      if(downObs.isEmpty()) attack += r_q-1;
+      else {
+        closestObs = Collections.max(downObs, Comparator.comparing(e->e.get(0))).get(0);
+        attack += (r_q-1)-closestObs;
+      }
+      System.out.println("attack: " + attack + ", downClosestOrbs: " + closestObs + ", downObs: " + downObs);
+    }
+
+    //right
+    if(c_q != n) {
+      //check if obstacles
+      List<List<Integer>> rightObs = obstacles.stream()
+                            .filter(obs -> obs.get(0) == r_q && obs.get(1) > c_q)
+                            .sorted(Comparator.comparingInt(i -> i.get(1)))
+                            .collect(Collectors.toList());
+      if(rightObs.isEmpty()) attack += n-c_q;
+      else {
+        closestObs = Collections.min(rightObs, Comparator.comparing(e->e.get(1))).get(1);
+        attack += (closestObs-(n+1));
+      }
+      System.out.println("attack: " + attack + ", rightClosestOrbs: " + closestObs + ", rightObs: " + rightObs);
+    }
+
+    //left
+    if(c_q != 1) {
+      //check if obstacles
+      List<List<Integer>> leftObs = obstacles.stream()
+                            .filter(obs -> obs.get(0) == r_q && obs.get(1) < c_q)
+                            .sorted(Comparator.comparingInt(i -> i.get(1)))
+                            .collect(Collectors.toList());
+      if(leftObs.isEmpty()) attack += c_q-1;
+      else {
+        closestObs = Collections.max(leftObs, Comparator.comparing(e->e.get(1))).get(1);
+        attack += (c_q-1)-closestObs;
+      }
+      System.out.println("attack: " + attack + ", leftClosestOrbs: " + closestObs + ", leftObs: " + leftObs);
+    }
+
+    return attack;
+  }
+  /* Refactoring intent */
+  public static List<Integer> filteredObstacles(int toInc, int idx, char d, int r_q, int c_q,
+                                                      List<List<Integer>> obstacles,
+                                                      Predicate<List<Integer>> filterCondition
+                                                      //Comparator<List<Integer>> sorter,
+                                                      ) {
+    List<List<Integer>> upObs = obstacles.stream()
+                            .filter(filterCondition)
+                            .sorted(Comparator.comparingInt(i -> i.get(idx)))
+                            .collect(Collectors.toList());
+
+      return d == 'u' !! d == 'r' ? Collections.min(upObs, Comparator.comparing(e->e.get(idx))).get(idx) :
+                                    Collections.max(upObs, Comparator.comparing(e->e.get(idx))).get(idx);
+                                                        /* return obstacles.stream()
+                          .filter(filterCondition)
+                          .sorted(Comparator.comparingInt(i -> i.get(0)))
+                          .collect(Collectors.toList()); */
+  }
+
 
   /* List.of() was introduced in Java 9!! */
-  public static int queensAttack(int n,
-    int k, int r_q, int c_q, List<List<Integer>> obstacles) {   //Mine.passed 2 TC
+  public static int queensAttack(int n, int k, int r_q, int c_q,
+                                 List<List<Integer>> obstacles) {   //Mine.passed 2 TC
     int attack = 0, axis = 0;
 
     //System.out.println("Constains obstacle(3,5)? " + obstacles.contains(List.of(3,5)));
@@ -141,6 +234,17 @@ public class QueensAttackII {
   }//end queensAttack
 
 }
+
+/* n=5, k=3, r_q=4, c_q=3, obstacles=[[5,5],[4,2],[2,3]]   //10
+
+    5   . ○ x ○ x
+    4   . x Q ○ x
+    3   . ○ x ○ .
+    2   ○ . x . ○
+    1   . . . . .
+    
+        1 2 3 4 5
+ */
 
 /* n=5, k=3, r_q=4, c_q=3, obstacles=[[5,5],[4,2],[2,3]]   //10
 
