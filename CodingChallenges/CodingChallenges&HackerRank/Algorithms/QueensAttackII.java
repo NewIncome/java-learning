@@ -63,80 +63,82 @@ public class QueensAttackII {
     //System.out.println(queensAttack1(5, 3, 4, 3, List.of(List.of(4,5),List.of(5,3),List.of(3,3),List.of(5,5),List.of(4,2),List.of(2,3)))); //10
   }//end main
 
+  /* enum Dirs {
+    NO(1), SO(2), EA(3), WE(4), NE(5), NW(6), SE(7), SW(8);
+    private final int direction;
+    Dirs(int direction) { this.direction = direction; }
+  } */
+
+
 
   //FIRST MAKE IT WORK, THEN REFACTOR!!!
   public static int queensAttack1(int n, int k, int r_q, int c_q,
                                   List<List<Integer>> obstacles) { //mathematical approach
     int attack = 0;
     int closestObs = 0;
-    List<Integer> closeObs;
 
-    //up
-    if(r_q != n) {
-      //check if obstacles
-      filteredObstacles(attack, 0, n, r_q, c_q, obstacles, obs -> obs.get(0) > r_q && obs.get(1) == c_q);
-
-      /* List<List<Integer>> upObs = obstacles.stream()
+    // NORTH
+    if(r_q != n) {  // if queens at the top no attacks available
+      //check if obstacles, refactored
+      //filteredObstacles(attack, 0, n, r_q, c_q, obstacles, obs -> obs.get(0) > r_q && obs.get(1) == c_q);
+      List<List<Integer>> obsNO = obstacles.stream()  // check for obstacles
                             .filter(obs -> obs.get(0) > r_q && obs.get(1) == c_q)
                             .sorted(Comparator.comparingInt(i -> i.get(0)))
                             .collect(Collectors.toList());
-      if(upObs.isEmpty()) attack += n-r_q;
+      if(obsNO.isEmpty()) attack += n - r_q;
       else {
-        closestObs = Collections.min(upObs, Comparator.comparing(e->e.get(0))).get(0);
-        attack += (closestObs-(n+1));
-      } */
-      System.out.println("attack: " + attack + ", upClosestOrbs: " + closestObs + ", upObs: " + upObs);
+        closestObs = Collections.min(obsNO, Comparator.comparing(e->e.get(0))).get(0);
+        attack += (closestObs-1) - r_q;
+      }
+      System.out.println("attack: " + attack + ", upClosestOrbs: " + closestObs + ", upObs: " + obsNO);
     }
 
-    //down
-    if(r_q != 1) {
-      //check if obstacles
-      List<List<Integer>> downObs = obstacles.stream()
+    // SOUTH
+    if(r_q != 1) {  // if queens at the bottom no attacks available
+      List<List<Integer>> obsSO = obstacles.stream()  // check for obstacles
                             .filter(obs -> obs.get(0) < r_q && obs.get(1) == c_q)
                             .sorted(Comparator.comparingInt(i -> i.get(0)))
                             .collect(Collectors.toList());
-      if(downObs.isEmpty()) attack += r_q-1;
+      if(obsSO.isEmpty()) attack += r_q - 1;
       else {
-        closestObs = Collections.max(downObs, Comparator.comparing(e->e.get(0))).get(0);
-        attack += (r_q-1)-closestObs;
+        closestObs = Collections.max(obsSO, Comparator.comparing(e->e.get(0))).get(0);
+        attack += r_q - (closestObs+1);
       }
-      System.out.println("attack: " + attack + ", downClosestOrbs: " + closestObs + ", downObs: " + downObs);
+      System.out.println("attack: " + attack + ", downClosestOrbs: " + closestObs + ", downObs: " + obsSO);
     }
 
-    //right
-    if(c_q != n) {
-      //check if obstacles
-      List<List<Integer>> rightObs = obstacles.stream()
+    // EAST
+    if(c_q != n) {  // if queens at the mostRight no attacks available
+      List<List<Integer>> obsEA = obstacles.stream()  // check for obstacles
                             .filter(obs -> obs.get(0) == r_q && obs.get(1) > c_q)
                             .sorted(Comparator.comparingInt(i -> i.get(1)))
                             .collect(Collectors.toList());
-      if(rightObs.isEmpty()) attack += n-c_q;
+      if(obsEA.isEmpty()) attack += n - c_q;
       else {
-        closestObs = Collections.min(rightObs, Comparator.comparing(e->e.get(1))).get(1);
-        attack += (closestObs-(n+1));
+        closestObs = Collections.min(obsEA, Comparator.comparing(e->e.get(1))).get(1);
+        attack += (closestObs-1) - c_q;
       }
-      System.out.println("attack: " + attack + ", rightClosestOrbs: " + closestObs + ", rightObs: " + rightObs);
+      System.out.println("attack: " + attack + ", rightClosestOrbs: " + closestObs + ", rightObs: " + obsEA);
     }
 
-    //left
-    if(c_q != 1) {
-      //check if obstacles
-      List<List<Integer>> leftObs = obstacles.stream()
+    // WEST
+    if(c_q != 1) {  // if queens at the mostLeft no attacks available
+      List<List<Integer>> obsWE = obstacles.stream()  // check for obstacles
                             .filter(obs -> obs.get(0) == r_q && obs.get(1) < c_q)
                             .sorted(Comparator.comparingInt(i -> i.get(1)))
                             .collect(Collectors.toList());
-      if(leftObs.isEmpty()) attack += c_q-1;
+      if(obsWE.isEmpty()) attack += c_q - 1;
       else {
-        closestObs = Collections.max(leftObs, Comparator.comparing(e->e.get(1))).get(1);
-        attack += (c_q-1)-closestObs;
+        closestObs = Collections.max(obsWE, Comparator.comparing(e->e.get(1))).get(1);
+        attack += c_q - (closestObs+1);
       }
-      System.out.println("attack: " + attack + ", leftClosestOrbs: " + closestObs + ", leftObs: " + leftObs);
+      System.out.println("attack: " + attack + ", leftClosestOrbs: " + closestObs + ", leftObs: " + obsWE);
     }
 
     return attack;
   }
   /* Refactoring intent */
-  public static List<Integer> filteredObstacles(int toInc, int idx, char d, int r_q, int c_q,
+  /* public static List<Integer> filteredObstacles(int toInc, int idx, char d, int r_q, int c_q,
                                                       List<List<Integer>> obstacles,
                                                       Predicate<List<Integer>> filterCondition
                                                       //Comparator<List<Integer>> sorter,
@@ -148,15 +150,16 @@ public class QueensAttackII {
 
       return d == 'u' !! d == 'r' ? Collections.min(upObs, Comparator.comparing(e->e.get(idx))).get(idx) :
                                     Collections.max(upObs, Comparator.comparing(e->e.get(idx))).get(idx);
-                                                        /* return obstacles.stream()
-                          .filter(filterCondition)
-                          .sorted(Comparator.comparingInt(i -> i.get(0)))
-                          .collect(Collectors.toList()); */
-  }
+                          //                               return obstacles.stream()
+                          //.filter(filterCondition)
+                          //.sorted(Comparator.comparingInt(i -> i.get(0)))
+                          //.collect(Collectors.toList());
+  } */
+
 
 
   /* List.of() was introduced in Java 9!! */
-  public static int queensAttack(int n, int k, int r_q, int c_q,
+  public static int queensAttack(int n, int k, int r_q, int c_q,    //timeLimitExceeded...
                                  List<List<Integer>> obstacles) {   //Mine.passed 2 TC
     int attack = 0, axis = 0;
 
