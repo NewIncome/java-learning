@@ -145,7 +145,13 @@ public class QueensAttackII {
 
     //*¡I could very well call all the filteredObstacles variables with the same variable, just reassign it each time!
 
-    /* VectorAlgorithms for attackAddition:
+    /* VectorAlgorithms for diagonalAttackAdditionWith-Obstacle:
+     *  NE (r_obs-1)-r_q
+     *  NW (r_obs-1)-r_q
+     *  SE (r_q-1)-r_obs
+     *  SW (r_q-1)-r_obs
+    */
+    /* VectorAlgorithms for diagonalAttackAdditionWithout-Obstacle:
      *  NE (r_obs-1)-r_q
      *  NW (r_obs-1)-r_q
      *  SE (r_q-1)-r_obs
@@ -351,3 +357,31 @@ public class QueensAttackII {
     
         1 2 3 4 5 6 7 8
  */
+
+
+// TESTING
+/*
+    9   . . . . . . . . .
+    8   ○ . . . Q . . . .  (8,5)
+    7   . . . Q . ○ . . .  (7,4)
+    6   . . Q Q ○ . ○ . .  (6,3) (6,4)
+    5   . . . . . ○ . ○ .
+    4   . . . . . . ○ . ○
+    3   . . . . . . . ○ .
+    2   . . . . . . . . ○
+    1   . . . . . . . . .
+    
+        1 2 3 4 5 6 7 8 9
+*/
+/*
+    8   . . . . . . . .
+    7   . . . . . . . .
+    6   . . . . . . . .
+    5   . . . . . . . .
+    4   . . . Q . . . .
+    3   . . . . . . . .
+    2   . . . . . . . .
+    1   . . . . . . . .
+    
+        1 2 3 4 5 6 7 8
+*/
