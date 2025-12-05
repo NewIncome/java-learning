@@ -54,22 +54,23 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import javax.swing.text.html.HTMLFrameHyperlinkEvent;
+
 public class QueensAttackII {
 
   public static void main(String[] args) {
-    //System.out.println(queensAttack1(8, 1, 4, 4, List.of(List.of(3,5)))); //24
+    System.out.println(queensAttack1(8, 1, 4, 4, List.of(List.of(3,5)))); //24
     //System.out.println(queensAttack1(4, 0, 4, 4, List.of())); //9
-    System.out.println(queensAttack1(5, 3, 4, 3, List.of(List.of(5,5),List.of(4,2),List.of(2,3)))); //10
-    //System.out.println(queensAttack1(5, 3, 4, 3, List.of(List.of(4,5),List.of(5,3),List.of(3,3),List.of(5,5),List.of(4,2),List.of(2,3)))); //10
+    //System.out.println(queensAttack1(5, 3, 4, 3, List.of(List.of(5,5),List.of(4,2),List.of(2,3)))); //10
+    //System.out.println(queensAttack1(5, 3, 4, 3, List.of(List.of(4,5),List.of(5,3),List.of(3,3),List.of(5,5),List.of(4,2),List.of(2,3)))); //7
   }//end main
 
-  /* enum Dirs {
+
+  enum Dirs {
     NO(1), SO(2), EA(3), WE(4), NE(5), NW(6), SE(7), SW(8);
     private final int direction;
     Dirs(int direction) { this.direction = direction; }
-  } */
-
-
+  }
 
   //FIRST MAKE IT WORK, THEN REFACTOR!!!
   public static int queensAttack1(int n, int k, int r_q, int c_q,
@@ -79,82 +80,149 @@ public class QueensAttackII {
 
     // NORTH
     if(r_q != n) {  // if queens at the top no attacks available
-      //check if obstacles, refactored
-      //filteredObstacles(attack, 0, n, r_q, c_q, obstacles, obs -> obs.get(0) > r_q && obs.get(1) == c_q);
-      List<List<Integer>> obsNO = obstacles.stream()  // check for obstacles
-                            .filter(obs -> obs.get(0) > r_q && obs.get(1) == c_q)
-                            .sorted(Comparator.comparingInt(i -> i.get(0)))
-                            .collect(Collectors.toList());
-      if(obsNO.isEmpty()) attack += n - r_q;
-      else {
-        closestObs = Collections.min(obsNO, Comparator.comparing(e->e.get(0))).get(0);
-        attack += (closestObs-1) - r_q;
-      }
-      System.out.println("attack: " + attack + ", upClosestOrbs: " + closestObs + ", upObs: " + obsNO);
+      List<List<Integer>> obsNO = filterObstaclesByDir(Dirs.NO, r_q, c_q, obstacles);
+
+      attack += obsNO.isEmpty() ? n - r_q :  (closestObs(Dirs.NO, obsNO) - 1) - r_q;
+      System.out.println("attack: " + attack + ", NorthClosestOrbsPos: " + (obsNO.isEmpty() ? "empty" : closestObs(Dirs.NO, obsNO)) + ", NorthObs: " + obsNO);
     }
 
     // SOUTH
     if(r_q != 1) {  // if queens at the bottom no attacks available
-      List<List<Integer>> obsSO = obstacles.stream()  // check for obstacles
-                            .filter(obs -> obs.get(0) < r_q && obs.get(1) == c_q)
-                            .sorted(Comparator.comparingInt(i -> i.get(0)))
-                            .collect(Collectors.toList());
-      if(obsSO.isEmpty()) attack += r_q - 1;
-      else {
-        closestObs = Collections.max(obsSO, Comparator.comparing(e->e.get(0))).get(0);
-        attack += r_q - (closestObs+1);
-      }
-      System.out.println("attack: " + attack + ", downClosestOrbs: " + closestObs + ", downObs: " + obsSO);
+      List<List<Integer>> obsSO = filterObstaclesByDir(Dirs.SO, r_q, c_q, obstacles);
+
+      attack += obsSO.isEmpty() ? r_q - 1 : r_q - (closestObs(Dirs.SO, obsSO) + 1);
+      System.out.println("attack: " + attack + ", SouthClosestOrbsPos: " + (obsSO.isEmpty() ? "empty" : closestObs(Dirs.SO, obsSO)) + ", SouthObs: " + obsSO);
     }
 
     // EAST
     if(c_q != n) {  // if queens at the mostRight no attacks available
-      List<List<Integer>> obsEA = obstacles.stream()  // check for obstacles
-                            .filter(obs -> obs.get(0) == r_q && obs.get(1) > c_q)
-                            .sorted(Comparator.comparingInt(i -> i.get(1)))
-                            .collect(Collectors.toList());
-      if(obsEA.isEmpty()) attack += n - c_q;
-      else {
-        closestObs = Collections.min(obsEA, Comparator.comparing(e->e.get(1))).get(1);
-        attack += (closestObs-1) - c_q;
-      }
-      System.out.println("attack: " + attack + ", rightClosestOrbs: " + closestObs + ", rightObs: " + obsEA);
+      List<List<Integer>> obsEA = filterObstaclesByDir(Dirs.EA, r_q, c_q, obstacles);
+
+      attack += obsEA.isEmpty() ? n - c_q : (closestObs(Dirs.EA, obsEA) - 1) - c_q;
+      System.out.println("attack: " + attack + ", EastClosestOrbsPos: " + (obsEA.isEmpty() ? "empty" : closestObs(Dirs.EA, obsEA)) + ", EastObs: " + obsEA);
     }
 
     // WEST
     if(c_q != 1) {  // if queens at the mostLeft no attacks available
-      List<List<Integer>> obsWE = obstacles.stream()  // check for obstacles
-                            .filter(obs -> obs.get(0) == r_q && obs.get(1) < c_q)
-                            .sorted(Comparator.comparingInt(i -> i.get(1)))
-                            .collect(Collectors.toList());
-      if(obsWE.isEmpty()) attack += c_q - 1;
-      else {
-        closestObs = Collections.max(obsWE, Comparator.comparing(e->e.get(1))).get(1);
-        attack += c_q - (closestObs+1);
-      }
-      System.out.println("attack: " + attack + ", leftClosestOrbs: " + closestObs + ", leftObs: " + obsWE);
+      List<List<Integer>> obsWE = filterObstaclesByDir(Dirs.WE, r_q, c_q, obstacles);
+
+      attack += obsWE.isEmpty() ? c_q - 1 : c_q - (closestObs(Dirs.WE, obsWE) + 1);
+      System.out.println("attack: " + attack + ", WestClosestOrbsPos: " + (obsWE.isEmpty() ? "empty" : closestObs(Dirs.WE, obsWE)) + ", WestObs: " + obsWE);
     }
 
+    // DIAGONALS
+    // NORTH-EAST VectorAlgorithm withObs (r_obs-1)-r_q
+    if(r_q != n) {  // if queens at the top no attacks available
+      List<List<Integer>> obsNE = filterObstaclesByDir(Dirs.NE, r_q, c_q, obstacles); //to filter Obs direction matters
+      
+      attack += obsNE.isEmpty() ? n - Math.max(r_q, c_q) : (closestObs(Dirs.NO, obsNE) - 1) - r_q;                          //to get closest one No, from filtered
+      System.out.println("attack: " + attack + ", NorthEastClosestOrbsPos: " + (obsNE.isEmpty() ? "empty" : closestObs(Dirs.NO, obsNE)) + ", NorthEastObs: " + obsNE);
+    }
+
+    // NORTH-WEST VectorAlgorithm withObs (r_obs-1)-r_q
+    if(r_q != n) {  // if queens at the top no attacks available
+      List<List<Integer>> obsNW = filterObstaclesByDir(Dirs.NW, r_q, c_q, obstacles);
+      
+      attack += obsNW.isEmpty() ? n - Math.max(r_q, c_q) : (closestObs(Dirs.NO, obsNW) - 1) - r_q;
+      System.out.println("attack: " + attack + ", NorthWestClosestOrbsPos: " + (obsNW.isEmpty() ? "empty" : closestObs(Dirs.NO, obsNW)) + ", NorthWestObs: " + obsNW);
+    }
+
+    // SOUTH-EAST VectorAlgorithm withObs (r_q-1)-r_obs
+    if(r_q != n) {  // if queens at the top no attacks available
+      List<List<Integer>> obsSE = filterObstaclesByDir(Dirs.SE, r_q, c_q, obstacles); //to filter Obs direction matters
+      
+      attack += obsSE.isEmpty() ? Math.min(r_q, c_q) - 1 : (r_q - 1) - closestObs(Dirs.SO, obsSE);                          //to get closest one No, from filtered
+      System.out.println("attack: " + attack + ", SouthEastClosestOrbsPos: " + (obsSE.isEmpty() ? "empty" : closestObs(Dirs.NO, obsSE)) + ", SouthEastObs: " + obsSE);
+    }
+
+    // SOUTH-WEST VectorAlgorithm withObs (r_q-1)-r_obs
+    if(r_q != n) {  // if queens at the top no attacks available
+      List<List<Integer>> obsSW = filterObstaclesByDir(Dirs.SW, r_q, c_q, obstacles); //to filter Obs direction matters
+      
+      attack += obsSW.isEmpty() ? Math.min(r_q, c_q) - 1 : (r_q - 1) - closestObs(Dirs.SO, obsSW);                          //to get closest one No, from filtered
+      System.out.println("attack: " + attack + ", SouthWestClosestOrbsPos: " + (obsSW.isEmpty() ? "empty" : closestObs(Dirs.NO, obsSW)) + ", SouthWestObs: " + obsSW);
+    }
+
+    //*¡I could very well call all the filteredObstacles variables with the same variable, just reassign it each time!
+
+    /* VectorAlgorithms for attackAddition:
+     *  NE (r_obs-1)-r_q
+     *  NW (r_obs-1)-r_q
+     *  SE (r_q-1)-r_obs
+     *  SW (r_q-1)-r_obs
+    */
     return attack;
   }
-  /* Refactoring intent */
-  /* public static List<Integer> filteredObstacles(int toInc, int idx, char d, int r_q, int c_q,
-                                                      List<List<Integer>> obstacles,
-                                                      Predicate<List<Integer>> filterCondition
-                                                      //Comparator<List<Integer>> sorter,
-                                                      ) {
-    List<List<Integer>> upObs = obstacles.stream()
-                            .filter(filterCondition)
-                            .sorted(Comparator.comparingInt(i -> i.get(idx)))
-                            .collect(Collectors.toList());
 
-      return d == 'u' !! d == 'r' ? Collections.min(upObs, Comparator.comparing(e->e.get(idx))).get(idx) :
-                                    Collections.max(upObs, Comparator.comparing(e->e.get(idx))).get(idx);
-                          //                               return obstacles.stream()
-                          //.filter(filterCondition)
-                          //.sorted(Comparator.comparingInt(i -> i.get(0)))
-                          //.collect(Collectors.toList());
-  } */
+  //*** min-max not needed if sorting done correctly in filterObstaclesByDir() method
+  public static int closestObs(Dirs dir, List<List<Integer>> obstacles) {
+    switch (dir) {
+      case NO:
+        return Collections.min(obstacles, Comparator.comparing(e->e.get(0))).get(0);
+      case SO:
+        return Collections.max(obstacles, Comparator.comparing(e->e.get(0))).get(0);
+      case EA:
+        return Collections.min(obstacles, Comparator.comparing(e->e.get(1))).get(1);
+      case WE:
+        return Collections.max(obstacles, Comparator.comparing(e->e.get(1))).get(1);
+      default:
+        return 0;
+    }
+  }
+
+  public static List<List<Integer>> filterObstaclesByDir(Dirs direction, int r_q, int c_q, List<List<Integer>> obstacles) {
+    return switch (direction) {
+      case NO ->
+        obstacles.stream()
+                    .filter(obs -> obs.get(0) > r_q && obs.get(1) == c_q)
+                    .sorted(Comparator.comparingInt(i -> i.get(0)))
+                    .collect(Collectors.toList());
+      case SO ->
+        obstacles.stream()
+                    .filter(obs -> obs.get(0) < r_q && obs.get(1) == c_q)
+                    .sorted(Comparator.comparingInt(i -> i.get(0)))
+                    .collect(Collectors.toList());
+      case EA ->
+        obstacles.stream()
+                    .filter(obs -> obs.get(0) == r_q && obs.get(1) > c_q)
+                    .sorted(Comparator.comparingInt(i -> i.get(1)))
+                    .collect(Collectors.toList());
+      case WE ->
+        obstacles.stream()
+                    .filter(obs -> obs.get(0) == r_q && obs.get(1) < c_q)
+                    .sorted(Comparator.comparingInt(i -> i.get(1)))
+                    .collect(Collectors.toList());
+      case NE ->
+        obstacles.stream()
+                    .filter(obs -> obs.get(0) - r_q == obs.get(1) - c_q && obs.get(0) > r_q)
+                    .sorted(Comparator.comparingInt(i -> i.get(0)))
+                    .collect(Collectors.toList());
+      case NW ->
+        obstacles.stream()
+                    .filter(obs -> obs.get(0) - r_q == c_q - obs.get(1) && obs.get(0) > r_q)
+                    .sorted(Comparator.comparingInt(i -> i.get(0)))
+                    .collect(Collectors.toList());
+      case SE ->
+        obstacles.stream()
+                    .filter(obs -> r_q - obs.get(0) == obs.get(1) - c_q && obs.get(0) < r_q)
+                    .sorted(Comparator.comparingInt(i -> i.get(0)))
+                    .collect(Collectors.toList());
+      case SW ->
+        obstacles.stream()
+                    .filter(obs -> r_q - obs.get(0) == c_q - obs.get(1) && obs.get(0) < r_q)
+                    .sorted(Comparator.comparingInt(i -> i.get(0)))
+                    .collect(Collectors.toList());
+      default -> null;
+    /* VectorAlgorithms for DiagonalFiltering
+      *  NE (r_obs - r_q) == (c_obs - c_q)
+      *  NW (r_obs - r_q) == (c_q - c_obs)
+      *        3      4        4      5
+      *  SE (r_q - r_obs) == (c_obs - c_q)
+      *        4     3          5      4
+      *  SW (r_q - r_obs) == (c_q - c_obs)
+      */
+    };
+  }
 
 
 
@@ -238,7 +306,7 @@ public class QueensAttackII {
 
 }
 
-/* n=5, k=3, r_q=4, c_q=3, obstacles=[[5,5],[4,2],[2,3]]   //10
+/* n=5, k=3, r_q=4, c_q=3, obstacles=[[5,5],[4,2],[2,3]]   //7
 
     5   . ○ x ○ x
     4   . x Q ○ x
