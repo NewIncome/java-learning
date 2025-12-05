@@ -20,22 +20,37 @@
 public class MergeTwoSortedLinkedLists {
 
   public static void main(String[] args) {
+    //TestCase #1
     //Create LinkedList 1
     SinglyLinkedList llist1 = new SinglyLinkedList();
     llist1.insertNode(4);
     llist1.insertNode(5);
     llist1.insertNode(6);
-    SinglyLinkedList.printList(llist1.head);
-
+    System.out.print("LL1: "); SinglyLinkedList.printList(llist1.head);
     //Create LinkedList 2
     SinglyLinkedList llist2 = new SinglyLinkedList();
     llist2.insertNode(1);
     llist2.insertNode(2);
     llist2.insertNode(10);
-    SinglyLinkedList.printList(llist2.head);
+    System.out.print("LL2: "); SinglyLinkedList.printList(llist2.head);
+
+    System.out.print("LLmerged: "); SinglyLinkedList.printList(mergeLists(llist1.head, llist2.head));
     System.out.println();
 
-    SinglyLinkedList.printList(mergeLists(llist1.head, llist2.head));
+    //TestCase #2
+    //Create LinkedList 1
+    SinglyLinkedList llist3 = new SinglyLinkedList();
+    llist3.insertNode(1);
+    llist3.insertNode(3);
+    llist3.insertNode(7);
+    System.out.print("LL1: "); SinglyLinkedList.printList(llist3.head);
+    //Create LinkedList 2
+    SinglyLinkedList llist4 = new SinglyLinkedList();
+    llist4.insertNode(1);
+    llist4.insertNode(2);
+    System.out.print("LL2: "); SinglyLinkedList.printList(llist4.head);
+
+    System.out.print("LLmerged: "); SinglyLinkedList.printList(mergeLists(llist3.head, llist4.head));
   }
 
   static SinglyLinkedListNode mergeLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
@@ -46,27 +61,33 @@ public class MergeTwoSortedLinkedLists {
      * ○ case: h1 == null
      * ○ case: h2 == null
      */
-    SinglyLinkedListNode head;
-    SinglyLinkedListNode current;
-    if(head1 != null && head1.data >= head2.data) {
+    SinglyLinkedListNode head = null;
+    SinglyLinkedListNode current = null;
+
+    if(head1 != null && head1.data <= head2.data) {
       head = head1;
+      head1 = head1.next;
     } else {
       head = head2;
+      head2 = head2.next;
     }
     current = head;
 
-    while(current != null) {
+    //int i=0;
+
+    while(head1 != null || head2 != null) {
+      //System.out.println("InsideWhile");
       if(head1 == null) {
-        current = head2;
+        current.next = head2;
         return head;
       }
       if(head2 == null) {
-        current = head1;
+        current.next = head1;
         return head;
       }
       
       //comparison
-      if(head1.data > head2.data) {
+      if(head1.data <= head2.data) {
         current.next = head1;
         head1 = head1.next;
       } else {
@@ -74,6 +95,11 @@ public class MergeTwoSortedLinkedLists {
         head2 = head2.next;
       }
       current = current.next;
+      //i++;
+      //System.out.println("i: " + i);
+      //System.out.print("current: "); SinglyLinkedList.printList(current);
+      //System.out.print("head:    "); SinglyLinkedList.printList(head);
+      //if (i > 15) break;
     }
     
     return head;
@@ -115,8 +141,11 @@ public class MergeTwoSortedLinkedLists {
     public static void printList(SinglyLinkedListNode head) {
       while(head != null) {
         System.out.print(head.data);
+        //System.out.println("head: " + head);
         if(head.next != null) System.out.print(" -> ");
         head = head.next;
+        //System.out.println("head.data: " + head.data);
+        //System.out.println("head.next: " + head.next);
       }
       System.out.println();
     }
