@@ -60,9 +60,9 @@ public class QueensAttackII {
 
   public static void main(String[] args) {
     System.out.println(queensAttack1(8, 1, 4, 4, List.of(List.of(3,5)))); //24
-    //System.out.println(queensAttack1(4, 0, 4, 4, List.of())); //9
-    //System.out.println(queensAttack1(5, 3, 4, 3, List.of(List.of(5,5),List.of(4,2),List.of(2,3)))); //10
-    //System.out.println(queensAttack1(5, 3, 4, 3, List.of(List.of(4,5),List.of(5,3),List.of(3,3),List.of(5,5),List.of(4,2),List.of(2,3)))); //7
+    System.out.println(queensAttack1(4, 0, 4, 4, List.of())); //9
+    System.out.println(queensAttack1(5, 3, 4, 3, List.of(List.of(5,5),List.of(4,2),List.of(2,3)))); //10
+    System.out.println(queensAttack1(5, 3, 4, 3, List.of(List.of(4,5),List.of(5,3),List.of(3,3),List.of(5,5),List.of(4,2),List.of(2,3)))); //7
   }//end main
 
 
@@ -76,14 +76,13 @@ public class QueensAttackII {
   public static int queensAttack1(int n, int k, int r_q, int c_q,
                                   List<List<Integer>> obstacles) { //mathematical approach
     int attack = 0;
-    int closestObs = 0;
 
     // NORTH
     if(r_q != n) {  // if queens at the top no attacks available
       List<List<Integer>> obsNO = filterObstaclesByDir(Dirs.NO, r_q, c_q, obstacles);
 
       attack += obsNO.isEmpty() ? n - r_q :  (closestObs(Dirs.NO, obsNO) - 1) - r_q;
-      System.out.println("attack: " + attack + ", NorthClosestOrbsPos: " + (obsNO.isEmpty() ? "empty" : closestObs(Dirs.NO, obsNO)) + ", NorthObs: " + obsNO);
+      //System.out.println("attack: " + attack + ", NorthClosestOrbsPos: " + (obsNO.isEmpty() ? "empty" : closestObs(Dirs.NO, obsNO)) + ", NorthObs: " + obsNO);
     }
 
     // SOUTH
@@ -91,7 +90,7 @@ public class QueensAttackII {
       List<List<Integer>> obsSO = filterObstaclesByDir(Dirs.SO, r_q, c_q, obstacles);
 
       attack += obsSO.isEmpty() ? r_q - 1 : r_q - (closestObs(Dirs.SO, obsSO) + 1);
-      System.out.println("attack: " + attack + ", SouthClosestOrbsPos: " + (obsSO.isEmpty() ? "empty" : closestObs(Dirs.SO, obsSO)) + ", SouthObs: " + obsSO);
+      //System.out.println("attack: " + attack + ", SouthClosestOrbsPos: " + (obsSO.isEmpty() ? "empty" : closestObs(Dirs.SO, obsSO)) + ", SouthObs: " + obsSO);
     }
 
     // EAST
@@ -99,7 +98,7 @@ public class QueensAttackII {
       List<List<Integer>> obsEA = filterObstaclesByDir(Dirs.EA, r_q, c_q, obstacles);
 
       attack += obsEA.isEmpty() ? n - c_q : (closestObs(Dirs.EA, obsEA) - 1) - c_q;
-      System.out.println("attack: " + attack + ", EastClosestOrbsPos: " + (obsEA.isEmpty() ? "empty" : closestObs(Dirs.EA, obsEA)) + ", EastObs: " + obsEA);
+      //System.out.println("attack: " + attack + ", EastClosestOrbsPos: " + (obsEA.isEmpty() ? "empty" : closestObs(Dirs.EA, obsEA)) + ", EastObs: " + obsEA);
     }
 
     // WEST
@@ -107,51 +106,51 @@ public class QueensAttackII {
       List<List<Integer>> obsWE = filterObstaclesByDir(Dirs.WE, r_q, c_q, obstacles);
 
       attack += obsWE.isEmpty() ? c_q - 1 : c_q - (closestObs(Dirs.WE, obsWE) + 1);
-      System.out.println("attack: " + attack + ", WestClosestOrbsPos: " + (obsWE.isEmpty() ? "empty" : closestObs(Dirs.WE, obsWE)) + ", WestObs: " + obsWE);
+      //System.out.println("attack: " + attack + ", WestClosestOrbsPos: " + (obsWE.isEmpty() ? "empty" : closestObs(Dirs.WE, obsWE)) + ", WestObs: " + obsWE);
     }
 
     // DIAGONALS
     // NORTH-EAST VectorAlgorithm withObs (r_obs-1)-r_q
-    if(r_q != n) {  // if queens at the top no attacks available
+    if(r_q != n && c_q != n) {  // if queens at the top no attacks available
       List<List<Integer>> obsNE = filterObstaclesByDir(Dirs.NE, r_q, c_q, obstacles); //to filter Obs direction matters
       
-      attack += obsNE.isEmpty() ? n - Math.max(r_q, c_q) : (closestObs(Dirs.NO, obsNE) - 1) - r_q;                          //to get closest one No, from filtered
-      System.out.println("attack: " + attack + ", NorthEastClosestOrbsPos: " + (obsNE.isEmpty() ? "empty" : closestObs(Dirs.NO, obsNE)) + ", NorthEastObs: " + obsNE);
+      attack += obsNE.isEmpty() ? Math.min(n - r_q,n - c_q) : (closestObs(Dirs.NO, obsNE) - 1) - r_q;                          //to get closest one No, from filtered
+      //System.out.println("attack: " + attack + ", NorthEastClosestOrbsPos: " + (obsNE.isEmpty() ? "empty" : closestObs(Dirs.NO, obsNE)) + ", NorthEastObs: " + obsNE);
     }
 
     // NORTH-WEST VectorAlgorithm withObs (r_obs-1)-r_q
-    if(r_q != n) {  // if queens at the top no attacks available
+    if(r_q != n && c_q != 1) {  // if queens at the top no attacks available
       List<List<Integer>> obsNW = filterObstaclesByDir(Dirs.NW, r_q, c_q, obstacles);
       
-      attack += obsNW.isEmpty() ? n - Math.max(r_q, c_q) : (closestObs(Dirs.NO, obsNW) - 1) - r_q;
-      System.out.println("attack: " + attack + ", NorthWestClosestOrbsPos: " + (obsNW.isEmpty() ? "empty" : closestObs(Dirs.NO, obsNW)) + ", NorthWestObs: " + obsNW);
+      attack += obsNW.isEmpty() ? Math.min(n - r_q,c_q - 1) : (closestObs(Dirs.NO, obsNW) - 1) - r_q;
+      //System.out.println("attack: " + attack + ", NorthWestClosestOrbsPos: " + (obsNW.isEmpty() ? "empty" : closestObs(Dirs.NO, obsNW)) + ", NorthWestObs: " + obsNW);
     }
 
     // SOUTH-EAST VectorAlgorithm withObs (r_q-1)-r_obs
-    if(r_q != n) {  // if queens at the top no attacks available
+    if(r_q != 1 && c_q != n) {  // if queens at the top no attacks available
       List<List<Integer>> obsSE = filterObstaclesByDir(Dirs.SE, r_q, c_q, obstacles); //to filter Obs direction matters
       
-      attack += obsSE.isEmpty() ? Math.min(r_q, c_q) - 1 : (r_q - 1) - closestObs(Dirs.SO, obsSE);                          //to get closest one No, from filtered
-      System.out.println("attack: " + attack + ", SouthEastClosestOrbsPos: " + (obsSE.isEmpty() ? "empty" : closestObs(Dirs.NO, obsSE)) + ", SouthEastObs: " + obsSE);
+      attack += obsSE.isEmpty() ? Math.min(r_q - 1,n - c_q) : (r_q - 1) - closestObs(Dirs.SO, obsSE);                          //to get closest one No, from filtered
+      //System.out.println("attack: " + attack + ", SouthEastClosestOrbsPos: " + (obsSE.isEmpty() ? "empty" : closestObs(Dirs.NO, obsSE)) + ", SouthEastObs: " + obsSE);
     }
 
     // SOUTH-WEST VectorAlgorithm withObs (r_q-1)-r_obs
-    if(r_q != n) {  // if queens at the top no attacks available
+    if(r_q != 1 && c_q != 1) {  // if queens at the top no attacks available
       List<List<Integer>> obsSW = filterObstaclesByDir(Dirs.SW, r_q, c_q, obstacles); //to filter Obs direction matters
       
-      attack += obsSW.isEmpty() ? Math.min(r_q, c_q) - 1 : (r_q - 1) - closestObs(Dirs.SO, obsSW);                          //to get closest one No, from filtered
-      System.out.println("attack: " + attack + ", SouthWestClosestOrbsPos: " + (obsSW.isEmpty() ? "empty" : closestObs(Dirs.NO, obsSW)) + ", SouthWestObs: " + obsSW);
+      attack += obsSW.isEmpty() ? Math.min(r_q - 1,c_q - 1) : (r_q - 1) - closestObs(Dirs.SO, obsSW);                          //to get closest one No, from filtered
+      //System.out.println("attack: " + attack + ", SouthWestClosestOrbsPos: " + (obsSW.isEmpty() ? "empty" : closestObs(Dirs.NO, obsSW)) + ", SouthWestObs: " + obsSW);
     }
 
     //*¡I could very well call all the filteredObstacles variables with the same variable, just reassign it each time!
 
-    /* VectorAlgorithms for diagonalAttackAdditionWith-Obstacle:
-     *  NE (r_obs-1)-r_q
-     *  NW (r_obs-1)-r_q
-     *  SE (r_q-1)-r_obs
-     *  SW (r_q-1)-r_obs
-    */
     /* VectorAlgorithms for diagonalAttackAdditionWithout-Obstacle:
+     *  NE Math.min(n - r_q,n - c_q)
+     *  NW Math.min(n - r_q,c_q - 1)
+     *  SE Math.min(r_q - 1,n - c_q)
+     *  SW Math.min(r_q - 1,c_q - 1)
+    */
+    /* VectorAlgorithms for diagonalAttackAdditionWith-Obstacle:
      *  NE (r_obs-1)-r_q
      *  NW (r_obs-1)-r_q
      *  SE (r_q-1)-r_obs
@@ -385,3 +384,12 @@ public class QueensAttackII {
     
         1 2 3 4 5 6 7 8
 */
+/*
+    5   . . . . .
+    4   . Q Q . .   2(4,3) 3(4,3)   2(atk=3) 3(atk=2)
+    3   . Q . ○ .   1(3,2)          1(atk=2)
+    2   . . ○ . ○
+    1   . . . ○ .
+    
+        1 2 3 4 5
+ */
