@@ -10,6 +10,7 @@ List
 • Convert String-to-ArrayList
 • Convert integer to String
 • num % denom ,  use of the MODulus operator
+• initialize a string with defined # of 0's
 • count occurrences in a String
 • quickly SORT a List
 • Copy a List, shallow copies(doen's matter for primitives)
@@ -48,6 +49,11 @@ Content
                           expept when num == denom, then % = 0, meaning the end
     ○ if  num > denom  ; then you will get the remainder of the division num / denom
                           ie.:  10 % 3 = 1  ...  10 / 3 = 3 .: 3x3 = 9-10 = 1
+
+• initialize a string with defined # of 0's
+  ○ new String(new char[topic.get(0).length()]).replace("\0", 0);
+   or
+  ○ "0".repeat(length);
 
 • count occurrences in a String
   ○ with Stream API (Java 8+)
