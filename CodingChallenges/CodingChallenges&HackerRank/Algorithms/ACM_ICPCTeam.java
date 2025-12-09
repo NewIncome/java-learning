@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * There are a number of people who will be attending ACM-ICPC World Finals.
  * Each of them may be well versed in a number of topics. Given a list of
@@ -39,14 +36,19 @@ import java.util.List;
  *   ○ do binaryOp: team1 OR team2
  *   ○ if binaryOp
  */
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+
 public class ACM_ICPCTeam {
 
   public static void main(String[] args) {
     //System.out.println(acmTeam(new ArrayList<>(List.of("10101","11110","00010"))));
     //System.out.println(acmTeam(new ArrayList<>(List.of("10101","11100","11010","00101"))));
     System.out.println(acmTeam(new ArrayList<>(List.of("11101","10101","11001","10111","10000","01110"))));
+    Arrays.asList(String, "string");
   }//end main
-
   public static List<Integer> acmTeam(List<String> topic) {
     //Asume all the stringValues are of same length
     List<Integer> maxTopicsTeams = new ArrayList<>(2);

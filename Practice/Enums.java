@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class EnumPractice01 {
+public class Enums {
 
   public static void main(String[] args) {
     Day day = Day.FRIDAY;
