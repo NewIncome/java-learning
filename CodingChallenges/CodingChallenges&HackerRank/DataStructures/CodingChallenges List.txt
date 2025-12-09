@@ -15,4 +15,6 @@ List of Coding Challenges, DataStructures
 [✔] - Reverse a linked list (passedByMe, error in HRcodeNotCompiling)
 [✔] - Compare two linked lists (passed-<15min)
 [✔] - Merge two sorted linked lists (stuck, ❌) (conditions where totally wrong)
+[✔] - Get Node Value
+[❌] - Delete duplicate-value nodes from a sorted linked list(passed1)
 [ ] - 
