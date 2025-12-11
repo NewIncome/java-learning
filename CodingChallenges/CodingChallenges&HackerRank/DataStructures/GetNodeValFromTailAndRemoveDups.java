@@ -5,7 +5,7 @@
  */
 import java.util.LinkedList;
 
-public class GetNodeValueFromTail {
+public class GetNodeValFromTailAndRemoveDups {
 
   public static void main(String[] args) {
     SinglyLinkedList llist1 = new SinglyLinkedList();
@@ -24,6 +24,17 @@ public class GetNodeValueFromTail {
     llist3.insertNode(1);
     llist3.insertNode(0);
     System.out.println(getNode(llist3.head, 2));
+
+    System.out.println();
+
+    SinglyLinkedList llist4 = new SinglyLinkedList();
+    llist4.insertNode(3);
+    llist4.insertNode(3);
+    llist4.insertNode(3);
+    llist4.insertNode(4);
+    llist4.insertNode(5);
+    SinglyLinkedList.printList(llist4.head);
+    SinglyLinkedList.printList(removeDuplicates(llist4.head));
   }
 
   public static int getNode(SinglyLinkedListNode llist, int positionFromTail) {
@@ -50,17 +61,34 @@ public class GetNodeValueFromTail {
     return list.get(pos);
   }
 
+  public static SinglyLinkedListNode removeDuplicates(SinglyLinkedListNode llist) {
+  // Write your code here
+    SinglyLinkedListNode current = llist;
+
+    while(current != null) {
+      //edgeCase, remove last element
+      
+      while(current.next != null && current.data == current.next.data) {
+          current.next = current.next.next;
+      }
+      current = current.next;
+      
+    }
+    
+    return llist;
+  }
+
 
 
   static class SinglyLinkedListNode {
-        public int data;
-        public SinglyLinkedListNode next;
+    public int data;
+    public SinglyLinkedListNode next;
 
-        public SinglyLinkedListNode(int nodeData) {
-            this.data = nodeData;
-            this.next = null;
-        }
+    public SinglyLinkedListNode(int nodeData) {
+      this.data = nodeData;
+      this.next = null;
     }
+  }
 
   static class SinglyLinkedList {
     public SinglyLinkedListNode head;
@@ -86,11 +114,8 @@ public class GetNodeValueFromTail {
     public static void printList(SinglyLinkedListNode head) {
       while(head != null) {
         System.out.print(head.data);
-        //System.out.println("head: " + head);
         if(head.next != null) System.out.print(" -> ");
         head = head.next;
-        //System.out.println("head.data: " + head.data);
-        //System.out.println("head.next: " + head.next);
       }
       System.out.println();
     }
