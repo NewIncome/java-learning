@@ -28,5 +28,6 @@ List of Coding Challenges, Algorithms
 [✔] - Non-Divisible Subset (passed wV) (❌, sortOfUnderstood, could do better)
 [✔] - Equalize the Array (passedOk)
 [✔] - Queen's Attack II (/,passed 18/22,timeLimitExc) (tookAlmost4days to get it by myself(atTheEnd withLittleAIhelp))
-[❌] - ACM ICPC Team (❌, passed 1)
+[✔] - ACM ICPC Team (❌, passed 1) (passed, do less operations inside nested loop with an outer loop and an array var for convOfInitData)
+      //the difference was only of 0.3seconds
 [ ] - 
