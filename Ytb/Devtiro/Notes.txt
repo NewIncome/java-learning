@@ -1,5 +1,7 @@
 Spring Rest API development
 ----------------------------
+by Devtiro
+https://www.youtube.com/watch?v=Nv2DERaMx-4
 
 ► Coding Steps
 ---------------
@@ -351,6 +353,9 @@ with many fields or optional parameters in a clean, readable, and flexible way.
   ♦ If no value is present, the object is considered empty and isPresent() returns false
   ♦ when crud method auto-generated from interface to implementationClass it comes with:
       return Optional.empty();
+• Optional class 'n methods
+  ♦ Optional.ofNullable(T value) ,  returns an optional describing the given value
+  ♦  .ifPresent(action) ,  if a value is present performs the given value
 
 ▲ RowMapper
 • Used to convert from a ResultSet and convert it into an object
@@ -588,6 +593,27 @@ a logger from Lombok
       ◘ we can implement that interface with Beans, then inject those beans when/where needed
         That allows us to swap things out
         * And we'll need an AuthorMapper for Implementations
+►*** NestedObject CRUD functionality
+• in this DomainDrivenDesign option, using "JPA, Jackson, and ModelMapper",
+  the issue relies in the ModelMapper
+  So to have that *functionality all we need is to add a configuration to the MapperConfig
+*by functionality I mean, creating a Book, and adding the nestedAuthor's info,
+ and without any extra code having SpringDataJPA create both the book and the Author for us
+  ♦ so, in the ModelMapper @Bean, instead of just returning a 'new ModelMapper()'
+    we, create that modelMapper with the constructor, and add a configuration to it
+  ♦ more clearly, add a "Matching Strategy" of "Loose" to it, then return it
+  ♦ like so:
+     @Configuration
+     public class MapperConfig {
+       @Bean
+       public ModelMapper modelMapper() {
+         ModelMapper modelMapper = new ModelMapper();
+  >>     modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+         return modelMapper;
+       }
+     }
+• That is all we need to do, to let "Jackson -> ModelMapper -> SpringDataJPA" handle
+  NestedObject CRUD functionality for us!!!
 
 ▲ Spring Boot Application Architecture : Layers
 • Three tier(or 3 layer) Arquitecture
@@ -752,6 +778,66 @@ public List<AuthorEntity> findAll() {
                     .spliterator(), /*Creates a Spliterator over the elements described by this Iterable*/
               false)     /*to define the stream as true=parallel, false=sequential*/
           .collect(Collectors.toList());  //to collect/convert the resulting stream into a List
+
+* Code to update partial information of an Entity
+   return authorRepository.findById(id).map(existingAuthor -> {
+      Optional.ofNullable(authorEntity.getAge()).ifPresent(existingAuthor::setAge);
+      Optional.ofNullable(authorEntity.getName()).ifPresent(existingAuthor::setName);
+      return authorRepository.save(existingAuthor);
+    }).orElseThrow(() -> new RuntimeException("Author does not exist"));
+/* If the Optional has an Age and is notNull,
+    set that as we found it on the existing author as we found it in the DB */
+//.ofNullable(), returns an emptyOptional on Null; .of() doesn't
+
+► Pagination
+• Needed to save resources to avoid crashed servers, crashed DBs,
+  limit views for better UI,
+  or just wait times that will affect UX
+• So where we can we want to set limits to the numbers of Entites that
+  return on those list EndPoints
+• Pagination is built-into SpringDataJPA, and spring-web, it goes all the way up the chain
+• Interface PagingAndSortingRepository<BookEntity, String> , by implementing it
+  ♦ is the one that adds the magic to the Repository, just like CrudRepository interface
+• Page & Pageable interfaces, are the way to call a method with pagination
+   Page<BookEntity> findAll(Pageable pageable);
+  ♦ Page is imported from: org.springframework.data.domain.Page;
+  ♦ Pageable is imported from: org.springframework.data.domain.Pageable;
+• the "Pageable" object contains metadata about the Page/PaginatedGroupOfEntities
+  ♦ we need the pageable to inform what is in the 'Page'
+• to use it in your method/endPoint declaration
+   @GetMapping("/books")
+   public Page<BookDto> listBooks(Pageable pageable) { ... }
+* Spring injects the info for us, just by adding the Pageable obj as a meth param
+• the returned Json of a paginationMethod
+  { "content": [ ...books... ],
+    "pageable": { ...pages-metadata... } }
+• to control the size of the page
+   http://localhost:8080/books?size=2
+• to control which page(index) we're currently viewing
+   http://localhost:8080/books?size=2$page=1
+* which allows us to limit the amount of elements returned by our API
+** Pagination here, also allows for 'sorting', and other nice features
+• example of the content and metadata:
+  {
+    "content": [
+      { "id": 1, "name": "Alice" },
+      { "id": 2, "name": "Bob" }
+    ],
+    "pageable": {
+      "pageNumber": 0,
+      "pageSize": 2,
+      "offset": 0,
+      "paged": true
+    },
+    "totalElements": 25,
+    "totalPages": 13,
+    "size": 2,
+    "number": 0,
+    "numberOfElements": 2,
+    "first": true,
+    "last": false,
+    "empty": false
+  }
 
 
 
