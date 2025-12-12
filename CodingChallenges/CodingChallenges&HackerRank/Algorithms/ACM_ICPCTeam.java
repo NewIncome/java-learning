@@ -80,20 +80,27 @@ public class ACM_ICPCTeam {
   public static List<Integer> acmTeam(List<String> topic) {
     //Asume all the stringValues are of same length
     List<Integer> maxTopicsTeams = new ArrayList<>(2);
-    BigInteger a, b;
-
     String teamOrOp;
     int teamOrOpOnes = 0;
+    //OP.1//BigInteger a, b;
+    //OP.2
+    int n = topic.size();
+    BigInteger[] bi = new BigInteger[n];
+
+    for (int i = 0; i < bi.length; i++)
+      bi[i] = new BigInteger(topic.get(i), 2);
 
     maxTopicsTeams.add(0);
     maxTopicsTeams.add(0);
+    
 
-    for (int i = 0; i < topic.size(); i++) {
-      for (int j = i+1; j < topic.size(); j++) {
+    for (int i = 0; i < n; i++) {
+      for (int j = i+1; j < n; j++) {
 
-        a = new BigInteger(topic.get(i), 2);
-        b = new BigInteger(topic.get(j), 2);
-        teamOrOp = a.or(b).toString(2);
+        //OP.1//a = new BigInteger(topic.get(i), 2);  //too many assignments inside the loop
+        //OP.1//b = new BigInteger(topic.get(j), 2);
+        //OP.2
+        teamOrOp = bi[i].or(bi[j]).toString(2);
         teamOrOpOnes = teamOrOp.length() - teamOrOp.replace("1", "").length();
         //System.out.println("i: " + i + ", j: " + j + ", teamOrOp: " + teamOrOp + ", teamOrOpOnes: " + teamOrOpOnes);
         if(teamOrOpOnes > maxTopicsTeams.get(0)) {
@@ -113,6 +120,9 @@ public class ACM_ICPCTeam {
 
     return maxTopicsTeams;
   }//end acmTeam
+  //OP.1// gets TLE by ~2.2sec  , so by little
+  //  inside loops try to do as little as possible
+  //OP.2// gets TLE by ~1.93sec , passed
 
   private static List<String> testCase06 = new ArrayList<>(List.of(
 "11000001001101011100010111000000010010001000101000000010010101010000111101110011101100011111101111101010100111111010001111010010100100111010011100110010010000110111101100001001111101100001001111010101000111110001010111001100010011111000110010111101001101100101000011001010011100010000111101010110101110001001011010100011011001011011111100111011100100011010001100110001011101001100101010111111010011010100001001111100000000000010101011101001010000110111110001111101011011110011001101000000111011100111",
