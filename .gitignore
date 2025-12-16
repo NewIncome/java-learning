@@ -2,3 +2,6 @@
 .idea/
 out/
 *.iml
+
+#all java compiled code
+*.class
