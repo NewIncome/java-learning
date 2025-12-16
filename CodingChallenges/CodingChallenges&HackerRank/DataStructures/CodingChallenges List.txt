@@ -17,4 +17,5 @@ List of Coding Challenges, DataStructures
 [✔] - Merge two sorted linked lists (stuck, ❌) (conditions where totally wrong)
 [✔] - Get Node Value
 [✔] - Delete duplicate-value nodes from a sorted linked list(passed1)(passedOk)
+[/] - Cycle Detection (passedSortOf,BadHR Explanation)(passedByMe)
 [ ] - 
