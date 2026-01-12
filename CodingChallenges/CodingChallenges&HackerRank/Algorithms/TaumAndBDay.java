@@ -1,3 +1,5 @@
+import java.math.BigInteger;
+
 /**
  * Taum is planning to celebrate the birthday of his friend, Diksha. There
  * are two types of gifts that Diksha wants from Taum: one is black and the
@@ -38,7 +40,19 @@ public class TaumAndBDay {
     System.out.println(taumBday(3,3,1,9,2));
   }
 
+  // ISSUE WAS THE USE OF VeryLong Integers, so BIGINTEGER!!!
   public static long taumBday(int b, int w, int bc, int wc, int z) {  //passed 7/14
+    // price_black_gift = price_black_gift || price_white_gift + price_of_conversion
+    // price_white_gift = price_white_gift || price_black_gift + price_of_conversion
+    BigInteger B = BigInteger.valueOf(b);
+    BigInteger W = BigInteger.valueOf(w);
+    BigInteger bp =  BigInteger.valueOf(Math.min(bc, (wc + z)));
+    BigInteger wp = BigInteger.valueOf(Math.min(wc, (bc + z)));
+
+    return bp.multiply(B).add( wp.multiply(W) ).longValue();
+  }
+
+  public static long taumBday0(int b, int w, int bc, int wc, int z) {  //passed 7/14
     //if(bc == wc) { return (b*bc) + (w*wc); }
     int alone, convWhite, convBlack = 0;
     alone = (b*bc) + (w*wc);
@@ -51,19 +65,7 @@ public class TaumAndBDay {
     return (b*bc) + (w*wc);*/
 
     // if z > bc || > wc, or if bc == wc  : no conversion
-    if(convBlack < convWhite) {
-      if(convBlack < alone) {
-        return convBlack;
-      } else {
-        return alone;
-      }
-    } else {
-      if(convWhite < alone) {
-        return convWhite;
-      } else {
-        return alone;
-      }
-    }
+    return alone < Math.min(convBlack, convWhite) ? alone : Math.min(convBlack, convWhite);
   }
 
 }
