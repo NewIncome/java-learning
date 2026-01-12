@@ -40,10 +40,30 @@ public class TaumAndBDay {
 
   public static long taumBday(int b, int w, int bc, int wc, int z) {  //passed 7/14
     //if(bc == wc) { return (b*bc) + (w*wc); }
-    if(bc > (wc + z)) { return ((b+w) * wc) + (b*z); }  //is this the same?: (b*(wc+z)) + (w*wc)
-    if(wc > (bc + z)) { return ((b+w) * bc) + (w*z); }
+    int alone, convWhite, convBlack = 0;
+    alone = (b*bc) + (w*wc);
+    convWhite = ((b+w) * wc) + (b*z);
+    convBlack = ((b+w) * bc) + (w*z);
 
-    return (b*bc) + (w*wc);
+    /*if(bc > (wc + z)) { return ((b+w) * wc) + (b*z); }  //cost of totalWhite units + cost of conversion
+    if(wc > (bc + z)) { return ((b+w) * bc) + (w*z); }  //cost of totalBlack units + cost of conversion
+
+    return (b*bc) + (w*wc);*/
+
+    // if z > bc || > wc, or if bc == wc  : no conversion
+    if(convBlack < convWhite) {
+      if(convBlack < alone) {
+        return convBlack;
+      } else {
+        return alone;
+      }
+    } else {
+      if(convWhite < alone) {
+        return convWhite;
+      } else {
+        return alone;
+      }
+    }
   }
 
 }
