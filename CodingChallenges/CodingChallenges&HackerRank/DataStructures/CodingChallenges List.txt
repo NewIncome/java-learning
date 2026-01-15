@@ -19,4 +19,5 @@ List of Coding Challenges, DataStructures
 [✔] - Delete duplicate-value nodes from a sorted linked list(passed1)(passedOk)
 [✔] - Cycle Detection (passedSortOf,BadHR Explanation)(passedByMe) (in Java7 HR does the IOscan)
 [✔] - Find Merge Point of Two Lists (tried twice, 1stTime wrong approach)
+[❌] - Inserting a Node Into a Sorted Doubly Linked List (0)
 [ ] - 
