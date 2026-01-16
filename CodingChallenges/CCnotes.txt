@@ -3,59 +3,62 @@ Java cool methods and classes
 
 List
 ----
-• toEnter java -jshell- tool
-• Collections.frequency(Collection<?> c, Object o)
-• String formatting
-• Convert String-to-charArray
-• Convert String-to-ArrayList
-• Convert integer to String
-• num % denom ,  use of the MODulus operator
-• initialize a string with defined # of 0's
-• count occurrences in a String
-• quickly SORT a List
-• Copy a List, shallow copies(doen's matter for primitives)
-• Copy a List of Objects, deep copy (streams)
+ 1• toEnter java -jshell- tool
+ 2• Collections.frequency(Collection<?> c, Object o)
+ 3• String formatting
+ 4• Convert String-to-charArray
+ 5• Convert String-to-ArrayList
+ 6• Convert integer to String
+ 7• num % denom ,  use of the MODulus operator
+ 8• initialize a string with defined # of 0's
+ 9• count occurrences in a String
+10• add the rows & cols of a matrix (the inner Lists of a List<List<Integer>>)
+11• quickly SORT a List
+12• Get the Key of the max Value of a HashMap
+13• Copy a List, shallow copies(doen's matter for primitives)
+14• Copy a List of Objects, deep copy (streams)
+
 
 
 Content
 -------
-• toEnter java -jshell- tool
+• 1 - toEnter java -jshell- tool
      $ jshell
     ○ to exit
      $ /exit
 
-• Collections.frequency(Collection<?> c, Object o)
+• 2 - Collections.frequency(Collection<?> c, Object o)
     ○ Returns the number of elements in the specified collection equal
       to the specified object
     ○ in java.util.Collections;
-• String formatting
+• 3 - String formatting
     ○ Opt1:  String.format("%d.%d.%d", sumDays, month, y);
     ○ Opt2:  System.out.printf("%d.%d.%d", sumDays, month, y);
-• Convert String-to-charArray
+• 4 - Convert String-to-charArray
     ○ Opt1:  str.toCharArray();    //char[]
     ○ Opt2:  sentence.split(" ");  //String[]
-• Convert String-to-ArrayList
+• 5 - Convert String-to-ArrayList
     ○ Opt1:  new ArrayList<>(Arrays.asList(10, 20, 30, 40, 50));  //mutable ; PREFERRED
     ○ Opt2:  new ArrayList<>(List.of(1, 2, 3));   //mutable ; Java 8 Stream API (Flexible)
     ○ Opt3:  Arrays.asList()                    //Mutable Elements, but FIXED-SIZE(immutable in size)
     ○ Opt4:  List.of(100, 200, 300);            //Fully IMMUTABLE ; Java 9+ Factory Method
-• Convert integer to String
+• 6 - Convert integer to String
   ○ Opt1: String.valueOf(number);
   ○ Opt2: String.format("%d", number);
 
-• num % denom ,  use of the MODulus operator
+• 7 - num % denom ,  use of the MODulus operator
   ♦ examples in a loop
     ○ if  demon > num  ; then the result will be the same number,
                           expept when num == denom, then % = 0, meaning the end
     ○ if  num > denom  ; then you will get the remainder of the division num / denom
                           ie.:  10 % 3 = 1  ...  10 / 3 = 3 .: 3x3 = 9-10 = 1
 
-• initialize a string with defined # of 0's
+• 8 - initialize a string with defined # of 0's
   ○ new String(new char[topic.get(0).length()]).replace("\0", 0);
    or
   ○ "0".repeat(length);
 
-• count occurrences in a String
+• 9 - count occurrences in a String
   ○ with Stream API (Java 8+)
     HashMap<String, Integer> count01 = new HashMap<>();
     Arrays.asList(str.split("")).stream().forEach(e -> count01.put(e, count01.containsKey(e) ? count01.get(e) + 1 : 1));
@@ -63,7 +66,35 @@ Content
   ○ Better writen line, with HashMap-Instance.getOrDefault(key, defaultVal)
     YourArray.stream().forEach(e -> count01.put(e, count01.get(e, 0) + 1));
 
-• quickly SORT a List
+• 10 - add the Rows and Cols of a Matrix (the inner Lists of a List<List<Integer>>), ie.: [[0,2,1], [1,1,1], [2,0,0]]
+  ○ add the Rows; (Op.A.)
+    ◙ Op.A.:
+       List<Integer> rowSums = matrix.stream()
+          .map(row -> row.stream().mapToInt(Integer::intValue).sum())
+          .toList();
+    ◙ Op.B.:
+       long[] contCapacity = new long[n];
+       for(..loop..) {
+         contCapacity[i] = container.get(i).stream().reduce((a,b)->a+b).orElse(0)
+       }
+  ○ add the Cols
+     List<Integer> colSums = IntStream.range(0, numCols)
+          .mapToObj(colIdx -> matrix.stream()
+              .mapToInt(row -> row.get(colIdx))
+              .sum())
+          .toList();
+  ○ add both
+     int[] rowSums = new int[rows];
+     int[] colSums = new int[cols];
+     for (int i = 0; i < rows; i++) {
+         for (int j = 0; j < cols; j++) {
+             int val = matrix.get(i).get(j);
+             rowSums[i] += val;
+             colSums[j] += val;
+         }
+     }
+
+• 11 - quickly SORT a List
   ○ with Collections, doesn't return anything, Modifies the array in place
      List<Integer> arr = new ArrayList<>(Arrays.asList(3, 1, 4, 1, 5, 9, 2));
       or just    = Arrays.asList(3, 1, 4, 1, 5, 9, 2);
@@ -79,7 +110,7 @@ Content
   ○ with ParallelStream, for veery large lists(has overhead)
     ◘ list.parallelStream() .sorted() .collect(Collectors.toList());
 
-• Get the Key of the max Value of a HashMap
+• 12 - Get the Key of the max Value of a HashMap
   ○ using .entrySet() method, to avoid extra looking when repeated key hashcodes
     ◘  String topKey = scores.entrySet().stream()
                           .max(Map.Entry.comparingByValue())
@@ -98,7 +129,7 @@ Content
                           .filter(key -> scores.get(key).equals(maxValue))
                           .findFirst();
 
-• Copy a List, shallow copies(doen's matter for primitives)
+• 13 - Copy a List, shallow copies(doen's matter for primitives)
   ○ Immutable (Java 10+)
      List<String> copy = List.copyOf(originalListString);
   ○ Mutable copy
@@ -106,7 +137,8 @@ Content
 /* In List of Primitives(wraps) there's no problem in having a shallow copy,
    but in Objects, and List of Objects, referencing them WILL change the original
 */
-• Copy a List of Objects, deep copy (streams)
+
+• 14 - Copy a List of Objects, deep copy (streams)
    List<Person> deepCopy = original.stream()
     .map(Person::clone)  // assuming clone() defined or new constructor () empty
     .collect(Collectors.toList());
