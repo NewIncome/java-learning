@@ -26,22 +26,46 @@ public class InsertingNodeIntoSortedDoublyLinkedList {
   }
 
   public static DoublyLinkedListNode sortedInsert(DoublyLinkedListNode llist, int data) {
-    DoublyLinkedListNode current = llist;
-      while(current.next != null) {
+    // Write your code here
+      DoublyLinkedListNode current = llist;
+      
+      //EdgeCase #1: the new node will be added 1st
+      if(current.prev == null && current.data > data) {
+        //System.out.println("Inside E.C.1 if");
+        DoublyLinkedListNode newNode = new DoublyLinkedListNode(data);
+        newNode.next = current;
+        current.prev = newNode;
+        return newNode;
+      }
+
+      while(current != null) {
+        //System.out.println("currentNode: " + current.data);
+        
+        //EdgeCase #2: the new node will be added last
+        if(current.next == null && (current.data < data)) {
+          //System.out.println("Inside E.C.2 if");
+          DoublyLinkedListNode newNode = new DoublyLinkedListNode(data);
+          newNode.prev = current;
+          current.next = newNode;
+          return llist;
+        } 
+
+        //Regular cases
         if(current.data < data &&
            current.next.data >= data) {
-          //insert node == update curr.next and add it to new node
           DoublyLinkedListNode newNode = new DoublyLinkedListNode(data);
           newNode.next = current.next;
-          newNode.prev = current;
           current.next.prev = newNode;
+          
+          newNode.prev = current;
           current.next = newNode;
           return llist;
         }
-        llist = llist.next;
+
+        current = current.next;
       }
       
       return llist;
-  }
+    }
 
 }
