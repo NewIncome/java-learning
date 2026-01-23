@@ -20,5 +20,5 @@ List of Coding Challenges, DataStructures
 [✔] - Cycle Detection (passedSortOf,BadHR Explanation)(passedByMe) (in Java7 HR does the IOscan)
 [✔] - Find Merge Point of Two Lists (tried twice, 1stTime wrong approach)
 [✔] - Inserting a Node Into a Sorted Doubly Linked List (0) (3rd try self-solution, could use refactoring)
-[❌] - Reverse a doubly linked list (❌,got to the end, but returning the single endNode)
+[✔] - Reverse a doubly linked list (❌,got to the end, but returning the single endNode)(w-Vid, almost just like reverse SinglyLinkedList)
 [ ] - 
