@@ -24,6 +24,19 @@ public class ReverseALinkedList {
     SinglyLinkedList.printList(reverse(llist2.head));
   }
 
+  public static SinglyLinkedListNode reverse2ndApproach(SinglyLinkedListNode llist) {
+    if(llist == null) return llist;
+    SinglyLinkedListNode prevNode = null;
+    SinglyLinkedListNode currentNode = llist;
+    while(currentNode != null) {
+      SinglyLinkedListNode nextNode = currentNode.next;
+      currentNode.next = prevNode;
+      prevNode = currentNode;
+      currentNode = nextNode;
+    }
+    return prevNode;
+  }
+
   public static SinglyLinkedListNode reverse(SinglyLinkedListNode llist) {
   // Write your code here
     /* loop through list

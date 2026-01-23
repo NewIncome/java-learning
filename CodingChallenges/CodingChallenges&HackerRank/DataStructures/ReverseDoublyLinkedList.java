@@ -25,6 +25,23 @@ public class ReverseDoublyLinkedList {
   }
 
   public static DoublyLinkedListNode reverse(DoublyLinkedListNode llist) {
+    DoublyLinkedListNode currentNode = llist;
+    DoublyLinkedListNode newHead = llist;  //Needs initialization. No matter if seems redundant, at first.
+
+    while(currentNode != null) {
+      DoublyLinkedListNode prev = currentNode.prev;
+
+      currentNode.prev = currentNode.next;
+      currentNode.next = prev;
+      newHead = currentNode;  //To keep account of the end
+
+      currentNode = currentNode.prev;
+    }
+
+    return newHead;
+  }
+
+  public static DoublyLinkedListNode reverse0(DoublyLinkedListNode llist) {
   // Write your code here
     //In case list is null
     if(llist == null || llist.next == null) return llist;
