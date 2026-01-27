@@ -34,5 +34,5 @@ List of Coding Challenges, Algorithms
 [✔] - Organizing Containers of Balls (2/7)(bad Approach for very large cases)(❌)(4th Try w-AI, wrong understanding of the problem)
       //MUST ASSUME(or musn't assume opposite), containers are not fixed with/for a specific ballType
 [✔] - Encryption (took too long with var-types, the loops, and loop-cond for different sized strings)
-[/] - Bigger is Greater (not entirely undestood)
+[/] - Bigger is Greater (❌, not entirely undestood)
 [ ] - 
