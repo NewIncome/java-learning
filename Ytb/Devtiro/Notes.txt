@@ -789,6 +789,20 @@ public List<AuthorEntity> findAll() {
     set that as we found it on the existing author as we found it in the DB */
 //.ofNullable(), returns an emptyOptional on Null; .of() doesn't
 
+* Changes of an Optional when being called with a second method:
+Code written                  Return type of the whole expression   What happens if ID doesn't exist?
+------------                  -----------------------------------   ---------------------------------
+.findById(taskListId)                     Optional<TaskList>        returns Optional.empty()
+.findById(taskListId).orElseThrow(...)    TaskList                  throws exception if not found
+.findById(taskListId).orElse(null)        TaskList (or null)        returns null if not found
+.findById(taskListId).orElseGet(this::createNew)    TaskList        returns fallback value
+.findById(taskListId).get()               TaskList                  throws NoSuchElementException if empty
+.findById(taskListId).orElseThrow()       TaskList                  throws NoSuchElementException if empty
+* Quick summary:
+  ♦ findById() → always returns Optional. Without any other added method, you keep the wrapper
+  ♦ .orElseThrow() → unwraps the Optional and returns the real object (or throws)
+
+
 ► Pagination
 • Needed to save resources to avoid crashed servers, crashed DBs,
   limit views for better UI,
