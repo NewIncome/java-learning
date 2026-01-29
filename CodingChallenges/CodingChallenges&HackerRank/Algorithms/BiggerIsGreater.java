@@ -65,6 +65,13 @@
    4• Find the min-char in that sub-string after 1stLower that is also greater than 1stLower
    5• Swap that min-char-subString(2ndLower) with 1stLower
    6• Now Sort that substring after 2ndLower, in ascending order
+
+  wWebpage:Nayuki.io
+  1. Firstly, identify the longest suffix that is non-increasing. Better found from RtoL
+  2. Identify pivot. Element immediately to the left
+  3. Find rightmost successor to pivot in the suffix.  ...Assume(should be) suffix is sorted  Descending sorted
+  4. Swap rightmost-successor with pivot
+  5. Reverse the suffix (ascending sort)
  */
 import java.util.Arrays;
 import java.util.stream.IntStream;
@@ -73,11 +80,56 @@ import java.util.stream.IntStream;
 public class BiggerIsGreater {
 
   public static void main(String[] args) {
-    System.out.println(biggerIsGreater("ab"));
+    /* for (String s : Arrays.asList(
+      "ab","bb","hefg","dhck","dkhc","lmno","dcba","dcbb","abdc","abcd"))
+    {
+      System.out.println(biggerIsGreater(s));
+    } */
+    System.out.println(biggerIsGreater("dkhc"));
+    System.out.println(biggerIsGreater("abdc"));
   }
 
 
-  public static String biggerIsGreater(String w) {
+  public static String biggerIsGreater(String w) {  //wWebpage
+    char[] W = w.toCharArray();
+    int suffixStart = 0;
+    int pivot = 0;
+    int rightMSuccessor = 0;
+
+    //1.Identify non-inc suffix
+    for (int i = W.length-1; i > 0; i--) {  //from RtoL
+      if(W[i-1] < W[i]) {
+        suffixStart = i;
+
+        //2.Identify pivot
+        pivot = i-1;
+        break;
+      }
+    }
+
+    //end, there was no non-inc suffix available
+    if(suffixStart == 0) return "no answer";
+
+    //3.Identify righmost-successor to pivot
+    //rightMSuccessor = suffixStart;
+    for (int i = W.length-1; i >= suffixStart; i--) {
+      //System.out.println("i: " + i);
+      if(W[i-1] <= W[i] && W[i] > W[pivot]) rightMSuccessor = i;
+    }
+
+    //4.Swap
+    char temp = W[rightMSuccessor];
+    W[rightMSuccessor] = W[pivot];
+    W[pivot] = temp;
+    //System.out.println("pivot: " + pivot + ", suffixStart: " + suffixStart + ", rightMSuccessor: " + rightMSuccessor);
+    
+    //5.Reverse suffix; sort
+    Arrays.sort(W, suffixStart, W.length);
+
+    return String.valueOf(W);
+  }
+
+  public static String biggerIsGreaterWVid(String w) { //Works
     char charArray[] = w.toCharArray();
     int n = charArray.length;
     int endIndex = 0;
@@ -91,11 +143,12 @@ public class BiggerIsGreater {
       int firstSmallChar = charArray[endIndex - 1];
       int nextSmallChar = endIndex;
 
-      for (int startIndex = endIndex + 1; startIndex < n; startIndex++) {
-        if(charArray[startIndex] > firstSmallChar && charArray[startIndex] < charArray[nextSmallChar]) {
-          nextSmallChar = startIndex;
+      for (int i = endIndex + 1; i < n; i++) {
+        if(charArray[i] > firstSmallChar && charArray[i] < charArray[nextSmallChar]) {
+          nextSmallChar = i;
         }
       }
+      System.out.println("firstSmallChar(pivot): " + (char)firstSmallChar + ", endIndex(suffixStart): " + endIndex + ", nextSmallChar: " + nextSmallChar);
 
       swap(charArray, endIndex - 1, nextSmallChar);
 
