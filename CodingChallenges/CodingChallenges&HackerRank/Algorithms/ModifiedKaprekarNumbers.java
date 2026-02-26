@@ -46,25 +46,28 @@ public class ModifiedKaprekarNumbers {
     //missing:  77778 82656 95121 99999
   }
 
+  /* I need to use Long because the maximum int num is 2147483647
+                    And            77778^2     is=     6049417284
+   */
   public static void kaprekarNumbers(int p, int q) {
-    List<Integer> kaprekarNumsArr = new ArrayList<>();
-    int l,r, kLength = 0;
+    List<Long> kaprekarNumsArr = new ArrayList<>();
+    long l,r, kLength = 0;
 
-    for(int i = p; i <= q; i++) {
-      kLength = String.valueOf(i).length();
-      int sq = (int) Math.pow(i, 2);
+    for(long i = p; i <= q; i++) {
+      kLength = String.valueOf(i).length();   // *** can obtain with:  Math.log10(i)+1
+      long sq = (long) Math.pow(i, 2);
       String sqS = String.valueOf(sq);
 
       if(sqS.length() == 1) {  //for single digits
         l = 0;
         r = sq;
       } else {
-        String rS = sqS.substring(sqS.length() - kLength);
-        r = Integer.parseInt(rS);
-        l = Integer.parseInt(sqS.replace(rS, ""));
+        String rS = sqS.substring(sqS.length() - (int) kLength);
+        r = Long.parseLong(rS);
+        l = Long.parseLong(sqS.replace(rS, ""));
       }
       /* // ***---Debugging start---***
-      if(i == 297) {
+      if(i == 77778 || i == 82656 || i == 95121 || i == 99999) {
         System.out.println("i: " + i + ", kLength: " + kLength + ", sq: " + sq + ", l: " + l + ", r: " + r);
       }
       // ***---Debugging end---*** */
