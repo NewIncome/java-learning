@@ -35,5 +35,5 @@ List of Coding Challenges, Algorithms
       //MUST ASSUME(or musn't assume opposite), containers are not fixed with/for a specific ballType
 [✔] - Encryption (took too long with var-types, the loops, and loop-cond for different sized strings)
 [/] - Bigger is Greater (❌, not entirely undestood)
-[/] - Modified Kaprekar Numbers (passed 6/7)(TookTooLong, rusty)
+[✔] - Modified Kaprekar Numbers (/, passed 6/7)(TookTooLong, rusty) -> (passed now, needed Long, int too limited)
 [ ] - 
