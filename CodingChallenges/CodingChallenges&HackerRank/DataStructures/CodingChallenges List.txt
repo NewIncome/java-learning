@@ -23,4 +23,5 @@ List of Coding Challenges, DataStructures
 [✔] - Reverse a doubly linked list (❌,got to the end, but returning the single endNode)(w-Vid, almost just like reverse SinglyLinkedList)
 [✔] - Tree: In Order Traversal (❌, took long, studied plenty) (need to amster BFS & DFS, and recursion)
 [✔] - Tree: Height of a Binary Tree (passed quickly with recursion)
+[❌] - Tree : Top View (stuck, ❌) (took too long viewing videos in PY & Hindi, never do that again!)
 [ ] - 
