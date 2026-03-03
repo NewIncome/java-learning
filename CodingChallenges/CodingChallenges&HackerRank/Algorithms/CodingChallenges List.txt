@@ -36,4 +36,5 @@ List of Coding Challenges, Algorithms
 [✔] - Encryption (took too long with var-types, the loops, and loop-cond for different sized strings)
 [/] - Bigger is Greater (❌, not entirely undestood)
 [✔] - Modified Kaprekar Numbers (/, passed 6/7)(TookTooLong, rusty) -> (passed now, needed Long, int too limited)
+[✔] - Beautiful Triplets (/, Time Limit Exceeded, passed 6/11) (passed, 2ndTry,SameDay, fixed my Loops + added condition to not run all 3rd loop)
 [ ] - 
