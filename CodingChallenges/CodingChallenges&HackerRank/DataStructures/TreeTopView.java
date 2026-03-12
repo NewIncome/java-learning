@@ -46,7 +46,7 @@ import java.util.TreeMap;
 import utility.TreeNode;
 
 
-public class TreeHeightAndTopView {
+public class TreeTopView {
 
   //Passing solution
   static class Pair {
@@ -153,18 +153,6 @@ public class TreeHeightAndTopView {
     topViewRecursive(root.left, key-1, level+1, mappedLevels);
     topViewRecursive(root.right, key+1, level+1, mappedLevels);
   } */
-
-
-  public static int height(TreeNode root) {
-    // Write your code here.
-    return recursiveHeight(root, -1);
-    //It's not 0 because it adds 1 also when root == 0, in the method call
-  }
-  public static int recursiveHeight(TreeNode root, int floor) {
-    if(root == null) return floor;
-    
-    return Math.max(recursiveHeight(root.left, floor+1), recursiveHeight(root.right, floor+1));
-  }
 
 
   // ========================
