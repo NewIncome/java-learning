@@ -38,5 +38,5 @@ List of Coding Challenges, Algorithms
 [✔] - Modified Kaprekar Numbers (/, passed 6/7)(TookTooLong, rusty) -> (passed now, needed Long, int too limited)
 [✔] - Beautiful Triplets (/, Time Limit Exceeded, passed 6/11) (passed, 2ndTry,SameDay, fixed my Loops + added condition to not run all 3rd loop)
 [✔] - Minimum Distances [{and in Node}]
-[/] - Halloween Sale (passed, not entirely understood)
+[/] - Halloween Sale (/, passed, not entirely understood) (passed and understood 94%)
 [ ] - 
