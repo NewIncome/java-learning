@@ -25,4 +25,5 @@ List of Coding Challenges, DataStructures
 [✔] - Tree: Height of a Binary Tree (passed quickly with recursion)
 [✔] - Tree: Top View (stuck, ❌) (took too long viewing videos in PY & Hindi, never do that again!) (took time to understand, ia)
 [✔] - Tree: Level Order Traversal (/, took very long, understanding Queues and Maps, with custom Node)
+[/] - Binary Search Tree : Insertion (/, took long and didn't fully understand, neither iterative or recursive)
 [ ] - 
