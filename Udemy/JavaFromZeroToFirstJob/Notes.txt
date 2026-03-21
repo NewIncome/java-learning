@@ -1,0 +1,12 @@
+-----------
+58. Enums
+-----------
+• What is an Enum type?
+  + Is a special dataType taht enables for a variable to be a set of predefined constants.
+  + An Enum type must always be equal to one of the values predefined for it
+  + You need to know all possible values at compile-time
+  + All values are constants, therefor named with capital letters
+  + Each value is associated with an ordinal number, listed in strict sequence
+    - can be checked with the .ordinal() method
+  + Can have custom fields(properties) and methods(behaviors)
+
