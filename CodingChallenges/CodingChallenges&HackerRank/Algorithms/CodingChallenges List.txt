@@ -39,4 +39,5 @@ List of Coding Challenges, Algorithms
 [✔] - Beautiful Triplets (/, Time Limit Exceeded, passed 6/11) (passed, 2ndTry,SameDay, fixed my Loops + added condition to not run all 3rd loop)
 [✔] - Minimum Distances [{and in Node}]
 [/] - Halloween Sale (/, passed, not entirely understood) (passed and understood 94%)
+[✔] - The Time in Words (/)(took too long because of VariableType to use confusion)
 [ ] - 

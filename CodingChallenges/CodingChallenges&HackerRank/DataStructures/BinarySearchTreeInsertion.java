@@ -1,5 +1,3 @@
-import org.w3c.dom.Node;
-
 /**
  * You are given a pointer to the root of a binary search tree and values
  * to be inserted into the tree. Insert the values into their appropriate
@@ -41,12 +39,18 @@ import org.w3c.dom.Node;
     + else if currentNode.left.data < data : currentNode = currentNode.left
     + else if currentNode.right.data > data : currentNode = currentNode.left
  */
+import org.w3c.dom.Node;
+
+
 public class BinarySearchTreeInsertion {
+
+  /* To traverse a BST we use 
+   */
 
   // Iterative
   public static Node insertI(Node root, int data) {  //1st time didn't check case root == null
     if(root == null) return new Node(data);
-    Node cNode = root;
+    Node cNode = root;  //currentNode
 
     while(cNode !=  null) {
       //Check Left / Lower-data
@@ -60,7 +64,7 @@ public class BinarySearchTreeInsertion {
         }
       }
       //Check Right / Higher-data
-      else if(data > cNode.data) {
+      else if(data > cNode.data) {    //this can be an else, else for duplicate values not needed to check
         //check if to-set or to-move
         if(cNode.right == null) {
           cNode.right = new Node(data);
