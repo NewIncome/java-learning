@@ -1,3 +1,6 @@
+=========================
+11 SECTION: Enumerations
+- - - - - - - - - - - - -
 -----------
 58. Enums
 -----------
@@ -10,14 +13,42 @@
     - can be checked with the .ordinal() method
   + Can have custom fields(properties) and methods(behaviors)
 
-• Inheritance
-  + What inheritance is
-  + How to extend a type
-  + 'super' keyword
-  + 'instanceof' operator
-  + Inheritance rules
-    - Multiple inheritance isn't supported in Java, a class can only extend from 1 class
-    - Use 'super' in a (child)constructor, it has to be the 1st line/sentence in the block
-  + Initialization order of a new object
 
+=========================
+13 SECTION: OOP
+- - - - - - - - - - - - -
+-----------------
+64. Inheritance
+-----------------
+• What inheritance is
+• How to extend a type
+• 'super' keyword
+• 'instanceof' operator
+• Inheritance rules
+  - Multiple inheritance isn't supported in Java, a class can only extend from 1 class
+  - Use 'super' in a (child)constructor, it has to be the 1st line/sentence in the block
+• Initialization order of a new object
 
+------------
+66. Static
+------------
+• static import
+  + used to import static methods of a class, to not need typing the class all the time
+  + ie.:
+    Arrays.sort(arr);
+
+    import static java.util.Arrays.*;
+    sort(arr);
+
+-------------------
+67. Encapsulation
+-------------------
+• Access Modifiers:
+  + private ,  only inside that class
+  + protected ,  inside same package or from child class
+  + default ,  only inside same package (not form childs)
+  + public ,  anywhere in the program
+• can't narrow scope of an Overriden method
+  + you can only widen or extend access level. ie.:
+    - not from public -> protected
+    - yes from default -> public
