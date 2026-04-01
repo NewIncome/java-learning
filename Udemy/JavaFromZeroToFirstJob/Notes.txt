@@ -1,6 +1,6 @@
-=========================
+===========================
 11 SECTION: Enumerations
-- - - - - - - - - - - - -
+- - - - - - - - - - - - - -
 -----------
 58. Enums
 -----------
@@ -13,10 +13,9 @@
     - can be checked with the .ordinal() method
   + Can have custom fields(properties) and methods(behaviors)
 
-
-=========================
+===========================
 13 SECTION: OOP
-- - - - - - - - - - - - -
+- - - - - - - - - - - - - -
 -----------------
 64. Inheritance
 -----------------
@@ -28,6 +27,7 @@
   - Multiple inheritance isn't supported in Java, a class can only extend from 1 class
   - Use 'super' in a (child)constructor, it has to be the 1st line/sentence in the block
 • Initialization order of a new object
+• Primitive types are stored in the stack, while objects are stored in the heap
 
 ------------
 66. Static
@@ -52,3 +52,85 @@
   + you can only widen or extend access level. ie.:
     - not from public -> protected
     - yes from default -> public
+
+-------------------
+68. Object & JNI
+-------------------
+• Object:  Object is a virtual entity that has its own behavior and state which can
+           distinguish it from other objects
+  + That means each object will inherit methods of 'object' class
+• JNI(Java Native Interface)
+  + Is a foreign function interface programming framework that enables Java code running
+    in Java Virtual Machine to call and be called by native applications and libraries
+    written in other languages such as C or C++
+  + Implemented by adding the 'native' keyword in a method
+
+-------------------
+69. QUIZ
+-------------------
+• OOP focuses on objects and state, while FP focuses on functions and immutability.
+• 'this' keyword is used to access the current instance of the class.
+*** • Difference between an inner class and a nested class
+      + An inner class is a non-static class inside another class, while a nested class
+        can be static or non-static
+• A class that has no name and is declared and instantiated in a single expression. ???
+• Excessive use of static considered bad practice
+  + It violates encapsulation and OOP principles by making methods and variables global
+• If a class does not define a constructor?
+  + the Java compiler provides a default constructor that takes no arguments and
+    initializes instance variables with default values
+• How do default methods work in Java interfaces?
+  + They allow interfaces to have method implementations
+  + Default methods in interfaces have concrete implementations and allow developers
+    to add new functionality to interfaces without breaking existing implementations.
+• The protected modifier allows access within the same package and in subclasses outside
+the package. It is often used for methods that should be inherited but not exposed publicly
+
+-------------------
+70. SOLID, S
+-------------------
+"A Class should have only one reason to change"
+• SingleResponsibility:  Is a group of actions that serve a particular goal(closely related)
+
+-------------------
+71. Open/Closed P
+-------------------
+"Module should be open to extension but closed for modification"
+• The best approach is to be able to: 
+  + use a 'Reference Type' that can invoke different 'Object types' depending on the issue/topic
+    + Using also DI (maybe) in the object Types that prev-object will use
+  + a ReferenceType that initializes with the same type might be "closed for extension"
+
+-------------------
+72. LSP
+-------------------
+""
+"A child class should be able to do everything a parent clas can"
+• focuses attention on types that violate polymorphism principle
+◙ Problem:
+   interface Bird { void fly(); void eat() }
+   class Sparrow implements Bird { @Override void fly()... }
+   class Ostrich implements Bird { @Override void fly()... }  //UnsupportedOperationException
+  Solution:
+   interface Bird { void eat(); }
+   interface FlyingBird { void fly(); }
+   class Sparrow implements FlyingBird { @Override void fly()... }
+   class Ostrich implements Bird { @Override void eat()... }
+
+-------------------
+73. ISP
+-------------------
+""
+"No client should be forced to depend on methods it does not use"
+• Interface should be slim, but should contain a group of operations that are logically connected
+//The "Repository Pattern" might fail a bit in this principle
+
+-------------------
+74. DIP
+-------------------
+"High-level modules should not depend on Low-level modules. They should both depend on an abstraction"
+    "Abstractions should not depend on details. Details should depend on abstractions"
+• 
+
+
+*** DI is used to control what object(Type) will be created at runtime
