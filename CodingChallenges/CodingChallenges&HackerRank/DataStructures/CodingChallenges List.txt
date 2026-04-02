@@ -26,4 +26,5 @@ List of Coding Challenges, DataStructures
 [✔] - Tree: Top View (stuck, ❌) (took too long viewing videos in PY & Hindi, never do that again!) (took time to understand, ia)
 [✔] - Tree: Level Order Traversal (/, took very long, understanding Queues and Maps, with custom Node)
 [/] - Binary Search Tree : Insertion (/, took long and didn't fully understand, neither iterative or recursive)
+[✔] - Tree: Huffman Decoding (/, took extra long for not knowing how to check chars, Strings, regex)(this saved me:  Character.isIdentifierIgnorable())
 [ ] - 
