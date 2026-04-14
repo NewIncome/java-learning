@@ -40,4 +40,5 @@ List of Coding Challenges, Algorithms
 [✔] - Minimum Distances [{and in Node}]
 [/] - Halloween Sale (/, passed, not entirely understood) (passed and understood 94%)
 [✔] - The Time in Words (/)(took too long because of VariableType to use confusion)
+[✔] - Chocolate Feast (/)(1st time 1/2, UNDERSTANDING, missed a step at first)
 [ ] - 
