@@ -120,8 +120,8 @@ the package. It is often used for methods that should be inherited but not expos
 -------------------
 73. ISP
 -------------------
-""
 "No client should be forced to depend on methods it does not use"
+"If you have bulky interfaces, your classes have to implement methods they might not use"
 • Interface should be slim, but should contain a group of operations that are logically connected
 //The "Repository Pattern" might fail a bit in this principle
 
@@ -130,7 +130,10 @@ the package. It is often used for methods that should be inherited but not expos
 -------------------
 "High-level modules should not depend on Low-level modules. They should both depend on an abstraction"
     "Abstractions should not depend on details. Details should depend on abstractions"
-• 
-
+•       WeatherAggregator              =>             WeatherAggregator
+        ↓              ↓                                    ↓
+  AccuWeatherApi    BbcWeatherApi                     WeatherSource
+                                                       ↑         ↑
+                                            AccuWeatherApi     BbcWeatherApi
 
 *** DI is used to control what object(Type) will be created at runtime
