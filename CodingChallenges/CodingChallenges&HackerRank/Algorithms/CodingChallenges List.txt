@@ -1,8 +1,8 @@
 List of Coding Challenges, Algorithms
 --------------------------
-❌  didn't pass any, not finished, not understood
-/  passed >= half test cases || passedWithVideo
-✔  done
+♦ doneWithRuby       ❌  didn't pass any, not finished, not understood
+• doneWithJS          /  passed >= half test cases || passedWithVideo
+◙ doneWithTS          ✔  done
 
 [✔] - ApplesAndOranges
 [✔] - NumberLineJumps  (can further understand a Math approach)
@@ -41,4 +41,5 @@ List of Coding Challenges, Algorithms
 [/] - Halloween Sale (/, passed, not entirely understood) (passed and understood 94%)
 [✔] - The Time in Words (/)(took too long because of VariableType to use confusion)
 [✔] - Chocolate Feast (/)(1st time 1/2, UNDERSTANDING, missed a step at first)
+[✔]♦• - Service Lane (✔)(took time debugging for not thorough-reading .subList(i,j) params)
 [ ] - 
