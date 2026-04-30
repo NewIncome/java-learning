@@ -1,8 +1,8 @@
 List of Coding Challenges, DataStructures
 --------------------------
-❌  didn't pass any, not finished, not understood
-/  passed >= half test cases || passedWithVideo
-✔  done
+♦ doneWithRuby       ❌  didn't pass any, not finished, not understood
+• doneWithJS          /  passed >= half test cases || passedWithVideo
+◙ doneWithTS          ✔  done
 
 [✔] - Dynamic Array (tookVeryLong)
 [✔] - Left Rotation (passedOK)
@@ -27,4 +27,6 @@ List of Coding Challenges, DataStructures
 [✔] - Tree: Level Order Traversal (/, took very long, understanding Queues and Maps, with custom Node)
 [/] - Binary Search Tree : Insertion (/, took long and didn't fully understand, neither iterative or recursive)
 [✔] - Tree: Huffman Decoding (/, took extra long for not knowing how to check chars, Strings, regex)(this saved me:  Character.isIdentifierIgnorable())
+[ ] - Binary Search Tree : Lowest Common Ancestor (must re-study Tree Traversal)
+[✔]•♦ - Day 22: Binary Search Trees :: Longest root-to-leaft path (2ndDayPassedIn10min)
 [ ] - 
