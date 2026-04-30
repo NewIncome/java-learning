@@ -1,0 +1,25 @@
+Binary Search Trees
+
+  • Longest root-to-leaf path
+        3
+       / \
+      2   5
+     /   / \
+    1   4   6
+             \
+              7
+    ans: 3 → 5 → 6 → 7:  4
+
+    Reasoning:
+      Since we need to "keep track of a value"=height/leafs, to iterate with
+      recursion, we need to have that variable. So we need a HelperMethod, with
+      that variable, incrementing.
+      And we start it at -1 because it will count the root as +1 on-call-start.
+    
+    Code(Java):  int getHeight(Node root){ getHeightHelper(-1, root) }
+                 int getHeightHelper(int height, Node root) {
+                   if(root == null) return height;
+        
+                   return Math.max(getHeightHelper(height+1, root.left), getHeightHelper(height+1, root.right));
+                 }
+
