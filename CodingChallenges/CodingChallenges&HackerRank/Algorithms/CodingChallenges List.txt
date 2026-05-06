@@ -42,4 +42,5 @@ List of Coding Challenges, Algorithms
 [✔] - The Time in Words (/)(took too long because of VariableType to use confusion)
 [✔] - Chocolate Feast (/)(1st time 1/2, UNDERSTANDING, missed a step at first)
 [✔]♦• - Service Lane (✔)(took time debugging for not thorough-reading .subList(i,j) params)
+[ ] - Lisa's Workbook
 [ ] - 
